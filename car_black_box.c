@@ -4,7 +4,8 @@ char* signature[8]={"ON","GN","G1", "G2","G3","G4","GR", "C "};
 
 void display_dashboard(unsigned char uckey)
 {
-    clcd_print( (unsigned char*) "  TIME     E  SP" , LINE1(0));     //time, event, speed
+    clcd_print( (unsigned char*) "TIME   E  SP" , LINE1(4));     //time, event, speed
+    car_animation();
     display_time();
     gear_monitor(uckey);
     display_speed();
@@ -21,20 +22,27 @@ void display_time(){
 }
 
 void gear_monitor(unsigned char uckey){
-    static char signindex=0;
+    static char signindex=0, crashflag=0;
     if(uckey == 1)
     {
-        signindex=7;                     //crashed
-    }    
-    else if(uckey == 2)                  //increment
+        crashflag=1;                         //crashed
+        signindex=7;                     
+    }        
+    else if(uckey == 2)                      //increment
     {
-        if(signindex != 6)
+        if(signindex < 6)
             signindex++;
-    }
-    else if(uckey == 3)                  //decrement
+        else if(signindex ==7)
+        {
+            signindex=1;
+            crashflag=0;
+        }
+    } 
+    else if(uckey == 3)                       //decrement
     {
-       if(signindex != 0)
-            signindex--;   
+           if(crashflag==1);
+           else if(signindex > 1)
+                signindex--; 
     }
     clcd_putch(signature[signindex][0], LINE2(11));
     clcd_putch(signature[signindex][1], LINE2(12));

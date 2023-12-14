@@ -17971,7 +17971,7 @@ void clcd_write(unsigned char bit_values, unsigned char control_bit);
 # 18 "./main.h" 2
 
 void init_config(void);
-
+void init_animation(void);
 
 
 void init_matrixkeypad(void);
@@ -17979,16 +17979,19 @@ unsigned char read_switches(unsigned char ucdetection);
 unsigned char scan_key(void);
 
 
+
 void display_dashboard(unsigned char uckey);
 void display_time(void);
 void gear_monitor(unsigned char uckey);
 void display_speed(void);
+void car_animation(void);
 # 7 "main.c" 2
 
 
 void init_config(){
     init_matrixkeypad();
     init_clcd();
+    init_animation();
 
 }
 

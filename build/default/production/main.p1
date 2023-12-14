@@ -5,12 +5,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "37 ./clcd.h
 [; ;./clcd.h: 37: void init_clcd(void);
 [v _init_clcd `(v ~T0 @X0 0 ef ]
+"20 ./main.h
+[; ;./main.h: 20: void init_animation(void);
+[v _init_animation `(v ~T0 @X0 0 ef ]
 [p mainexit ]
-"24 ./main.h
+"24
 [; ;./main.h: 24: unsigned char read_switches(unsigned char ucdetection);
 [v _read_switches `(uc ~T0 @X0 0 ef1`uc ]
-"28
-[; ;./main.h: 28: void display_dashboard(unsigned char uckey);
+"29
+[; ;./main.h: 29: void display_dashboard(unsigned char uckey);
 [v _display_dashboard `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 54: __asm("RXF6SIDH equ 0D60h");
@@ -1329,43 +1332,46 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11
 [; ;main.c: 11:     init_clcd();
 [e ( _init_clcd ..  ]
-"13
-[; ;main.c: 13: }
+"12
+[; ;main.c: 12:     init_animation();
+[e ( _init_animation ..  ]
+"14
+[; ;main.c: 14: }
 [e :UE 1088 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"15
-[; ;main.c: 15: void main(void) {
+"16
+[; ;main.c: 16: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"16
-[; ;main.c: 16:     init_config();
-[e ( _init_config ..  ]
 "17
-[; ;main.c: 17:     unsigned char ucKey;
-[v _ucKey `uc ~T0 @X0 1 a ]
+[; ;main.c: 17:     init_config();
+[e ( _init_config ..  ]
 "18
-[; ;main.c: 18:     while(1){
+[; ;main.c: 18:     unsigned char ucKey;
+[v _ucKey `uc ~T0 @X0 1 a ]
+"19
+[; ;main.c: 19:     while(1){
 [e :U 1091 ]
 {
-"20
-[; ;main.c: 20:         ucKey = read_switches(1);
-[e = _ucKey ( _read_switches (1 -> -> 1 `i `uc ]
 "21
-[; ;main.c: 21:         display_dashboard(ucKey);
-[e ( _display_dashboard (1 _ucKey ]
+[; ;main.c: 21:         ucKey = read_switches(1);
+[e = _ucKey ( _read_switches (1 -> -> 1 `i `uc ]
 "22
-[; ;main.c: 22:     }
+[; ;main.c: 22:         display_dashboard(ucKey);
+[e ( _display_dashboard (1 _ucKey ]
+"23
+[; ;main.c: 23:     }
 }
 [e :U 1090 ]
 [e $U 1091  ]
 [e :U 1092 ]
-"23
-[; ;main.c: 23:     return;
-[e $UE 1089  ]
 "24
-[; ;main.c: 24: }
+[; ;main.c: 24:     return;
+[e $UE 1089  ]
+"25
+[; ;main.c: 25: }
 [e :UE 1089 ]
 }

@@ -1,20 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"38 ./clcd.h
-[; ;./clcd.h: 38: void clcd_print(const unsigned char *data, unsigned char addr);
-[v _clcd_print `(v ~T0 @X0 0 ef2`*Cuc`uc ]
-"33 ./main.h
-[; ;./main.h: 33: void car_animation(void);
-[v _car_animation `(v ~T0 @X0 0 ef ]
-"30
-[; ;./main.h: 30: void display_time(void);
-[v _display_time `(v ~T0 @X0 0 ef ]
-"31
-[; ;./main.h: 31: void gear_monitor(unsigned char uckey);
-[v _gear_monitor `(v ~T0 @X0 0 ef1`uc ]
-"32
-[; ;./main.h: 32: void display_speed(void);
-[v _display_speed `(v ~T0 @X0 0 ef ]
-"39 ./clcd.h
+"40 ./clcd.h
+[; ;./clcd.h: 40: void clcd_write(unsigned char bit_values, unsigned char control_bit);
+[v _clcd_write `(v ~T0 @X0 0 ef2`uc`uc ]
+"39
 [; ;./clcd.h: 39: void clcd_putch(const unsigned char data, unsigned char addr);
 [v _clcd_putch `(v ~T0 @X0 0 ef2`Cuc`uc ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h
@@ -1322,214 +1310,179 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "67
 [p x EBTRB  =  OFF       ]
-"3 car_black_box.c
-[; ;car_black_box.c: 3: char* signature[8]={"ON","GN","G1", "G2","G3","G4","GR", "C "};
-[v _signature `*uc ~T0 @X0 -> 8 `i e ]
-[i _signature
+"3 car animation.c
+[; ;car animation.c: 3: void init_animation(void)
+[v _init_animation `(v ~T0 @X0 1 ef ]
+"4
+[; ;car animation.c: 4: {
+{
+[e :U _init_animation ]
+[f ]
+[v F10462 `uc ~T0 @X0 -> 8 `i s ]
+[i F10462
 :U ..
-:s 1C
-:s 2C
-:s 3C
-:s 4C
-:s 5C
-:s 6C
-:s 7C
-:s 8C
+"5
+[; ;car animation.c: 5:     char firsthalfcar[8] = { 0x00, 0x07, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
+-> -> 0 `i `uc
+-> -> 7 `i `uc
+-> -> 4 `i `uc
+-> -> 14 `i `uc
+-> -> 31 `i `uc
+-> -> 4 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
 ..
 ]
-"5
-[; ;car_black_box.c: 5: void display_dashboard(unsigned char uckey)
-[v _display_dashboard `(v ~T0 @X0 1 ef1`uc ]
+[v _firsthalfcar `uc ~T0 @X0 -> 8 `i a ]
+[e = _firsthalfcar F10462 ]
+[v F10464 `uc ~T0 @X0 -> 8 `i s ]
+[i F10464
+:U ..
 "6
-[; ;car_black_box.c: 6: {
-{
-[e :U _display_dashboard ]
-"5
-[; ;car_black_box.c: 5: void display_dashboard(unsigned char uckey)
-[v _uckey `uc ~T0 @X0 1 r1 ]
-"6
-[; ;car_black_box.c: 6: {
-[f ]
+[; ;car animation.c: 6:     char secondhalfcar[8] = { 0x00, 0x1C, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
+-> -> 0 `i `uc
+-> -> 28 `i `uc
+-> -> 4 `i `uc
+-> -> 14 `i `uc
+-> -> 31 `i `uc
+-> -> 4 `i `uc
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+..
+]
+[v _secondhalfcar `uc ~T0 @X0 -> 8 `i a ]
+[e = _secondhalfcar F10464 ]
+[v F10466 `uc ~T0 @X0 -> 8 `i s ]
+[i F10466
+:U ..
 "7
-[; ;car_black_box.c: 7:     clcd_print( (unsigned char*) "TIME   E  SP" , (0x80 + (4)));
-[e ( _clcd_print (2 , -> -> :s 9C `*uc `*Cuc -> + -> 128 `i -> 4 `i `uc ]
-"8
-[; ;car_black_box.c: 8:     car_animation();
-[e ( _car_animation ..  ]
-"9
-[; ;car_black_box.c: 9:     display_time();
-[e ( _display_time ..  ]
-"10
-[; ;car_black_box.c: 10:     gear_monitor(uckey);
-[e ( _gear_monitor (1 _uckey ]
-"11
-[; ;car_black_box.c: 11:     display_speed();
-[e ( _display_speed ..  ]
-"12
-[; ;car_black_box.c: 12: }
+[; ;car animation.c: 7:     char m[8]=
+-> -> 0 `i `uc
+-> -> 3 `i `uc
+-> -> 7 `i `uc
+-> -> 31 `i `uc
+-> -> 31 `i `uc
+-> -> 31 `i `uc
+-> -> 12 `i `uc
+-> -> 0 `i `uc
+..
+]
+[v _m `uc ~T0 @X0 -> 8 `i a ]
+[e = _m F10466 ]
+[v F10468 `uc ~T0 @X0 -> 8 `i s ]
+[i F10468
+:U ..
+"18
+[; ;car animation.c: 18:     char n[8]={
+-> -> 0 `i `uc
+-> -> 30 `i `uc
+-> -> 30 `i `uc
+-> -> 31 `i `uc
+-> -> 31 `i `uc
+-> -> 31 `i `uc
+-> -> 12 `i `uc
+-> -> 0 `i `uc
+..
+]
+[v _n `uc ~T0 @X0 -> 8 `i a ]
+[e = _n F10468 ]
+"29
+[; ;car animation.c: 29:     clcd_write(0x40,0);
+[e ( _clcd_write (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
+"30
+[; ;car animation.c: 30:     for (int i=0; i<8; i++)
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 1089  ]
+[e $U 1090  ]
+[e :U 1089 ]
+"31
+[; ;car animation.c: 31:         clcd_write(firsthalfcar[i],1);
+[e ( _clcd_write (2 , -> *U + &U _firsthalfcar * -> -> _i `ui `ux -> -> # *U &U _firsthalfcar `ui `ux `uc -> -> 1 `i `uc ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 8 `i 1089  ]
+[e :U 1090 ]
+}
+"32
+[; ;car animation.c: 32:     clcd_write(0x48,0);
+[e ( _clcd_write (2 , -> -> 72 `i `uc -> -> 0 `i `uc ]
+"33
+[; ;car animation.c: 33:     for (int i=0; i<8; i++)
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 1092  ]
+[e $U 1093  ]
+[e :U 1092 ]
+"34
+[; ;car animation.c: 34:         clcd_write(secondhalfcar[i],1);
+[e ( _clcd_write (2 , -> *U + &U _secondhalfcar * -> -> _i `ui `ux -> -> # *U &U _secondhalfcar `ui `ux `uc -> -> 1 `i `uc ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 8 `i 1092  ]
+[e :U 1093 ]
+}
+"35
+[; ;car animation.c: 35:         clcd_write(0x50,0);
+[e ( _clcd_write (2 , -> -> 80 `i `uc -> -> 0 `i `uc ]
+"36
+[; ;car animation.c: 36:     for (int i=0; i<8; i++)
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 1095  ]
+[e $U 1096  ]
+[e :U 1095 ]
+"37
+[; ;car animation.c: 37:         clcd_write(m[i],1);
+[e ( _clcd_write (2 , -> *U + &U _m * -> -> _i `ui `ux -> -> # *U &U _m `ui `ux `uc -> -> 1 `i `uc ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 8 `i 1095  ]
+[e :U 1096 ]
+}
+"38
+[; ;car animation.c: 38:     clcd_write(0x58,0);
+[e ( _clcd_write (2 , -> -> 88 `i `uc -> -> 0 `i `uc ]
+"39
+[; ;car animation.c: 39:     for (int i=0; i<8; i++)
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $ < _i -> 8 `i 1098  ]
+[e $U 1099  ]
+[e :U 1098 ]
+"40
+[; ;car animation.c: 40:         clcd_write(n[i],1);
+[e ( _clcd_write (2 , -> *U + &U _n * -> -> _i `ui `ux -> -> # *U &U _n `ui `ux `uc -> -> 1 `i `uc ]
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 8 `i 1098  ]
+[e :U 1099 ]
+}
+"41
+[; ;car animation.c: 41: }
 [e :UE 1088 ]
 }
-"13
-[; ;car_black_box.c: 13: void display_time(){
-[v _display_time `(v ~T0 @X0 1 ef ]
-{
-[e :U _display_time ]
-[f ]
-"14
-[; ;car_black_box.c: 14:     clcd_putch('1', (0xC0 + (2)));
-[e ( _clcd_putch (2 , -> -> 49 `ui `uc -> + -> 192 `i -> 2 `i `uc ]
-"15
-[; ;car_black_box.c: 15:     clcd_putch('5', (0xC0 + (3)));
-[e ( _clcd_putch (2 , -> -> 53 `ui `uc -> + -> 192 `i -> 3 `i `uc ]
-"16
-[; ;car_black_box.c: 16:     clcd_putch(':', (0xC0 + (4)));
-[e ( _clcd_putch (2 , -> -> 58 `ui `uc -> + -> 192 `i -> 4 `i `uc ]
-"17
-[; ;car_black_box.c: 17:     clcd_putch('0', (0xC0 + (5)));
-[e ( _clcd_putch (2 , -> -> 48 `ui `uc -> + -> 192 `i -> 5 `i `uc ]
-"18
-[; ;car_black_box.c: 18:     clcd_putch('0', (0xC0 + (6)));
-[e ( _clcd_putch (2 , -> -> 48 `ui `uc -> + -> 192 `i -> 6 `i `uc ]
-"19
-[; ;car_black_box.c: 19:     clcd_putch(':', (0xC0 + (7)));
-[e ( _clcd_putch (2 , -> -> 58 `ui `uc -> + -> 192 `i -> 7 `i `uc ]
-"20
-[; ;car_black_box.c: 20:     clcd_putch('0', (0xC0 + (8)));
-[e ( _clcd_putch (2 , -> -> 48 `ui `uc -> + -> 192 `i -> 8 `i `uc ]
-"21
-[; ;car_black_box.c: 21:     clcd_putch('0', (0xC0 + (9)));
-[e ( _clcd_putch (2 , -> -> 48 `ui `uc -> + -> 192 `i -> 9 `i `uc ]
-"22
-[; ;car_black_box.c: 22: }
-[e :UE 1089 ]
-}
-"24
-[; ;car_black_box.c: 24: void gear_monitor(unsigned char uckey){
-[v _gear_monitor `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _gear_monitor ]
-[v _uckey `uc ~T0 @X0 1 r1 ]
-[f ]
-"25
-[; ;car_black_box.c: 25:     static char signindex=0, crashflag=0;
-[v F10467 `uc ~T0 @X0 1 s signindex ]
-[i F10467
--> -> 0 `i `uc
-]
-[v F10468 `uc ~T0 @X0 1 s crashflag ]
-[i F10468
--> -> 0 `i `uc
-]
-"26
-[; ;car_black_box.c: 26:     if(uckey == 1)
-[e $ ! == -> _uckey `i -> 1 `i 1091  ]
-"27
-[; ;car_black_box.c: 27:     {
-{
-"28
-[; ;car_black_box.c: 28:         crashflag=1;
-[e = F10468 -> -> 1 `i `uc ]
-"29
-[; ;car_black_box.c: 29:         signindex=7;
-[e = F10467 -> -> 7 `i `uc ]
-"30
-[; ;car_black_box.c: 30:     }
-}
-[e $U 1092  ]
-"31
-[; ;car_black_box.c: 31:     else if(uckey == 2)
-[e :U 1091 ]
-[e $ ! == -> _uckey `i -> 2 `i 1093  ]
-"32
-[; ;car_black_box.c: 32:     {
-{
-"33
-[; ;car_black_box.c: 33:         if(signindex < 6)
-[e $ ! < -> F10467 `i -> 6 `i 1094  ]
-"34
-[; ;car_black_box.c: 34:             signindex++;
-[e ++ F10467 -> -> 1 `i `uc ]
-[e $U 1095  ]
-"35
-[; ;car_black_box.c: 35:         else if(signindex ==7)
-[e :U 1094 ]
-[e $ ! == -> F10467 `i -> 7 `i 1096  ]
-"36
-[; ;car_black_box.c: 36:         {
-{
-"37
-[; ;car_black_box.c: 37:             signindex=1;
-[e = F10467 -> -> 1 `i `uc ]
-"38
-[; ;car_black_box.c: 38:             crashflag=0;
-[e = F10468 -> -> 0 `i `uc ]
-"39
-[; ;car_black_box.c: 39:         }
-}
-[e :U 1096 ]
-[e :U 1095 ]
-"40
-[; ;car_black_box.c: 40:     }
-}
-[e $U 1097  ]
-"41
-[; ;car_black_box.c: 41:     else if(uckey == 3)
-[e :U 1093 ]
-[e $ ! == -> _uckey `i -> 3 `i 1098  ]
-"42
-[; ;car_black_box.c: 42:     {
-{
 "43
-[; ;car_black_box.c: 43:            if(crashflag==1);
-[e $ ! == -> F10468 `i -> 1 `i 1099  ]
-[e $U 1100  ]
+[; ;car animation.c: 43: void car_animation(void)
+[v _car_animation `(v ~T0 @X0 1 ef ]
 "44
-[; ;car_black_box.c: 44:            else if(signindex > 1)
-[e :U 1099 ]
-[e $ ! > -> F10467 `i -> 1 `i 1101  ]
-"45
-[; ;car_black_box.c: 45:                 signindex--;
-[e -- F10467 -> -> 1 `i `uc ]
-[e :U 1101 ]
-[e :U 1100 ]
-"46
-[; ;car_black_box.c: 46:     }
-}
-[e :U 1098 ]
-[e :U 1097 ]
-[e :U 1092 ]
-"47
-[; ;car_black_box.c: 47:     clcd_putch(signature[signindex][0], (0xC0 + (11)));
-[e ( _clcd_putch (2 , -> *U + *U + &U _signature * -> F10467 `ux -> -> # *U &U _signature `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U *U + &U _signature * -> F10467 `ux -> -> # *U &U _signature `ui `ux `ui `ux `uc -> + -> 192 `i -> 11 `i `uc ]
-"48
-[; ;car_black_box.c: 48:     clcd_putch(signature[signindex][1], (0xC0 + (12)));
-[e ( _clcd_putch (2 , -> *U + *U + &U _signature * -> F10467 `ux -> -> # *U &U _signature `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U *U + &U _signature * -> F10467 `ux -> -> # *U &U _signature `ui `ux `ui `ux `uc -> + -> 192 `i -> 12 `i `uc ]
-"49
-[; ;car_black_box.c: 49: }
-[e :UE 1090 ]
-}
-"51
-[; ;car_black_box.c: 51: void display_speed(){
-[v _display_speed `(v ~T0 @X0 1 ef ]
+[; ;car animation.c: 44: {
 {
-[e :U _display_speed ]
+[e :U _car_animation ]
 [f ]
-"52
-[; ;car_black_box.c: 52:         clcd_putch('9', (0xC0 + (14)));
-[e ( _clcd_putch (2 , -> -> 57 `ui `uc -> + -> 192 `i -> 14 `i `uc ]
-"53
-[; ;car_black_box.c: 53:         clcd_putch('9', (0xC0 + (15)));
-[e ( _clcd_putch (2 , -> -> 57 `ui `uc -> + -> 192 `i -> 15 `i `uc ]
-"54
-[; ;car_black_box.c: 54:     }
-[e :UE 1102 ]
+"46
+[; ;car animation.c: 46:         clcd_putch( 0x03, (0x80 + (1)));
+[e ( _clcd_putch (2 , -> -> 3 `i `uc -> + -> 128 `i -> 1 `i `uc ]
+"47
+[; ;car animation.c: 47:         clcd_putch( 0x02, (0x80 + (0)));
+[e ( _clcd_putch (2 , -> -> 2 `i `uc -> + -> 128 `i -> 0 `i `uc ]
+"48
+[; ;car animation.c: 48:         clcd_putch( 0x01, (0xC0 + (1)));
+[e ( _clcd_putch (2 , -> -> 1 `i `uc -> + -> 192 `i -> 1 `i `uc ]
+"49
+[; ;car animation.c: 49:         clcd_putch( 0x00, (0xC0 + (0)));
+[e ( _clcd_putch (2 , -> -> 0 `i `uc -> + -> 192 `i -> 0 `i `uc ]
+"51
+[; ;car animation.c: 51: }
+[e :UE 1101 ]
 }
-[a 7C 71 82 0 ]
-[a 9C 84 73 77 69 32 32 32 69 32 32 83 80 0 ]
-[a 1C 79 78 0 ]
-[a 2C 71 78 0 ]
-[a 6C 71 52 0 ]
-[a 5C 71 51 0 ]
-[a 4C 71 50 0 ]
-[a 3C 71 49 0 ]
-[a 8C 67 32 0 ]

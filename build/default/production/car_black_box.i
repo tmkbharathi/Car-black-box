@@ -17965,7 +17965,7 @@ void clcd_write(unsigned char bit_values, unsigned char control_bit);
 # 18 "./main.h" 2
 
 void init_config(void);
-
+void init_animation(void);
 
 
 void init_matrixkeypad(void);
@@ -17973,10 +17973,12 @@ unsigned char read_switches(unsigned char ucdetection);
 unsigned char scan_key(void);
 
 
+
 void display_dashboard(unsigned char uckey);
 void display_time(void);
 void gear_monitor(unsigned char uckey);
 void display_speed(void);
+void car_animation(void);
 # 1 "car_black_box.c" 2
 
 
@@ -17984,7 +17986,8 @@ char* signature[8]={"ON","GN","G1", "G2","G3","G4","GR", "C "};
 
 void display_dashboard(unsigned char uckey)
 {
-    clcd_print( (unsigned char*) "  TIME     E  SP" , (0x80 + (0)));
+    clcd_print( (unsigned char*) "TIME   E  SP" , (0x80 + (4)));
+    car_animation();
     display_time();
     gear_monitor(uckey);
     display_speed();
@@ -18001,20 +18004,27 @@ void display_time(){
 }
 
 void gear_monitor(unsigned char uckey){
-    static char signindex=0;
+    static char signindex=0, crashflag=0;
     if(uckey == 1)
     {
+        crashflag=1;
         signindex=7;
     }
     else if(uckey == 2)
     {
-        if(signindex != 6)
+        if(signindex < 6)
             signindex++;
+        else if(signindex ==7)
+        {
+            signindex=1;
+            crashflag=0;
+        }
     }
     else if(uckey == 3)
     {
-       if(signindex != 0)
-            signindex--;
+           if(crashflag==1);
+           else if(signindex > 1)
+                signindex--;
     }
     clcd_putch(signature[signindex][0], (0xC0 + (11)));
     clcd_putch(signature[signindex][1], (0xC0 + (12)));

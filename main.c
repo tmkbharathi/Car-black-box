@@ -9,6 +9,7 @@
 void init_config(){
     init_matrixkeypad();
     init_clcd();
+    init_animation();
     
 }
 
@@ -16,6 +17,7 @@ void main(void) {
     init_config();
     unsigned char ucKey;
     while(1){
+        
         ucKey = read_switches(EDGE);
         display_dashboard(ucKey);
     }

@@ -17,7 +17,7 @@
 #include "conf.h"
 #include "clcd.h"
 void init_config(void);
-
+void init_animation(void);
 /*  Matrix keypad MKP1 MKP2 MKP3*/
 #define EDGE 1
 void init_matrixkeypad(void);
@@ -25,10 +25,14 @@ unsigned char read_switches(unsigned char ucdetection);
 unsigned char scan_key(void);
 
 /*car black box*/
+
 void display_dashboard(unsigned char uckey);
 void display_time(void);
 void gear_monitor(unsigned char uckey);
 void display_speed(void);
+void car_animation(void);
+
+
 
 
 #endif	/* MAIN_H */

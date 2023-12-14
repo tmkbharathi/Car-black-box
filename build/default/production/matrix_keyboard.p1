@@ -1379,11 +1379,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "12
 [; ;matrix_keyboard.c: 12:     static unsigned char uconce=1, uckey;
-[v F10462 `uc ~T0 @X0 1 s uconce ]
-[i F10462
+[v F10464 `uc ~T0 @X0 1 s uconce ]
+[i F10464
 -> -> 1 `i `uc
 ]
-[v F10463 `uc ~T0 @X0 1 s uckey ]
+[v F10465 `uc ~T0 @X0 1 s uckey ]
 "13
 [; ;matrix_keyboard.c: 13:     if(ucdetection ==0 )
 [e $ ! == -> _ucdetection `i -> 0 `i 1090  ]
@@ -1401,19 +1401,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "17
 [; ;matrix_keyboard.c: 17:         uckey = scan_key();
-[e = F10463 ( _scan_key ..  ]
+[e = F10465 ( _scan_key ..  ]
 "18
 [; ;matrix_keyboard.c: 18:         if((uckey != 0xFF) && uconce)
-[e $ ! && != -> F10463 `i -> 255 `i != -> F10462 `i -> 0 `i 1093  ]
+[e $ ! && != -> F10465 `i -> 255 `i != -> F10464 `i -> 0 `i 1093  ]
 "19
 [; ;matrix_keyboard.c: 19:         {
 {
 "20
 [; ;matrix_keyboard.c: 20:             uconce=0;
-[e = F10462 -> -> 0 `i `uc ]
+[e = F10464 -> -> 0 `i `uc ]
 "21
 [; ;matrix_keyboard.c: 21:             return uckey;
-[e ) F10463 ]
+[e ) F10465 ]
 [e $UE 1089  ]
 "22
 [; ;matrix_keyboard.c: 22:         }
@@ -1422,10 +1422,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;matrix_keyboard.c: 23:         else if(uckey == 0xFF)
 [e :U 1093 ]
-[e $ ! == -> F10463 `i -> 255 `i 1095  ]
+[e $ ! == -> F10465 `i -> 255 `i 1095  ]
 "24
 [; ;matrix_keyboard.c: 24:             uconce = 1;
-[e = F10462 -> -> 1 `i `uc ]
+[e = F10464 -> -> 1 `i `uc ]
 [e :U 1095 ]
 [e :U 1094 ]
 "25

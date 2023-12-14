@@ -1,4 +1,4 @@
-# 1 "matrix_keyboard.c"
+# 1 "car animation.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "matrix_keyboard.c" 2
+# 1 "car animation.c" 2
 # 1 "./main.h" 1
 # 10 "./main.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 1 3
@@ -17979,66 +17979,55 @@ void display_time(void);
 void gear_monitor(unsigned char uckey);
 void display_speed(void);
 void car_animation(void);
-# 1 "matrix_keyboard.c" 2
+# 1 "car animation.c" 2
 
 
-void init_matrixkeypad()
+void init_animation(void)
 {
-    PORTB =0x00;
-    TRISB = TRISB & 0x1E;
-    RBPU=0;
-}
-
-unsigned char read_switches(unsigned char ucdetection)
-{
-    static unsigned char uconce=1, uckey;
-    if(ucdetection ==0 )
-        return scan_key();
-    else if(ucdetection == 1)
+    char firsthalfcar[8] = { 0x00, 0x07, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
+    char secondhalfcar[8] = { 0x00, 0x1C, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
+    char m[8]=
     {
-        uckey = scan_key();
-        if((uckey != 0xFF) && uconce)
-        {
-            uconce=0;
-            return uckey;
-        }
-        else if(uckey == 0xFF)
-            uconce = 1;
-    }
-    return 0xFF;
+         0b00000,
+ 0b00011,
+ 0b00111,
+ 0b11111,
+ 0b11111,
+ 0b11111,
+ 0b01100,
+ 0b00000
+    };
+    char n[8]={
+        0b00000,
+ 0b11110,
+ 0b11110,
+ 0b11111,
+ 0b11111,
+ 0b11111,
+ 0b01100,
+ 0b00000
+    };
+
+    clcd_write(0x40,0);
+    for (int i=0; i<8; i++)
+        clcd_write(firsthalfcar[i],1);
+    clcd_write(0x48,0);
+    for (int i=0; i<8; i++)
+        clcd_write(secondhalfcar[i],1);
+        clcd_write(0x50,0);
+    for (int i=0; i<8; i++)
+        clcd_write(m[i],1);
+    clcd_write(0x58,0);
+    for (int i=0; i<8; i++)
+        clcd_write(n[i],1);
 }
 
-unsigned char scan_key()
+void car_animation(void)
 {
-    PORTBbits.RB5 = 0, PORTBbits.RB6 = 1, PORTBbits.RB7 = 1;
-    if( PORTBbits.RB1 == 0)
-        return 1;
 
+        clcd_putch( 0x03, (0x80 + (1)));
+        clcd_putch( 0x02, (0x80 + (0)));
+        clcd_putch( 0x01, (0xC0 + (1)));
+        clcd_putch( 0x00, (0xC0 + (0)));
 
-
-
-
-
-
-    PORTBbits.RB5 = 1, PORTBbits.RB6 = 0, PORTBbits.RB7 = 1;
-    if( PORTBbits.RB1 == 0)
-        return 2;
-
-
-
-
-
-
-
-    PORTBbits.RB5 = 1, PORTBbits.RB6 = 1, PORTBbits.RB7 = 0, PORTBbits.RB7 = 0;
-    if( PORTBbits.RB1 == 0)
-        return 3;
-
-
-
-
-
-
-
-        return 0xFF;
 }
