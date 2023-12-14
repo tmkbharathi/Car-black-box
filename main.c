@@ -4,11 +4,21 @@
  *
  * Created on 13 December, 2023, 9:24 PM
  */
+#include "main.h"
 
-#include <xc.h>
+void init_config(){
+    init_matrixkeypad();
+    init_clcd();
+    
+}
 
 void main(void) {
-    
+    init_config();
+    unsigned char ucKey;
+    while(1){
+        ucKey = read_switches(EDGE);
+        display_dashboard(ucKey);
+    }
     return;
 }
 
