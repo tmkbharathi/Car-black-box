@@ -1318,8 +1318,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _init_animation ]
 [f ]
-[v F10462 `uc ~T0 @X0 -> 8 `i s ]
-[i F10462
+[v F10467 `uc ~T0 @X0 -> 8 `i s ]
+[i F10467
 :U ..
 "5
 [; ;car animation.c: 5:     char firsthalfcar[8] = { 0x00, 0x07, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
@@ -1334,9 +1334,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _firsthalfcar `uc ~T0 @X0 -> 8 `i a ]
-[e = _firsthalfcar F10462 ]
-[v F10464 `uc ~T0 @X0 -> 8 `i s ]
-[i F10464
+[e = _firsthalfcar F10467 ]
+[v F10469 `uc ~T0 @X0 -> 8 `i s ]
+[i F10469
 :U ..
 "6
 [; ;car animation.c: 6:     char secondhalfcar[8] = { 0x00, 0x1C, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
@@ -1351,12 +1351,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _secondhalfcar `uc ~T0 @X0 -> 8 `i a ]
-[e = _secondhalfcar F10464 ]
-[v F10466 `uc ~T0 @X0 -> 8 `i s ]
-[i F10466
+[e = _secondhalfcar F10469 ]
+[v F10471 `uc ~T0 @X0 -> 8 `i s ]
+[i F10471
 :U ..
 "7
-[; ;car animation.c: 7:     char m[8]=
+[; ;car animation.c: 7:     char m[8]={0x00, 0x03, 0x07, 0x1F, 0x1F, 0x1F, 0x0C, 0x00};
 -> -> 0 `i `uc
 -> -> 3 `i `uc
 -> -> 7 `i `uc
@@ -1368,12 +1368,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _m `uc ~T0 @X0 -> 8 `i a ]
-[e = _m F10466 ]
-[v F10468 `uc ~T0 @X0 -> 8 `i s ]
-[i F10468
+[e = _m F10471 ]
+[v F10473 `uc ~T0 @X0 -> 8 `i s ]
+[i F10473
 :U ..
-"18
-[; ;car animation.c: 18:     char n[8]={
+"8
+[; ;car animation.c: 8:     char n[8]={0x00, 0x1E, 0x1E, 0x1F, 0x1F, 0x1F, 0x0C, 0x00};
 -> -> 0 `i `uc
 -> -> 30 `i `uc
 -> -> 30 `i `uc
@@ -1385,104 +1385,104 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 [v _n `uc ~T0 @X0 -> 8 `i a ]
-[e = _n F10468 ]
-"29
-[; ;car animation.c: 29:     clcd_write(0x40,0);
+[e = _n F10473 ]
+"10
+[; ;car animation.c: 10:     clcd_write(0x40,0);
 [e ( _clcd_write (2 , -> -> 64 `i `uc -> -> 0 `i `uc ]
-"30
-[; ;car animation.c: 30:     for (int i=0; i<8; i++)
+"11
+[; ;car animation.c: 11:     for (int i=0; i<8; i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 8 `i 1089  ]
 [e $U 1090  ]
 [e :U 1089 ]
-"31
-[; ;car animation.c: 31:         clcd_write(firsthalfcar[i],1);
+"12
+[; ;car animation.c: 12:         clcd_write(firsthalfcar[i],1);
 [e ( _clcd_write (2 , -> *U + &U _firsthalfcar * -> -> _i `ui `ux -> -> # *U &U _firsthalfcar `ui `ux `uc -> -> 1 `i `uc ]
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 8 `i 1089  ]
 [e :U 1090 ]
 }
-"32
-[; ;car animation.c: 32:     clcd_write(0x48,0);
+"13
+[; ;car animation.c: 13:     clcd_write(0x48,0);
 [e ( _clcd_write (2 , -> -> 72 `i `uc -> -> 0 `i `uc ]
-"33
-[; ;car animation.c: 33:     for (int i=0; i<8; i++)
+"14
+[; ;car animation.c: 14:     for (int i=0; i<8; i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 8 `i 1092  ]
 [e $U 1093  ]
 [e :U 1092 ]
-"34
-[; ;car animation.c: 34:         clcd_write(secondhalfcar[i],1);
+"15
+[; ;car animation.c: 15:         clcd_write(secondhalfcar[i],1);
 [e ( _clcd_write (2 , -> *U + &U _secondhalfcar * -> -> _i `ui `ux -> -> # *U &U _secondhalfcar `ui `ux `uc -> -> 1 `i `uc ]
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 8 `i 1092  ]
 [e :U 1093 ]
 }
-"35
-[; ;car animation.c: 35:         clcd_write(0x50,0);
+"16
+[; ;car animation.c: 16:         clcd_write(0x50,0);
 [e ( _clcd_write (2 , -> -> 80 `i `uc -> -> 0 `i `uc ]
-"36
-[; ;car animation.c: 36:     for (int i=0; i<8; i++)
+"17
+[; ;car animation.c: 17:     for (int i=0; i<8; i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 8 `i 1095  ]
 [e $U 1096  ]
 [e :U 1095 ]
-"37
-[; ;car animation.c: 37:         clcd_write(m[i],1);
+"18
+[; ;car animation.c: 18:         clcd_write(m[i],1);
 [e ( _clcd_write (2 , -> *U + &U _m * -> -> _i `ui `ux -> -> # *U &U _m `ui `ux `uc -> -> 1 `i `uc ]
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 8 `i 1095  ]
 [e :U 1096 ]
 }
-"38
-[; ;car animation.c: 38:     clcd_write(0x58,0);
+"19
+[; ;car animation.c: 19:     clcd_write(0x58,0);
 [e ( _clcd_write (2 , -> -> 88 `i `uc -> -> 0 `i `uc ]
-"39
-[; ;car animation.c: 39:     for (int i=0; i<8; i++)
+"20
+[; ;car animation.c: 20:     for (int i=0; i<8; i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 8 `i 1098  ]
 [e $U 1099  ]
 [e :U 1098 ]
-"40
-[; ;car animation.c: 40:         clcd_write(n[i],1);
+"21
+[; ;car animation.c: 21:         clcd_write(n[i],1);
 [e ( _clcd_write (2 , -> *U + &U _n * -> -> _i `ui `ux -> -> # *U &U _n `ui `ux `uc -> -> 1 `i `uc ]
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 8 `i 1098  ]
 [e :U 1099 ]
 }
-"41
-[; ;car animation.c: 41: }
+"22
+[; ;car animation.c: 22: }
 [e :UE 1088 ]
 }
-"43
-[; ;car animation.c: 43: void car_animation(void)
+"24
+[; ;car animation.c: 24: void car_animation(void)
 [v _car_animation `(v ~T0 @X0 1 ef ]
-"44
-[; ;car animation.c: 44: {
+"25
+[; ;car animation.c: 25: {
 {
 [e :U _car_animation ]
 [f ]
-"46
-[; ;car animation.c: 46:         clcd_putch( 0x03, (0x80 + (1)));
+"27
+[; ;car animation.c: 27:         clcd_putch( 0x03, (0x80 + (1)));
 [e ( _clcd_putch (2 , -> -> 3 `i `uc -> + -> 128 `i -> 1 `i `uc ]
-"47
-[; ;car animation.c: 47:         clcd_putch( 0x02, (0x80 + (0)));
+"28
+[; ;car animation.c: 28:         clcd_putch( 0x02, (0x80 + (0)));
 [e ( _clcd_putch (2 , -> -> 2 `i `uc -> + -> 128 `i -> 0 `i `uc ]
-"48
-[; ;car animation.c: 48:         clcd_putch( 0x01, (0xC0 + (1)));
+"29
+[; ;car animation.c: 29:         clcd_putch( 0x01, (0xC0 + (1)));
 [e ( _clcd_putch (2 , -> -> 1 `i `uc -> + -> 192 `i -> 1 `i `uc ]
-"49
-[; ;car animation.c: 49:         clcd_putch( 0x00, (0xC0 + (0)));
+"30
+[; ;car animation.c: 30:         clcd_putch( 0x00, (0xC0 + (0)));
 [e ( _clcd_putch (2 , -> -> 0 `i `uc -> + -> 192 `i -> 0 `i `uc ]
-"51
-[; ;car animation.c: 51: }
+"32
+[; ;car animation.c: 32: }
 [e :UE 1101 ]
 }

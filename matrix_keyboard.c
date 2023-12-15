@@ -34,9 +34,9 @@ unsigned char scan_key()
     /*else if( RB2 == 0)
         return 4;
     else if( RB3 == 0)
-        return 7;
-    else if( RB4 == 0)
-        return 10;*/
+        return 7;*/
+    else if( B.RB4 == 0)
+        return 10;
     
     B.RB5 = 1, B.RB6 = 0, B.RB7 = 1;
     if( B.RB1 == 0)
@@ -44,9 +44,9 @@ unsigned char scan_key()
     /*else if( RB2 == 0)
         return 5;
     else if( RB3 == 0)
-        return 8;
-    else if( RB4 == 0)
-        return 11;*/
+        return 8;*/
+    else if( B.RB4 == 0)
+        return 11;
     
     B.RB5 = 1, B.RB6 = 1, B.RB7 = 0, B.RB7 = 0;
     if( B.RB1 == 0)
@@ -54,9 +54,9 @@ unsigned char scan_key()
     /*else if( RB2 == 0)
         return 6;
     else if( RB3 == 0)
-        return 9;
-    else if( RB4 == 0)
-        return 12;*/
+        return 9;*/
+    else if( B.RB4 == 0)
+        return 12;
    
         return 0xFF;
 }

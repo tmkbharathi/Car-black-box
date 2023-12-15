@@ -17973,12 +17973,15 @@ unsigned char read_switches(unsigned char ucdetection);
 unsigned char scan_key(void);
 
 
-
-void display_dashboard(unsigned char uckey);
+void display_dashboard(unsigned char uckey, unsigned short usAdc);
 void display_time(void);
 void gear_monitor(unsigned char uckey);
-void display_speed(void);
+void display_speed(unsigned short usads);
 void car_animation(void);
+
+
+void init_adc(void);
+unsigned short read_adc(unsigned char channel);
 # 1 "clcd.c" 2
 
 

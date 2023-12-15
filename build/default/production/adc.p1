@@ -1,26 +1,58 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"23 ./main.h
-[; ;./main.h: 23: void init_matrixkeypad(void);
-[v _init_matrixkeypad `(v ~T0 @X0 0 ef ]
-"37 ./clcd.h
-[; ;./clcd.h: 37: void init_clcd(void);
-[v _init_clcd `(v ~T0 @X0 0 ef ]
-"20 ./main.h
-[; ;./main.h: 20: void init_animation(void);
-[v _init_animation `(v ~T0 @X0 0 ef ]
-"35
-[; ;./main.h: 35: void init_adc(void);
-[v _init_adc `(v ~T0 @X0 0 ef ]
-[p mainexit ]
-"36
-[; ;./main.h: 36: unsigned short read_adc(unsigned char channel);
-[v _read_adc `(us ~T0 @X0 0 ef1`uc ]
-"24
-[; ;./main.h: 24: unsigned char read_switches(unsigned char ucdetection);
-[v _read_switches `(uc ~T0 @X0 0 ef1`uc ]
-"28
-[; ;./main.h: 28: void display_dashboard(unsigned char uckey, unsigned short usAdc);
-[v _display_dashboard `(v ~T0 @X0 0 ef2`uc`us ]
+"32526 C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32526: extern volatile __bit ADON __attribute__((address(0x7E10)));
+[v _ADON `Vb ~T0 @X0 0 e@32272 ]
+"40356
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 40356: extern volatile __bit VCFG1 __attribute__((address(0x7E0D)));
+[v _VCFG1 `Vb ~T0 @X0 0 e@32269 ]
+"40350
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 40350: extern volatile __bit VCFG0 __attribute__((address(0x7E0C)));
+[v _VCFG0 `Vb ~T0 @X0 0 e@32268 ]
+"36051
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 36051: extern volatile __bit PCFG3 __attribute__((address(0x7E0B)));
+[v _PCFG3 `Vb ~T0 @X0 0 e@32267 ]
+"36048
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 36048: extern volatile __bit PCFG2 __attribute__((address(0x7E0A)));
+[v _PCFG2 `Vb ~T0 @X0 0 e@32266 ]
+"36045
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 36045: extern volatile __bit PCFG1 __attribute__((address(0x7E09)));
+[v _PCFG1 `Vb ~T0 @X0 0 e@32265 ]
+"36042
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 36042: extern volatile __bit PCFG0 __attribute__((address(0x7E08)));
+[v _PCFG0 `Vb ~T0 @X0 0 e@32264 ]
+"32496
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32496: extern volatile __bit ACQT2 __attribute__((address(0x7E05)));
+[v _ACQT2 `Vb ~T0 @X0 0 e@32261 ]
+"32493
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32493: extern volatile __bit ACQT1 __attribute__((address(0x7E04)));
+[v _ACQT1 `Vb ~T0 @X0 0 e@32260 ]
+"32490
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32490: extern volatile __bit ACQT0 __attribute__((address(0x7E03)));
+[v _ACQT0 `Vb ~T0 @X0 0 e@32259 ]
+"32505
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32505: extern volatile __bit ADCS2 __attribute__((address(0x7E02)));
+[v _ADCS2 `Vb ~T0 @X0 0 e@32258 ]
+"32502
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32502: extern volatile __bit ADCS1 __attribute__((address(0x7E01)));
+[v _ADCS1 `Vb ~T0 @X0 0 e@32257 ]
+"32499
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32499: extern volatile __bit ADCS0 __attribute__((address(0x7E00)));
+[v _ADCS0 `Vb ~T0 @X0 0 e@32256 ]
+"32514
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 32514: extern volatile __bit ADFM __attribute__((address(0x7E07)));
+[v _ADFM `Vb ~T0 @X0 0 e@32263 ]
+"30273
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 30273: extern volatile unsigned char ADCON0 __attribute__((address(0xFC2)));
+[v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
+"35499
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 35499: extern volatile __bit GO __attribute__((address(0x7E11)));
+[v _GO `Vb ~T0 @X0 0 e@32273 ]
+"30399
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 30399: extern volatile unsigned char ADRESL __attribute__((address(0xFC3)));
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
+"30406
+[; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 30406: extern volatile unsigned char ADRESH __attribute__((address(0xFC4)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "54 C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h
 [; ;C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 54: __asm("RXF6SIDH equ 0D60h");
 [; <" RXF6SIDH equ 0D60h ;# ">
@@ -1326,67 +1358,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "67
 [p x EBTRB  =  OFF       ]
-"9 main.c
-[; ;main.c: 9: void init_config(){
-[v _init_config `(v ~T0 @X0 1 ef ]
+"3 adc.c
+[; ;adc.c: 3: void init_adc()
+[v _init_adc `(v ~T0 @X0 1 ef ]
+"4
+[; ;adc.c: 4: {
 {
-[e :U _init_config ]
+[e :U _init_adc ]
 [f ]
+"5
+[; ;adc.c: 5:     ADON=1;
+[e = _ADON -> -> 1 `i `b ]
+"6
+[; ;adc.c: 6:     VCFG1=0, VCFG0=0;
+[e ; -> = _VCFG1 -> -> 0 `i `b `i -> = _VCFG0 -> -> 0 `i `b `i ]
+"7
+[; ;adc.c: 7:     PCFG3=1, PCFG2=0, PCFG1=1, PCFG0=0;
+[e ; -> ; -> ; -> = _PCFG3 -> -> 1 `i `b `i -> = _PCFG2 -> -> 0 `i `b `i `i -> = _PCFG1 -> -> 1 `i `b `i `i -> = _PCFG0 -> -> 0 `i `b `i ]
+"8
+[; ;adc.c: 8:     ACQT2=1, ACQT1=0, ACQT0=0;
+[e ; -> ; -> = _ACQT2 -> -> 1 `i `b `i -> = _ACQT1 -> -> 0 `i `b `i `i -> = _ACQT0 -> -> 0 `i `b `i ]
+"9
+[; ;adc.c: 9:     ADCS2=0, ADCS1=1, ADCS0=0;
+[e ; -> ; -> = _ADCS2 -> -> 0 `i `b `i -> = _ADCS1 -> -> 1 `i `b `i `i -> = _ADCS0 -> -> 0 `i `b `i ]
 "10
-[; ;main.c: 10:     init_matrixkeypad();
-[e ( _init_matrixkeypad ..  ]
+[; ;adc.c: 10:     ADFM=1;
+[e = _ADFM -> -> 1 `i `b ]
 "11
-[; ;main.c: 11:     init_clcd();
-[e ( _init_clcd ..  ]
-"12
-[; ;main.c: 12:     init_animation();
-[e ( _init_animation ..  ]
-"13
-[; ;main.c: 13:     init_adc();
-[e ( _init_adc ..  ]
-"14
-[; ;main.c: 14: }
+[; ;adc.c: 11: }
 [e :UE 1088 ]
 }
-[v $root$_main `(v ~T0 @X0 0 e ]
-"16
-[; ;main.c: 16: void main(void) {
-[v _main `(v ~T0 @X0 1 ef ]
+"12
+[; ;adc.c: 12: unsigned short read_adc(unsigned char channel)
+[v _read_adc `(us ~T0 @X0 1 ef1`uc ]
+"13
+[; ;adc.c: 13: {
 {
-[e :U _main ]
+[e :U _read_adc ]
+"12
+[; ;adc.c: 12: unsigned short read_adc(unsigned char channel)
+[v _channel `uc ~T0 @X0 1 r1 ]
+"13
+[; ;adc.c: 13: {
 [f ]
-"17
-[; ;main.c: 17:     init_config();
-[e ( _init_config ..  ]
-"18
-[; ;main.c: 18:     unsigned char ucKey;
-[v _ucKey `uc ~T0 @X0 1 a ]
-"19
-[; ;main.c: 19:     unsigned short usAdc;
-[v _usAdc `us ~T0 @X0 1 a ]
-"20
-[; ;main.c: 20:     while(1){
+"14
+[; ;adc.c: 14:     ADCON0=(ADCON0 & 0xC3) |(unsigned char)(channel<<2);
+[e = _ADCON0 -> | & -> _ADCON0 `i -> 195 `i -> -> << -> _channel `i -> 2 `i `uc `i `uc ]
+"15
+[; ;adc.c: 15:     GO=1;
+[e = _GO -> -> 1 `i `b ]
+"16
+[; ;adc.c: 16:     while(GO);
+[e $U 1090  ]
 [e :U 1091 ]
-{
-"21
-[; ;main.c: 21:         usAdc = (unsigned short)(read_adc(4)/10.33);
-[e = _usAdc -> / -> -> ( _read_adc (1 -> -> 4 `i `uc `ui `d .10.33 `us ]
-"22
-[; ;main.c: 22:         ucKey = read_switches(1);
-[e = _ucKey ( _read_switches (1 -> -> 1 `i `uc ]
-"23
-[; ;main.c: 23:             display_dashboard(ucKey, usAdc);
-[e ( _display_dashboard (2 , _ucKey _usAdc ]
-"25
-[; ;main.c: 25:     }
-}
 [e :U 1090 ]
-[e $U 1091  ]
+[e $ _GO 1091  ]
 [e :U 1092 ]
-"27
-[; ;main.c: 27:     return;
+"17
+[; ;adc.c: 17:     return (unsigned short) ADRESL | (unsigned short)((ADRESH & 0x03) << 8);
+[e ) -> | -> -> _ADRESL `us `ui -> -> << & -> _ADRESH `i -> 3 `i -> 8 `i `us `ui `us ]
 [e $UE 1089  ]
-"28
-[; ;main.c: 28: }
+"18
+[; ;adc.c: 18: }
 [e :UE 1089 ]
 }

@@ -1,4 +1,4 @@
-# 1 "matrix_keyboard.c"
+# 1 "adc.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.35/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "matrix_keyboard.c" 2
+# 1 "adc.c" 2
 # 1 "./main.h" 1
 # 10 "./main.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 1 3
@@ -17982,66 +17982,22 @@ void car_animation(void);
 
 void init_adc(void);
 unsigned short read_adc(unsigned char channel);
-# 1 "matrix_keyboard.c" 2
+# 1 "adc.c" 2
 
 
-void init_matrixkeypad()
+void init_adc()
 {
-    PORTB =0x00;
-    TRISB = TRISB & 0x1E;
-    RBPU=0;
+    ADON=1;
+    VCFG1=0, VCFG0=0;
+    PCFG3=1, PCFG2=0, PCFG1=1, PCFG0=0;
+    ACQT2=1, ACQT1=0, ACQT0=0;
+    ADCS2=0, ADCS1=1, ADCS0=0;
+    ADFM=1;
 }
-
-unsigned char read_switches(unsigned char ucdetection)
+unsigned short read_adc(unsigned char channel)
 {
-    static unsigned char uconce=1, uckey;
-    if(ucdetection ==0 )
-        return scan_key();
-    else if(ucdetection == 1)
-    {
-        uckey = scan_key();
-        if((uckey != 0xFF) && uconce)
-        {
-            uconce=0;
-            return uckey;
-        }
-        else if(uckey == 0xFF)
-            uconce = 1;
-    }
-    return 0xFF;
-}
-
-unsigned char scan_key()
-{
-    PORTBbits.RB5 = 0, PORTBbits.RB6 = 1, PORTBbits.RB7 = 1;
-    if( PORTBbits.RB1 == 0)
-        return 1;
-
-
-
-
-    else if( PORTBbits.RB4 == 0)
-        return 10;
-
-    PORTBbits.RB5 = 1, PORTBbits.RB6 = 0, PORTBbits.RB7 = 1;
-    if( PORTBbits.RB1 == 0)
-        return 2;
-
-
-
-
-    else if( PORTBbits.RB4 == 0)
-        return 11;
-
-    PORTBbits.RB5 = 1, PORTBbits.RB6 = 1, PORTBbits.RB7 = 0, PORTBbits.RB7 = 0;
-    if( PORTBbits.RB1 == 0)
-        return 3;
-
-
-
-
-    else if( PORTBbits.RB4 == 0)
-        return 12;
-
-        return 0xFF;
+    ADCON0=(ADCON0 & 0xC3) |(unsigned char)(channel<<2);
+    GO=1;
+    while(GO);
+    return (unsigned short) ADRESL | (unsigned short)((ADRESH & 0x03) << 8);
 }

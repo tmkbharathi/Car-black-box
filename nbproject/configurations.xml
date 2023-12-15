@@ -20,6 +20,7 @@
       <itemPath>matrix_keyboard.c</itemPath>
       <itemPath>clcd.c</itemPath>
       <itemPath>car animation.c</itemPath>
+      <itemPath>adc.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

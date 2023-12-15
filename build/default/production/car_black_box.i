@@ -17973,24 +17973,27 @@ unsigned char read_switches(unsigned char ucdetection);
 unsigned char scan_key(void);
 
 
-
-void display_dashboard(unsigned char uckey);
+void display_dashboard(unsigned char uckey, unsigned short usAdc);
 void display_time(void);
 void gear_monitor(unsigned char uckey);
-void display_speed(void);
+void display_speed(unsigned short usads);
 void car_animation(void);
+
+
+void init_adc(void);
+unsigned short read_adc(unsigned char channel);
 # 1 "car_black_box.c" 2
 
 
 char* signature[8]={"ON","GN","G1", "G2","G3","G4","GR", "C "};
 
-void display_dashboard(unsigned char uckey)
+void display_dashboard(unsigned char uckey, unsigned short usads)
 {
     clcd_print( (unsigned char*) "TIME   E  SP" , (0x80 + (4)));
     car_animation();
     display_time();
     gear_monitor(uckey);
-    display_speed();
+    display_speed(usads);
 }
 void display_time(){
     clcd_putch('1', (0xC0 + (2)));
@@ -18022,15 +18025,14 @@ void gear_monitor(unsigned char uckey){
     }
     else if(uckey == 3)
     {
-           if(crashflag==1);
-           else if(signindex > 1)
-                signindex--;
+          if(crashflag ==0 && signindex > 1)
+              signindex--;
     }
     clcd_putch(signature[signindex][0], (0xC0 + (11)));
     clcd_putch(signature[signindex][1], (0xC0 + (12)));
 }
 
-void display_speed(){
-        clcd_putch('9', (0xC0 + (14)));
-        clcd_putch('9', (0xC0 + (15)));
+void display_speed(unsigned short usadc){
+        clcd_putch((unsigned char)(usadc/10)%10+48, (0xC0 + (14)));
+        clcd_putch((unsigned char)usadc%10+48, (0xC0 + (15)));
     }

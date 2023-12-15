@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=car_black_box.c main.c matrix_keyboard.c clcd.c "car animation.c"
+SOURCEFILES_QUOTED_IF_SPACED=car_black_box.c main.c matrix_keyboard.c clcd.c "car animation.c" adc.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/car_black_box.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/matrix_keyboard.p1 ${OBJECTDIR}/clcd.p1 "${OBJECTDIR}/car animation.p1"
-POSSIBLE_DEPFILES=${OBJECTDIR}/car_black_box.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/matrix_keyboard.p1.d ${OBJECTDIR}/clcd.p1.d "${OBJECTDIR}/car animation.p1.d"
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/car_black_box.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/matrix_keyboard.p1 ${OBJECTDIR}/clcd.p1 "${OBJECTDIR}/car animation.p1" ${OBJECTDIR}/adc.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/car_black_box.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/matrix_keyboard.p1.d ${OBJECTDIR}/clcd.p1.d "${OBJECTDIR}/car animation.p1.d" ${OBJECTDIR}/adc.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/car_black_box.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/matrix_keyboard.p1 ${OBJECTDIR}/clcd.p1 ${OBJECTDIR}/car\ animation.p1
+OBJECTFILES=${OBJECTDIR}/car_black_box.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/matrix_keyboard.p1 ${OBJECTDIR}/clcd.p1 ${OBJECTDIR}/car\ animation.p1 ${OBJECTDIR}/adc.p1
 
 # Source Files
-SOURCEFILES=car_black_box.c main.c matrix_keyboard.c clcd.c car animation.c
+SOURCEFILES=car_black_box.c main.c matrix_keyboard.c clcd.c car animation.c adc.c
 
 
 
@@ -134,6 +134,14 @@ ${OBJECTDIR}/car\ animation.p1: car\ animation.c  nbproject/Makefile-${CND_CONF}
 	@-${MV} "${OBJECTDIR}/car animation".d "${OBJECTDIR}/car animation.p1".d 
 	@${FIXDEPS} "${OBJECTDIR}/car animation.p1".d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/adc.p1: adc.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/adc.p1.d 
+	@${RM} ${OBJECTDIR}/adc.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp=${DFP_DIR}/xc8  -fno-short-double -fno-short-float -memi=wordwrite -mrom=0-3000 -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/adc.p1 adc.c 
+	@-${MV} ${OBJECTDIR}/adc.d ${OBJECTDIR}/adc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/adc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/car_black_box.p1: car_black_box.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -174,6 +182,14 @@ ${OBJECTDIR}/car\ animation.p1: car\ animation.c  nbproject/Makefile-${CND_CONF}
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp=${DFP_DIR}/xc8  -fno-short-double -fno-short-float -memi=wordwrite -mrom=0-3000 -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o "${OBJECTDIR}/car animation.p1" "car animation.c" 
 	@-${MV} "${OBJECTDIR}/car animation".d "${OBJECTDIR}/car animation.p1".d 
 	@${FIXDEPS} "${OBJECTDIR}/car animation.p1".d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/adc.p1: adc.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/adc.p1.d 
+	@${RM} ${OBJECTDIR}/adc.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp=${DFP_DIR}/xc8  -fno-short-double -fno-short-float -memi=wordwrite -mrom=0-3000 -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/adc.p1 adc.c 
+	@-${MV} ${OBJECTDIR}/adc.d ${OBJECTDIR}/adc.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/adc.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

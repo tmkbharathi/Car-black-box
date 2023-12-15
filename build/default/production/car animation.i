@@ -17973,12 +17973,15 @@ unsigned char read_switches(unsigned char ucdetection);
 unsigned char scan_key(void);
 
 
-
-void display_dashboard(unsigned char uckey);
+void display_dashboard(unsigned char uckey, unsigned short usAdc);
 void display_time(void);
 void gear_monitor(unsigned char uckey);
-void display_speed(void);
+void display_speed(unsigned short usads);
 void car_animation(void);
+
+
+void init_adc(void);
+unsigned short read_adc(unsigned char channel);
 # 1 "car animation.c" 2
 
 
@@ -17986,27 +17989,8 @@ void init_animation(void)
 {
     char firsthalfcar[8] = { 0x00, 0x07, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
     char secondhalfcar[8] = { 0x00, 0x1C, 0x04, 0x0E, 0x1F, 0x04, 0x00,0x00};
-    char m[8]=
-    {
-         0b00000,
- 0b00011,
- 0b00111,
- 0b11111,
- 0b11111,
- 0b11111,
- 0b01100,
- 0b00000
-    };
-    char n[8]={
-        0b00000,
- 0b11110,
- 0b11110,
- 0b11111,
- 0b11111,
- 0b11111,
- 0b01100,
- 0b00000
-    };
+    char m[8]={0x00, 0x03, 0x07, 0x1F, 0x1F, 0x1F, 0x0C, 0x00};
+    char n[8]={0x00, 0x1E, 0x1E, 0x1F, 0x1F, 0x1F, 0x0C, 0x00};
 
     clcd_write(0x40,0);
     for (int i=0; i<8; i++)

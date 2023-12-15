@@ -1379,11 +1379,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "12
 [; ;matrix_keyboard.c: 12:     static unsigned char uconce=1, uckey;
-[v F10464 `uc ~T0 @X0 1 s uconce ]
-[i F10464
+[v F10469 `uc ~T0 @X0 1 s uconce ]
+[i F10469
 -> -> 1 `i `uc
 ]
-[v F10465 `uc ~T0 @X0 1 s uckey ]
+[v F10470 `uc ~T0 @X0 1 s uckey ]
 "13
 [; ;matrix_keyboard.c: 13:     if(ucdetection ==0 )
 [e $ ! == -> _ucdetection `i -> 0 `i 1090  ]
@@ -1401,19 +1401,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "17
 [; ;matrix_keyboard.c: 17:         uckey = scan_key();
-[e = F10465 ( _scan_key ..  ]
+[e = F10470 ( _scan_key ..  ]
 "18
 [; ;matrix_keyboard.c: 18:         if((uckey != 0xFF) && uconce)
-[e $ ! && != -> F10465 `i -> 255 `i != -> F10464 `i -> 0 `i 1093  ]
+[e $ ! && != -> F10470 `i -> 255 `i != -> F10469 `i -> 0 `i 1093  ]
 "19
 [; ;matrix_keyboard.c: 19:         {
 {
 "20
 [; ;matrix_keyboard.c: 20:             uconce=0;
-[e = F10464 -> -> 0 `i `uc ]
+[e = F10469 -> -> 0 `i `uc ]
 "21
 [; ;matrix_keyboard.c: 21:             return uckey;
-[e ) F10465 ]
+[e ) F10470 ]
 [e $UE 1089  ]
 "22
 [; ;matrix_keyboard.c: 22:         }
@@ -1422,10 +1422,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;matrix_keyboard.c: 23:         else if(uckey == 0xFF)
 [e :U 1093 ]
-[e $ ! == -> F10465 `i -> 255 `i 1095  ]
+[e $ ! == -> F10470 `i -> 255 `i 1095  ]
 "24
 [; ;matrix_keyboard.c: 24:             uconce = 1;
-[e = F10464 -> -> 1 `i `uc ]
+[e = F10469 -> -> 1 `i `uc ]
 [e :U 1095 ]
 [e :U 1094 ]
 "25
@@ -1459,29 +1459,59 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;matrix_keyboard.c: 33:         return 1;
 [e ) -> -> 1 `i `uc ]
 [e $UE 1096  ]
+[e $U 1098  ]
+"38
+[; ;matrix_keyboard.c: 38:     else if( PORTBbits.RB4 == 0)
 [e :U 1097 ]
+[e $ ! == -> . . _PORTBbits 0 4 `i -> 0 `i 1099  ]
+"39
+[; ;matrix_keyboard.c: 39:         return 10;
+[e ) -> -> 10 `i `uc ]
+[e $UE 1096  ]
+[e :U 1099 ]
+[e :U 1098 ]
 "41
 [; ;matrix_keyboard.c: 41:     PORTBbits.RB5 = 1, PORTBbits.RB6 = 0, PORTBbits.RB7 = 1;
 [e ; ; = . . _PORTBbits 0 5 -> -> 1 `i `uc = . . _PORTBbits 0 6 -> -> 0 `i `uc = . . _PORTBbits 0 7 -> -> 1 `i `uc ]
 "42
 [; ;matrix_keyboard.c: 42:     if( PORTBbits.RB1 == 0)
-[e $ ! == -> . . _PORTBbits 0 1 `i -> 0 `i 1098  ]
+[e $ ! == -> . . _PORTBbits 0 1 `i -> 0 `i 1100  ]
 "43
 [; ;matrix_keyboard.c: 43:         return 2;
 [e ) -> -> 2 `i `uc ]
 [e $UE 1096  ]
-[e :U 1098 ]
+[e $U 1101  ]
+"48
+[; ;matrix_keyboard.c: 48:     else if( PORTBbits.RB4 == 0)
+[e :U 1100 ]
+[e $ ! == -> . . _PORTBbits 0 4 `i -> 0 `i 1102  ]
+"49
+[; ;matrix_keyboard.c: 49:         return 11;
+[e ) -> -> 11 `i `uc ]
+[e $UE 1096  ]
+[e :U 1102 ]
+[e :U 1101 ]
 "51
 [; ;matrix_keyboard.c: 51:     PORTBbits.RB5 = 1, PORTBbits.RB6 = 1, PORTBbits.RB7 = 0, PORTBbits.RB7 = 0;
 [e ; ; ; = . . _PORTBbits 0 5 -> -> 1 `i `uc = . . _PORTBbits 0 6 -> -> 1 `i `uc = . . _PORTBbits 0 7 -> -> 0 `i `uc = . . _PORTBbits 0 7 -> -> 0 `i `uc ]
 "52
 [; ;matrix_keyboard.c: 52:     if( PORTBbits.RB1 == 0)
-[e $ ! == -> . . _PORTBbits 0 1 `i -> 0 `i 1099  ]
+[e $ ! == -> . . _PORTBbits 0 1 `i -> 0 `i 1103  ]
 "53
 [; ;matrix_keyboard.c: 53:         return 3;
 [e ) -> -> 3 `i `uc ]
 [e $UE 1096  ]
-[e :U 1099 ]
+[e $U 1104  ]
+"58
+[; ;matrix_keyboard.c: 58:     else if( PORTBbits.RB4 == 0)
+[e :U 1103 ]
+[e $ ! == -> . . _PORTBbits 0 4 `i -> 0 `i 1105  ]
+"59
+[; ;matrix_keyboard.c: 59:         return 12;
+[e ) -> -> 12 `i `uc ]
+[e $UE 1096  ]
+[e :U 1105 ]
+[e :U 1104 ]
 "61
 [; ;matrix_keyboard.c: 61:         return 0xFF;
 [e ) -> -> 255 `i `uc ]
