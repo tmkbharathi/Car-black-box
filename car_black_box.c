@@ -1,11 +1,11 @@
 #include "main.h"
 
-char* signature[8]={"ON","GN","G1", "G2","G3","G4","GR", "C "};
+char* signature[8]={"ON","GN","G1","G2","G3","G4","GR", "C "};
 
 void display_dashboard(unsigned char uckey, unsigned short usads)
 {
-    clcd_print( (unsigned char*) "TIME   E  SP" , LINE1(4));     //time, event, speed
-    car_animation();
+    clcd_print( (unsigned char*) "    TIME   E  SP" , LINE1(0));     //time, event, speed
+    //car_animation(); 
     display_time();
     gear_monitor(uckey);
     display_speed(usads);
