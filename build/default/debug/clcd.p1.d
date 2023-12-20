@@ -1,4 +1,4 @@
-build/default/production/clcd.p1:  \
+build/default/debug/clcd.p1:  \
 clcd.c  \
 main.h  \
 conf.h  \

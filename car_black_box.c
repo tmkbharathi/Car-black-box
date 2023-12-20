@@ -4,21 +4,14 @@ char* signature[8]={"ON","GN","G1","G2","G3","G4","GR", "C "};
 
 void display_dashboard(unsigned char uckey, unsigned short usads)
 {
-    clcd_print( (unsigned char*) "    TIME   E  SP" , LINE1(0));     //time, event, speed
+    clcd_print( (unsigned char*) "   Time    E  SP" , LINE1(0));     //time, event, speed
     //car_animation(); 
     display_time();
     gear_monitor(uckey);
     display_speed(usads);
 }
 void display_time(){
-    clcd_putch('1', LINE2(2));
-    clcd_putch('5', LINE2(3));
-    clcd_putch(':', LINE2(4));
-    clcd_putch('0', LINE2(5));
-    clcd_putch('0', LINE2(6));
-    clcd_putch(':', LINE2(7));
-    clcd_putch('0', LINE2(8));
-    clcd_putch('0', LINE2(9));
+    clcd_print(" 10:00:00", LINE2(0));
 }
 
 void gear_monitor(unsigned char uckey){
@@ -50,4 +43,4 @@ void gear_monitor(unsigned char uckey){
 void display_speed(unsigned short usadc){
         clcd_putch((unsigned char)(usadc/10)%10+48, LINE2(14));
         clcd_putch((unsigned char)usadc%10+48, LINE2(15));
-    }
+}

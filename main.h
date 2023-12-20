@@ -16,6 +16,7 @@
 #include <xc.h>
 #include "conf.h"
 #include "clcd.h"
+#include "string.h"
 void init_config(void);
 void init_animation(void);
 /*  Matrix keypad MKP1 MKP2 MKP3*/
@@ -35,5 +36,9 @@ void car_animation(void);
 void init_adc(void);
 unsigned short read_adc(unsigned char channel);
 
+/*logscreen*/
+void logscreen(unsigned char uckey);
+void scrolllog(void);
+void timeleft(void);
+void init_timer0(void);
 #endif	/* MAIN_H */
-
