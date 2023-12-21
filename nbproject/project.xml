@@ -3,13 +3,9 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>Carblackbox</name>
-            <creation-uuid>b350c459-dee8-44de-ae9c-f13b544276fb</creation-uuid>
+            <name>Car black box</name>
+            <creation-uuid>ea47274e-1a93-4e3c-a411-21955d0f7c73</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions/>
-            <cpp-extensions/>
-            <header-extensions>c,h</header-extensions>
-            <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList/>

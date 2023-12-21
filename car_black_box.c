@@ -11,7 +11,7 @@ void display_dashboard(unsigned char uckey, unsigned short usads)
     display_speed(usads);
 }
 void display_time(){
-    clcd_print(" 10:00:00", LINE2(0));
+    clcd_print( TC " 10:00:00", LINE2(0));
 }
 
 void gear_monitor(unsigned char uckey){
@@ -39,8 +39,8 @@ void gear_monitor(unsigned char uckey){
     clcd_putch(signature[signindex][0], LINE2(11));
     clcd_putch(signature[signindex][1], LINE2(12));
 }
-
 void display_speed(unsigned short usadc){
         clcd_putch((unsigned char)(usadc/10)%10+48, LINE2(14));
         clcd_putch((unsigned char)usadc%10+48, LINE2(15));
+
 }

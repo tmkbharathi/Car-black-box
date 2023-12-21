@@ -1,4 +1,4 @@
-# 1 "car_black_box.c"
+# 1 "adc.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "car_black_box.c" 2
+# 1 "adc.c" 2
 # 1 "./main.h" 1
 # 10 "./main.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 1 3
@@ -18077,50 +18077,22 @@ void logscreen(unsigned char uckey);
 void scrolllog(void);
 void timeleft(void);
 void init_timer0(void);
-# 1 "car_black_box.c" 2
+# 1 "adc.c" 2
 
 
-char* signature[8]={"ON","GN","G1","G2","G3","G4","GR", "C "};
-
-void display_dashboard(unsigned char uckey, unsigned short usads)
+void init_adc()
 {
-    clcd_print( (unsigned char*) "   Time    E  SP" , (0x80 + (0)));
-
-    display_time();
-    gear_monitor(uckey);
-    display_speed(usads);
+    ADON=1;
+    VCFG1=0, VCFG0=0;
+    PCFG3=1, PCFG2=0, PCFG1=1, PCFG0=0;
+    ACQT2=1, ACQT1=0, ACQT0=0;
+    ADCS2=0, ADCS1=1, ADCS0=0;
+    ADFM=1;
 }
-void display_time(){
-    clcd_print( (unsigned char*) " 10:00:00", (0xC0 + (0)));
-}
-
-void gear_monitor(unsigned char uckey){
-    static char signindex=0, crashflag=0;
-    if(uckey == 1)
-    {
-        crashflag=1;
-        signindex=7;
-    }
-    else if(uckey == 2)
-    {
-        if(signindex < 6)
-            signindex++;
-        else if(signindex ==7)
-        {
-            signindex=1;
-            crashflag=0;
-        }
-    }
-    else if(uckey == 3)
-    {
-          if(crashflag ==0 && signindex > 1)
-              signindex--;
-    }
-    clcd_putch(signature[signindex][0], (0xC0 + (11)));
-    clcd_putch(signature[signindex][1], (0xC0 + (12)));
-}
-void display_speed(unsigned short usadc){
-        clcd_putch((unsigned char)(usadc/10)%10+48, (0xC0 + (14)));
-        clcd_putch((unsigned char)usadc%10+48, (0xC0 + (15)));
-
+unsigned short read_adc(unsigned char channel)
+{
+    ADCON0=(ADCON0 & 0xC3) |(unsigned char)(channel<<2);
+    GO=1;
+    while(GO);
+    return (unsigned short) ADRESL | (unsigned short)((ADRESH & 0x03) << 8);
 }

@@ -9,7 +9,7 @@
 void init_config(){
     init_matrixkeypad();
     init_clcd();
-    init_animation();
+    //init_animation();
     init_adc();
     init_timer0();
 }
@@ -47,10 +47,11 @@ void main(void) {
                 break;
             case 4:
                 scrolllog();
-            case 3: //defualt screnn
+            case 3: //default screen
                 break;
         }
     }
+    
     
     return;
 }

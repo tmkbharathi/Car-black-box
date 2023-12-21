@@ -1,35 +1,58 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"24 ./main.h
-[; ;./main.h: 24: void init_matrixkeypad(void);
-[v _init_matrixkeypad `(v ~T0 @X0 0 ef ]
-"37 ./clcd.h
-[; ;./clcd.h: 37: void init_clcd(void);
-[v _init_clcd `(v ~T0 @X0 0 ef ]
-"36 ./main.h
-[; ;./main.h: 36: void init_adc(void);
-[v _init_adc `(v ~T0 @X0 0 ef ]
-"43
-[; ;./main.h: 43: void init_timer0(void);
-[v _init_timer0 `(v ~T0 @X0 0 ef ]
-[p mainexit ]
-"37
-[; ;./main.h: 37: unsigned short read_adc(unsigned char channel);
-[v _read_adc `(us ~T0 @X0 0 ef1`uc ]
-"25
-[; ;./main.h: 25: unsigned char read_switches(unsigned char ucdetection);
-[v _read_switches `(uc ~T0 @X0 0 ef1`uc ]
-"40 ./clcd.h
-[; ;./clcd.h: 40: void clcd_write(unsigned char bit_values, unsigned char control_bit);
-[v _clcd_write `(v ~T0 @X0 0 ef2`uc`uc ]
-"40 ./main.h
-[; ;./main.h: 40: void logscreen(unsigned char uckey);
-[v _logscreen `(v ~T0 @X0 0 ef1`uc ]
-"29
-[; ;./main.h: 29: void display_dashboard(unsigned char uckey, unsigned short usAdc);
-[v _display_dashboard `(v ~T0 @X0 0 ef2`uc`us ]
-"41
-[; ;./main.h: 41: void scrolllog(void);
-[v _scrolllog `(v ~T0 @X0 0 ef ]
+"32530 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32530: extern volatile __bit ADON __attribute__((address(0x7E10)));
+[v _ADON `Vb ~T0 @X0 0 e@32272 ]
+"40360
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 40360: extern volatile __bit VCFG1 __attribute__((address(0x7E0D)));
+[v _VCFG1 `Vb ~T0 @X0 0 e@32269 ]
+"40354
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 40354: extern volatile __bit VCFG0 __attribute__((address(0x7E0C)));
+[v _VCFG0 `Vb ~T0 @X0 0 e@32268 ]
+"36055
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 36055: extern volatile __bit PCFG3 __attribute__((address(0x7E0B)));
+[v _PCFG3 `Vb ~T0 @X0 0 e@32267 ]
+"36052
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 36052: extern volatile __bit PCFG2 __attribute__((address(0x7E0A)));
+[v _PCFG2 `Vb ~T0 @X0 0 e@32266 ]
+"36049
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 36049: extern volatile __bit PCFG1 __attribute__((address(0x7E09)));
+[v _PCFG1 `Vb ~T0 @X0 0 e@32265 ]
+"36046
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 36046: extern volatile __bit PCFG0 __attribute__((address(0x7E08)));
+[v _PCFG0 `Vb ~T0 @X0 0 e@32264 ]
+"32500
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32500: extern volatile __bit ACQT2 __attribute__((address(0x7E05)));
+[v _ACQT2 `Vb ~T0 @X0 0 e@32261 ]
+"32497
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32497: extern volatile __bit ACQT1 __attribute__((address(0x7E04)));
+[v _ACQT1 `Vb ~T0 @X0 0 e@32260 ]
+"32494
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32494: extern volatile __bit ACQT0 __attribute__((address(0x7E03)));
+[v _ACQT0 `Vb ~T0 @X0 0 e@32259 ]
+"32509
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32509: extern volatile __bit ADCS2 __attribute__((address(0x7E02)));
+[v _ADCS2 `Vb ~T0 @X0 0 e@32258 ]
+"32506
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32506: extern volatile __bit ADCS1 __attribute__((address(0x7E01)));
+[v _ADCS1 `Vb ~T0 @X0 0 e@32257 ]
+"32503
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32503: extern volatile __bit ADCS0 __attribute__((address(0x7E00)));
+[v _ADCS0 `Vb ~T0 @X0 0 e@32256 ]
+"32518
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 32518: extern volatile __bit ADFM __attribute__((address(0x7E07)));
+[v _ADFM `Vb ~T0 @X0 0 e@32263 ]
+"30273
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 30273: extern volatile unsigned char ADCON0 __attribute__((address(0xFC2)));
+[v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
+"35503
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 35503: extern volatile __bit GO __attribute__((address(0x7E11)));
+[v _GO `Vb ~T0 @X0 0 e@32273 ]
+"30399
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 30399: extern volatile unsigned char ADRESL __attribute__((address(0xFC3)));
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
+"30406
+[; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 30406: extern volatile unsigned char ADRESH __attribute__((address(0xFC4)));
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 54: __asm("RXF6SIDH equ 0D60h");
 [; <" RXF6SIDH equ 0D60h ;# ">
@@ -1335,169 +1358,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "67
 [p x EBTRB  =  OFF       ]
-"9 main.c
-[; ;main.c: 9: void init_config(){
-[v _init_config `(v ~T0 @X0 1 ef ]
+"3 adc.c
+[; ;adc.c: 3: void init_adc()
+[v _init_adc `(v ~T0 @X0 1 ef ]
+"4
+[; ;adc.c: 4: {
 {
-[e :U _init_config ]
+[e :U _init_adc ]
 [f ]
+"5
+[; ;adc.c: 5:     ADON=1;
+[e = _ADON -> -> 1 `i `b ]
+"6
+[; ;adc.c: 6:     VCFG1=0, VCFG0=0;
+[e ; -> = _VCFG1 -> -> 0 `i `b `i -> = _VCFG0 -> -> 0 `i `b `i ]
+"7
+[; ;adc.c: 7:     PCFG3=1, PCFG2=0, PCFG1=1, PCFG0=0;
+[e ; -> ; -> ; -> = _PCFG3 -> -> 1 `i `b `i -> = _PCFG2 -> -> 0 `i `b `i `i -> = _PCFG1 -> -> 1 `i `b `i `i -> = _PCFG0 -> -> 0 `i `b `i ]
+"8
+[; ;adc.c: 8:     ACQT2=1, ACQT1=0, ACQT0=0;
+[e ; -> ; -> = _ACQT2 -> -> 1 `i `b `i -> = _ACQT1 -> -> 0 `i `b `i `i -> = _ACQT0 -> -> 0 `i `b `i ]
+"9
+[; ;adc.c: 9:     ADCS2=0, ADCS1=1, ADCS0=0;
+[e ; -> ; -> = _ADCS2 -> -> 0 `i `b `i -> = _ADCS1 -> -> 1 `i `b `i `i -> = _ADCS0 -> -> 0 `i `b `i ]
 "10
-[; ;main.c: 10:     init_matrixkeypad();
-[e ( _init_matrixkeypad ..  ]
+[; ;adc.c: 10:     ADFM=1;
+[e = _ADFM -> -> 1 `i `b ]
 "11
-[; ;main.c: 11:     init_clcd();
-[e ( _init_clcd ..  ]
-"13
-[; ;main.c: 13:     init_adc();
-[e ( _init_adc ..  ]
-"14
-[; ;main.c: 14:     init_timer0();
-[e ( _init_timer0 ..  ]
-"15
-[; ;main.c: 15: }
+[; ;adc.c: 11: }
 [e :UE 1088 ]
 }
-"16
-[; ;main.c: 16: unsigned int controlflag=1;
-[v _controlflag `ui ~T0 @X0 1 e ]
-[i _controlflag
--> -> 1 `i `ui
-]
-"17
-[; ;main.c: 17: unsigned int logout=0;
-[v _logout `ui ~T0 @X0 1 e ]
-[i _logout
--> -> 0 `i `ui
-]
-[v $root$_main `(v ~T0 @X0 0 e ]
-"19
-[; ;main.c: 19: void main(void) {
-[v _main `(v ~T0 @X0 1 ef ]
+"12
+[; ;adc.c: 12: unsigned short read_adc(unsigned char channel)
+[v _read_adc `(us ~T0 @X0 1 ef1`uc ]
+"13
+[; ;adc.c: 13: {
 {
-[e :U _main ]
+[e :U _read_adc ]
+"12
+[; ;adc.c: 12: unsigned short read_adc(unsigned char channel)
+[v _channel `uc ~T0 @X0 1 r1 ]
+"13
+[; ;adc.c: 13: {
 [f ]
-"20
-[; ;main.c: 20:     init_config();
-[e ( _init_config ..  ]
-"21
-[; ;main.c: 21:     unsigned char ucKey,uc1Key;
-[v _ucKey `uc ~T0 @X0 1 a ]
-[v _uc1Key `uc ~T0 @X0 1 a ]
-"22
-[; ;main.c: 22:     unsigned short usAdc;
-[v _usAdc `us ~T0 @X0 1 a ]
-"23
-[; ;main.c: 23:     while(1){
+"14
+[; ;adc.c: 14:     ADCON0=(ADCON0 & 0xC3) |(unsigned char)(channel<<2);
+[e = _ADCON0 -> | & -> _ADCON0 `i -> 195 `i -> -> << -> _channel `i -> 2 `i `uc `i `uc ]
+"15
+[; ;adc.c: 15:     GO=1;
+[e = _GO -> -> 1 `i `b ]
+"16
+[; ;adc.c: 16:     while(GO);
+[e $U 1090  ]
 [e :U 1091 ]
-{
-"24
-[; ;main.c: 24:         usAdc = (unsigned short)(read_adc(4)/10.33);
-[e = _usAdc -> / -> -> ( _read_adc (1 -> -> 4 `i `uc `ui `d .10.33 `us ]
-"25
-[; ;main.c: 25:         ucKey = read_switches(1);
-[e = _ucKey ( _read_switches (1 -> -> 1 `i `uc ]
-"26
-[; ;main.c: 26:         uc1Key = read_switches(0);
-[e = _uc1Key ( _read_switches (1 -> -> 0 `i `uc ]
-"27
-[; ;main.c: 27:         if(uc1Key == 12)
-[e $ ! == -> _uc1Key `i -> 12 `i 1093  ]
-"28
-[; ;main.c: 28:         {
-{
-"29
-[; ;main.c: 29:             if(logout++ == 1000)
-[e $ ! == ++ _logout -> -> 1 `i `ui -> -> 1000 `i `ui 1094  ]
-"30
-[; ;main.c: 30:             {
-{
-"31
-[; ;main.c: 31:                 logout=0;
-[e = _logout -> -> 0 `i `ui ]
-"32
-[; ;main.c: 32:                 controlflag=1;
-[e = _controlflag -> -> 1 `i `ui ]
-"33
-[; ;main.c: 33:             }
-}
-[e :U 1094 ]
-"34
-[; ;main.c: 34:         }
-}
-[e :U 1093 ]
-"35
-[; ;main.c: 35:         if(ucKey == 10)
-[e $ ! == -> _ucKey `i -> 10 `i 1095  ]
-"36
-[; ;main.c: 36:         {
-{
-"37
-[; ;main.c: 37:             controlflag=0;
-[e = _controlflag -> -> 0 `i `ui ]
-"38
-[; ;main.c: 38:             clcd_write(0x01, 0);
-[e ( _clcd_write (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-"39
-[; ;main.c: 39:         }
-}
-[e :U 1095 ]
-"40
-[; ;main.c: 40:         switch(controlflag)
-[e $U 1097  ]
-"41
-[; ;main.c: 41:         {
-{
-"42
-[; ;main.c: 42:             case 0:
-[e :U 1098 ]
-"43
-[; ;main.c: 43:                 logscreen(ucKey);
-[e ( _logscreen (1 _ucKey ]
-"44
-[; ;main.c: 44:                 break;
-[e $U 1096  ]
-"45
-[; ;main.c: 45:             case 1:
-[e :U 1099 ]
-"46
-[; ;main.c: 46:                 display_dashboard(ucKey, usAdc);
-[e ( _display_dashboard (2 , _ucKey _usAdc ]
-"47
-[; ;main.c: 47:                 break;
-[e $U 1096  ]
-"48
-[; ;main.c: 48:             case 4:
-[e :U 1100 ]
-"49
-[; ;main.c: 49:                 scrolllog();
-[e ( _scrolllog ..  ]
-"50
-[; ;main.c: 50:             case 3:
-[e :U 1101 ]
-"51
-[; ;main.c: 51:                 break;
-[e $U 1096  ]
-"52
-[; ;main.c: 52:         }
-}
-[e $U 1096  ]
-[e :U 1097 ]
-[e [\ _controlflag , $ -> -> 0 `i `ui 1098
- , $ -> -> 1 `i `ui 1099
- , $ -> -> 4 `i `ui 1100
- , $ -> -> 3 `i `ui 1101
- 1096 ]
-[e :U 1096 ]
-"53
-[; ;main.c: 53:     }
-}
 [e :U 1090 ]
-[e $U 1091  ]
+[e $ _GO 1091  ]
 [e :U 1092 ]
-"56
-[; ;main.c: 56:     return;
+"17
+[; ;adc.c: 17:     return (unsigned short) ADRESL | (unsigned short)((ADRESH & 0x03) << 8);
+[e ) -> | -> -> _ADRESL `us `ui -> -> << & -> _ADRESH `i -> 3 `i -> 8 `i `us `ui `us ]
 [e $UE 1089  ]
-"57
-[; ;main.c: 57: }
+"18
+[; ;adc.c: 18: }
 [e :UE 1089 ]
 }

@@ -1,4 +1,4 @@
-# 1 "car_black_box.c"
+# 1 "timer0.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "car_black_box.c" 2
+# 1 "timer0.c" 2
 # 1 "./main.h" 1
 # 10 "./main.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 1 3
@@ -18077,50 +18077,28 @@ void logscreen(unsigned char uckey);
 void scrolllog(void);
 void timeleft(void);
 void init_timer0(void);
-# 1 "car_black_box.c" 2
+# 1 "timer0.c" 2
 
 
-char* signature[8]={"ON","GN","G1","G2","G3","G4","GR", "C "};
-
-void display_dashboard(unsigned char uckey, unsigned short usads)
+void init_timer0(void)
 {
-    clcd_print( (unsigned char*) "   Time    E  SP" , (0x80 + (0)));
+    GIE=1;
+    PEIE=1;
+    TMR0IE=1;
+    TMR0ON=0;
+    TMR0IF=0;
 
-    display_time();
-    gear_monitor(uckey);
-    display_speed(usads);
+    T08BIT=1;
+    T0CS = 0;
+    PSA = 1;
+    TMR0 = 6;
 }
-void display_time(){
-    clcd_print( (unsigned char*) " 10:00:00", (0xC0 + (0)));
-}
+void init_timer2(void)
+{
 
-void gear_monitor(unsigned char uckey){
-    static char signindex=0, crashflag=0;
-    if(uckey == 1)
-    {
-        crashflag=1;
-        signindex=7;
-    }
-    else if(uckey == 2)
-    {
-        if(signindex < 6)
-            signindex++;
-        else if(signindex ==7)
-        {
-            signindex=1;
-            crashflag=0;
-        }
-    }
-    else if(uckey == 3)
-    {
-          if(crashflag ==0 && signindex > 1)
-              signindex--;
-    }
-    clcd_putch(signature[signindex][0], (0xC0 + (11)));
-    clcd_putch(signature[signindex][1], (0xC0 + (12)));
-}
-void display_speed(unsigned short usadc){
-        clcd_putch((unsigned char)(usadc/10)%10+48, (0xC0 + (14)));
-        clcd_putch((unsigned char)usadc%10+48, (0xC0 + (15)));
-
+    T2CKPS0 = 1;
+    T2CKPS1 = 1;
+    PR2 = 250;
+    TMR2IE = 1;
+    TMR2ON = 1;
 }

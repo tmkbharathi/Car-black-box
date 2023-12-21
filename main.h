@@ -12,11 +12,11 @@
 #define B PORTBbits 
 #define C PORTCbits
 #define D PORTBbits
+#define TC (unsigned char*)
 
 #include <xc.h>
 #include "conf.h"
 #include "clcd.h"
-#include "string.h"
 void init_config(void);
 void init_animation(void);
 /*  Matrix keypad MKP1 MKP2 MKP3*/

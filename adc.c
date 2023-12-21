@@ -17,3 +17,4 @@ unsigned short read_adc(unsigned char channel)
     return (unsigned short) ADRESL | (unsigned short)((ADRESH & 0x03) << 8);
 }
 
+
