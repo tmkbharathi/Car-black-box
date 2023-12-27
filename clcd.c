@@ -29,7 +29,10 @@ void init_clcd()
 	TRISD = 0x00;
 	/* Set PortC as output port for CLCD control */
 	TRISC = TRISC & 0xF8;
-
+   ECCP1CONbits.ECCP1M = 0;    //Turn off ECCP module
+    CCP1CON = 0;                //Disable CCP1
+    TRISEbits.PSPMODE = 0;      //Turn off PSP module
+    CMCON = 0x07;
 	CLCD_RW = LO;
 
 	

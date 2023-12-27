@@ -12,10 +12,12 @@ void init_config(){
     //init_animation();
     init_adc();
     init_timer0();
+    init_i2c();
+	init_ds1307();
 }
 unsigned int controlflag=1;
 unsigned int logout=0;
-
+extern char mpos;
 void main(void) {
     init_config();
     unsigned char ucKey,uc1Key;
@@ -23,15 +25,7 @@ void main(void) {
     while(1){
         usAdc = (unsigned short)(read_adc(4)/10.33);
         ucKey = read_switches(EDGE);
-        uc1Key = read_switches(0);
-        if(uc1Key == 12)
-        {
-            if(logout++ == 1000)
-            {
-                logout=0;
-                controlflag=1;
-            }
-        }
+        uc1Key = read_switches(LEVEL);
         if(ucKey == 10)
         {
             controlflag=0;
@@ -41,13 +35,16 @@ void main(void) {
         {
             case 0:
                 logscreen(ucKey);
+                mpos=0;
                 break;
             case 1:
-                display_dashboard(ucKey, usAdc);  
+                display_dashboard(ucKey, usAdc);
+                mpos=0;
                 break;
-            case 4:
-                scrolllog();
-            case 3: //default screen
+            case 3:
+                scrolllog(ucKey, uc1Key);
+                break;
+            case 4: //default screen
                 break;
         }
     }

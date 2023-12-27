@@ -17,10 +17,14 @@
 #include <xc.h>
 #include "conf.h"
 #include "clcd.h"
+#include "i2c.h"
+#include "ds1307.h"
 void init_config(void);
 void init_animation(void);
+int mystrcmp(char*s1, char *s2);
 /*  Matrix keypad MKP1 MKP2 MKP3*/
 #define EDGE 1
+#define LEVEL 0
 void init_matrixkeypad(void);
 unsigned char read_switches(unsigned char ucdetection);
 unsigned char scan_key(void);
@@ -38,7 +42,11 @@ unsigned short read_adc(unsigned char channel);
 
 /*logscreen*/
 void logscreen(unsigned char uckey);
-void scrolllog(void);
+void scrolllog(unsigned char key, unsigned char key1);
 void timeleft(void);
 void init_timer0(void);
+
+void display_times(void);
+static void get_time(void);
+void init_ds1307(void);
 #endif	/* MAIN_H */
