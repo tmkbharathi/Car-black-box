@@ -18078,6 +18078,18 @@ void write_ds1307(unsigned char address1, unsigned char data);
 unsigned char read_ds1307(unsigned char address1);
 # 21 "./main.h" 2
 
+# 1 "./ext_eeprom.h" 1
+
+
+
+
+
+
+
+void write_external_eeprom(unsigned char address1, unsigned char data);
+unsigned char read_external_eeprom(unsigned char address1);
+# 22 "./main.h" 2
+
 void init_config(void);
 void init_animation(void);
 int mystrcmp(char*s1, char *s2);
@@ -18101,20 +18113,22 @@ unsigned short read_adc(unsigned char channel);
 
 
 void logscreen(unsigned char uckey);
-void scrolllog(unsigned char key, unsigned char key1);
+void scrolllog(unsigned char key);
 void timeleft(void);
 void init_timer0(void);
 
 void display_times(void);
-static void get_time(void);
+void get_time(void);
 void init_ds1307(void);
+
+void getforstoreevent(void);
+void log_event();
 # 7 "main.c" 2
 
 
 void init_config(){
     init_matrixkeypad();
     init_clcd();
-
     init_adc();
     init_timer0();
     init_i2c();
@@ -18122,34 +18136,31 @@ void init_config(){
 }
 unsigned int controlflag=1;
 unsigned int logout=0;
-extern char mpos;
 void main(void) {
     init_config();
-    unsigned char ucKey,uc1Key;
+    unsigned char ucKey;
     unsigned short usAdc;
+    getforstoreevent();
     while(1){
         usAdc = (unsigned short)(read_adc(4)/10.33);
-        ucKey = read_switches(1);
-        uc1Key = read_switches(0);
-        if(ucKey == 10)
-        {
-            controlflag=0;
-            clcd_write(0x01, 0);
-        }
+        if(controlflag == 0 || controlflag == 1)
+            ucKey = read_switches(1);
+        else
+            ucKey = read_switches(0);
+
         switch(controlflag)
         {
             case 0:
                 logscreen(ucKey);
-                mpos=0;
                 break;
             case 1:
                 display_dashboard(ucKey, usAdc);
-                mpos=0;
                 break;
             case 3:
-                scrolllog(ucKey, uc1Key);
+                scrolllog(ucKey);
                 break;
             case 4:
+                clcd_print("View log",(0xC0 + (0)));
                 break;
         }
     }

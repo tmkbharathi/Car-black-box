@@ -1,31 +1,19 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"42 ./main.h
-[; ;./main.h: 42: unsigned short read_adc(unsigned char channel);
-[v _read_adc `(us ~T0 @X0 0 ef1`uc ]
-"51
-[; ;./main.h: 51: void get_time(void);
-[v _get_time `(v ~T0 @X0 0 ef ]
-"7 scrolldisplay.c
-[; ;scrolldisplay.c: 7: extern unsigned char time[9];
-[v _time `uc ~T0 @X0 -> 0 `x e ]
-"55 ./main.h
-[; ;./main.h: 55: void log_event();
-[v _log_event `(v ~T0 @X0 0 e? ]
-"8 ./ext_eeprom.h
-[; ;./ext_eeprom.h: 8: void write_external_eeprom(unsigned char address1, unsigned char data);
-[v _write_external_eeprom `(v ~T0 @X0 0 ef2`uc`uc ]
-"40 ./clcd.h
-[; ;./clcd.h: 40: void clcd_write(unsigned char bit_values, unsigned char control_bit);
-[v _clcd_write `(v ~T0 @X0 0 ef2`uc`uc ]
-"39
-[; ;./clcd.h: 39: void clcd_putch(const unsigned char data, unsigned char addr);
-[v _clcd_putch `(v ~T0 @X0 0 ef2`Cuc`uc ]
-"38
-[; ;./clcd.h: 38: void clcd_print(const unsigned char *data, unsigned char addr);
-[v _clcd_print `(v ~T0 @X0 0 ef2`*Cuc`uc ]
-"10 scrolldisplay.c
-[; ;scrolldisplay.c: 10: extern unsigned int controlflag;
-[v _controlflag `ui ~T0 @X0 0 e ]
+"6 ./i2c.h
+[; ;./i2c.h: 6: void i2c_start(void);
+[v _i2c_start `(v ~T0 @X0 0 ef ]
+"9
+[; ;./i2c.h: 9: void i2c_write(unsigned char data);
+[v _i2c_write `(v ~T0 @X0 0 ef1`uc ]
+"8
+[; ;./i2c.h: 8: void i2c_stop(void);
+[v _i2c_stop `(v ~T0 @X0 0 ef ]
+"7
+[; ;./i2c.h: 7: void i2c_rep_start(void);
+[v _i2c_rep_start `(v ~T0 @X0 0 ef ]
+"10
+[; ;./i2c.h: 10: unsigned char i2c_read(void);
+[v _i2c_read `(uc ~T0 @X0 0 ef ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 54: __asm("RXF6SIDH equ 0D60h");
 [; <" RXF6SIDH equ 0D60h ;# ">
@@ -1331,382 +1319,92 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "67
 [p x EBTRB  =  OFF       ]
-"3 scrolldisplay.c
-[; ;scrolldisplay.c: 3: char *scrolling[5]={"View log     ", "Download log ", "Clear log    ", "Set time     ", "Change Pass  "};
-[v _scrolling `*uc ~T0 @X0 -> 5 `i e ]
-[i _scrolling
-:U ..
-:s 1C
-:s 2C
-:s 3C
-:s 4C
-:s 5C
-..
-]
-"4
-[; ;scrolldisplay.c: 4: char logg=0;
-[v _logg `uc ~T0 @X0 1 e ]
-[i _logg
--> -> 0 `i `uc
-]
-"5
-[; ;scrolldisplay.c: 5: char log[17];
-[v _log `uc ~T0 @X0 -> 17 `i e ]
-"6
-[; ;scrolldisplay.c: 6: int press=0;
-[v _press `i ~T0 @X0 1 e ]
-[i _press
--> 0 `i
-]
-"8
-[; ;scrolldisplay.c: 8: char logpos=(-1);
-[v _logpos `uc ~T0 @X0 1 e ]
-[i _logpos
--> -U -> 1 `i `uc
-]
+"9 external.c
+[; ;external.c: 9: void write_external_eeprom(unsigned char address, unsigned char data)
+[v _write_external_eeprom `(v ~T0 @X0 1 ef2`uc`uc ]
+"10
+[; ;external.c: 10: {
+{
+[e :U _write_external_eeprom ]
 "9
-[; ;scrolldisplay.c: 9: unsigned eventcount=0;
-[v _eventcount `ui ~T0 @X0 1 e ]
-[i _eventcount
--> -> 0 `i `ui
-]
+[; ;external.c: 9: void write_external_eeprom(unsigned char address, unsigned char data)
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _data `uc ~T0 @X0 1 r2 ]
+"10
+[; ;external.c: 10: {
+[f ]
 "11
-[; ;scrolldisplay.c: 11: unsigned int out=0;
-[v _out `ui ~T0 @X0 1 e ]
-[i _out
--> -> 0 `i `ui
-]
+[; ;external.c: 11:  i2c_start();
+[e ( _i2c_start ..  ]
+"12
+[; ;external.c: 12:  i2c_write(0xA0);
+[e ( _i2c_write (1 -> -> 160 `i `uc ]
+"13
+[; ;external.c: 13:  i2c_write(address);
+[e ( _i2c_write (1 _address ]
+"14
+[; ;external.c: 14:  i2c_write(data);
+[e ( _i2c_write (1 _data ]
 "15
-[; ;scrolldisplay.c: 15: void get_speed()
-[v _get_speed `(v ~T0 @X0 1 ef ]
+[; ;external.c: 15:  i2c_stop();
+[e ( _i2c_stop ..  ]
 "16
-[; ;scrolldisplay.c: 16: {
+[; ;external.c: 16:  for(unsigned int i = 3000;i--;);
 {
-[e :U _get_speed ]
-[f ]
-"17
-[; ;scrolldisplay.c: 17:     unsigned short adc = (unsigned short)(read_adc(4)/10.33);
-[v _adc `us ~T0 @X0 1 a ]
-[e = _adc -> / -> -> ( _read_adc (1 -> -> 4 `i `uc `ui `d .10.33 `us ]
-"18
-[; ;scrolldisplay.c: 18:     log[14] = ((adc/10)%10)+'0';
-[e = *U + &U _log * -> -> -> 14 `i `ui `ux -> -> # *U &U _log `ui `ux -> + % / -> _adc `ui -> -> 10 `i `ui -> -> 10 `i `ui -> 48 `ui `uc ]
-"19
-[; ;scrolldisplay.c: 19:     log[15] = (adc%10)+'0';
-[e = *U + &U _log * -> -> -> 15 `i `ui `ux -> -> # *U &U _log `ui `ux -> + % -> _adc `ui -> -> 10 `i `ui -> 48 `ui `uc ]
-"20
-[; ;scrolldisplay.c: 20: }
-[e :UE 1089 ]
-}
-"21
-[; ;scrolldisplay.c: 21: void getforstoreevent()
-[v _getforstoreevent `(v ~T0 @X0 1 ef ]
-"22
-[; ;scrolldisplay.c: 22: {
-{
-[e :U _getforstoreevent ]
-[f ]
-"23
-[; ;scrolldisplay.c: 23:     for(int i=0; i<16; i++)
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 16 `i 1091  ]
+[v _i `ui ~T0 @X0 1 a ]
+[e = _i -> -> 3000 `i `ui ]
 [e $U 1092  ]
-[e :U 1091 ]
-"24
-[; ;scrolldisplay.c: 24:         log[i]=' ';
-[e = *U + &U _log * -> -> _i `ui `ux -> -> # *U &U _log `ui `ux -> -> 32 `ui `uc ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 16 `i 1091  ]
+[e :U 1089 ]
 [e :U 1092 ]
+[e $ != -- _i -> -> 1 `i `ui -> -> 0 `i `ui 1089  ]
+[e :U 1090 ]
 }
+"17
+[; ;external.c: 17: }
+[e :UE 1088 ]
+}
+"19
+[; ;external.c: 19: unsigned char read_external_eeprom(unsigned char address)
+[v _read_external_eeprom `(uc ~T0 @X0 1 ef1`uc ]
+"20
+[; ;external.c: 20: {
+{
+[e :U _read_external_eeprom ]
+"19
+[; ;external.c: 19: unsigned char read_external_eeprom(unsigned char address)
+[v _address `uc ~T0 @X0 1 r1 ]
+"20
+[; ;external.c: 20: {
+[f ]
+"21
+[; ;external.c: 21:  unsigned char data;
+[v _data `uc ~T0 @X0 1 a ]
+"23
+[; ;external.c: 23:  i2c_start();
+[e ( _i2c_start ..  ]
+"24
+[; ;external.c: 24:  i2c_write(0xA0);
+[e ( _i2c_write (1 -> -> 160 `i `uc ]
 "25
-[; ;scrolldisplay.c: 25:     log[16] = '\0';
-[e = *U + &U _log * -> -> -> 16 `i `ui `ux -> -> # *U &U _log `ui `ux -> -> 0 `ui `uc ]
+[; ;external.c: 25:  i2c_write(address);
+[e ( _i2c_write (1 _address ]
 "26
-[; ;scrolldisplay.c: 26:     get_time();
-[e ( _get_time ..  ]
+[; ;external.c: 26:  i2c_rep_start();
+[e ( _i2c_rep_start ..  ]
 "27
-[; ;scrolldisplay.c: 27:     for(int i=0; i<8; i++)
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 8 `i 1094  ]
-[e $U 1095  ]
-[e :U 1094 ]
+[; ;external.c: 27:  i2c_write(0xA1);
+[e ( _i2c_write (1 -> -> 161 `i `uc ]
 "28
-[; ;scrolldisplay.c: 28:         log[i+2]=time[i];
-[e = *U + &U _log * -> -> + _i -> 2 `i `ui `ux -> -> # *U &U _log `ui `ux -> *U + &U _time * -> -> _i `ui `ux -> -> # *U &U _time `ui `ux `uc ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 8 `i 1094  ]
-[e :U 1095 ]
-}
+[; ;external.c: 28:  data = i2c_read();
+[e = _data ( _i2c_read ..  ]
 "29
-[; ;scrolldisplay.c: 29:     get_speed();
-[e ( _get_speed ..  ]
+[; ;external.c: 29:  i2c_stop();
+[e ( _i2c_stop ..  ]
 "31
-[; ;scrolldisplay.c: 31:     log_event();
-[e ( _log_event ..  ]
+[; ;external.c: 31:  return data;
+[e ) _data ]
+[e $UE 1093  ]
 "32
-[; ;scrolldisplay.c: 32: }
-[e :UE 1090 ]
+[; ;external.c: 32: }
+[e :UE 1093 ]
 }
-"33
-[; ;scrolldisplay.c: 33: void log_event()
-[v _log_event `(v ~T0 @X0 1 ef ]
-"34
-[; ;scrolldisplay.c: 34: {
-{
-[e :U _log_event ]
-[f ]
-"35
-[; ;scrolldisplay.c: 35:     unsigned char address;
-[v _address `uc ~T0 @X0 1 a ]
-"36
-[; ;scrolldisplay.c: 36:     logpos++;
-[e ++ _logpos -> -> 1 `i `uc ]
-"37
-[; ;scrolldisplay.c: 37:     if(logpos==10)
-[e $ ! == -> _logpos `i -> 10 `i 1098  ]
-"38
-[; ;scrolldisplay.c: 38:         logpos=0;
-[e = _logpos -> -> 0 `i `uc ]
-[e :U 1098 ]
-"39
-[; ;scrolldisplay.c: 39:     address=logpos*16;
-[e = _address -> * -> _logpos `i -> 16 `i `uc ]
-"40
-[; ;scrolldisplay.c: 40:     for(int i=0; i<16 ;i++)
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 16 `i 1099  ]
-[e $U 1100  ]
-[e :U 1099 ]
-"41
-[; ;scrolldisplay.c: 41:     {
-{
-"42
-[; ;scrolldisplay.c: 42:         write_external_eeprom(address,log[i]);
-[e ( _write_external_eeprom (2 , _address -> *U + &U _log * -> -> _i `ui `ux -> -> # *U &U _log `ui `ux `uc ]
-"43
-[; ;scrolldisplay.c: 43:         address++;
-[e ++ _address -> -> 1 `i `uc ]
-"44
-[; ;scrolldisplay.c: 44:     }
-}
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 16 `i 1099  ]
-[e :U 1100 ]
-}
-"47
-[; ;scrolldisplay.c: 47: }
-[e :UE 1097 ]
-}
-"49
-[; ;scrolldisplay.c: 49: void print(unsigned char key)
-[v _print `(v ~T0 @X0 1 ef1`uc ]
-"50
-[; ;scrolldisplay.c: 50: {
-{
-[e :U _print ]
-"49
-[; ;scrolldisplay.c: 49: void print(unsigned char key)
-[v _key `uc ~T0 @X0 1 r1 ]
-"50
-[; ;scrolldisplay.c: 50: {
-[f ]
-"51
-[; ;scrolldisplay.c: 51:     if((key==12)&&(logg < 4))
-[e $ ! && == -> _key `i -> 12 `i < -> _logg `i -> 4 `i 1103  ]
-"52
-[; ;scrolldisplay.c: 52:     {
-{
-"53
-[; ;scrolldisplay.c: 53:         clcd_write(0x01, 0);
-[e ( _clcd_write (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-"54
-[; ;scrolldisplay.c: 54:         logg++;
-[e ++ _logg -> -> 1 `i `uc ]
-"55
-[; ;scrolldisplay.c: 55:         press=1;
-[e = _press -> 1 `i ]
-"56
-[; ;scrolldisplay.c: 56:         clcd_putch('*', (0xC0 + (1)));
-[e ( _clcd_putch (2 , -> -> 42 `ui `uc -> + -> 192 `i -> 1 `i `uc ]
-"57
-[; ;scrolldisplay.c: 57:         clcd_print((unsigned char*) scrolling[logg-1], (0x80 + (3)));
-[e ( _clcd_print (2 , -> -> *U + &U _scrolling * -> -> - -> _logg `i -> 1 `i `ui `ux -> -> # *U &U _scrolling `ui `ux `*uc `*Cuc -> + -> 128 `i -> 3 `i `uc ]
-"58
-[; ;scrolldisplay.c: 58:         clcd_print((unsigned char*) scrolling[logg], (0xC0 + (3)));
-[e ( _clcd_print (2 , -> -> *U + &U _scrolling * -> _logg `ux -> -> # *U &U _scrolling `ui `ux `*uc `*Cuc -> + -> 192 `i -> 3 `i `uc ]
-"59
-[; ;scrolldisplay.c: 59:     }
-}
-[e $U 1104  ]
-"60
-[; ;scrolldisplay.c: 60:     else if((key== 11)&&(logg>=1))
-[e :U 1103 ]
-[e $ ! && == -> _key `i -> 11 `i >= -> _logg `i -> 1 `i 1105  ]
-"61
-[; ;scrolldisplay.c: 61:     {
-{
-"62
-[; ;scrolldisplay.c: 62:         clcd_write(0x01, 0);
-[e ( _clcd_write (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-"63
-[; ;scrolldisplay.c: 63:         logg--;
-[e -- _logg -> -> 1 `i `uc ]
-"64
-[; ;scrolldisplay.c: 64:         press = 1;
-[e = _press -> 1 `i ]
-"65
-[; ;scrolldisplay.c: 65:         clcd_putch('*', (0x80 + (1)));
-[e ( _clcd_putch (2 , -> -> 42 `ui `uc -> + -> 128 `i -> 1 `i `uc ]
-"66
-[; ;scrolldisplay.c: 66:         clcd_print((unsigned char*) scrolling[logg], (0x80 + (3)));
-[e ( _clcd_print (2 , -> -> *U + &U _scrolling * -> _logg `ux -> -> # *U &U _scrolling `ui `ux `*uc `*Cuc -> + -> 128 `i -> 3 `i `uc ]
-"67
-[; ;scrolldisplay.c: 67:         clcd_print((unsigned char*) scrolling[logg+1], (0xC0 + (3)));
-[e ( _clcd_print (2 , -> -> *U + &U _scrolling * -> -> + -> _logg `i -> 1 `i `ui `ux -> -> # *U &U _scrolling `ui `ux `*uc `*Cuc -> + -> 192 `i -> 3 `i `uc ]
-"68
-[; ;scrolldisplay.c: 68:     }
-}
-[e :U 1105 ]
-[e :U 1104 ]
-"69
-[; ;scrolldisplay.c: 69: }
-[e :UE 1102 ]
-}
-"70
-[; ;scrolldisplay.c: 70: void scrolllog(unsigned char key) {
-[v _scrolllog `(v ~T0 @X0 1 ef1`uc ]
-{
-[e :U _scrolllog ]
-[v _key `uc ~T0 @X0 1 r1 ]
-[f ]
-"71
-[; ;scrolldisplay.c: 71:     static unsigned char prevkey=0xFF;
-[v F10719 `uc ~T0 @X0 1 s prevkey ]
-[i F10719
--> -> 255 `i `uc
-]
-"72
-[; ;scrolldisplay.c: 72:     if(press==0)
-[e $ ! == _press -> 0 `i 1107  ]
-"73
-[; ;scrolldisplay.c: 73:         {
-{
-"74
-[; ;scrolldisplay.c: 74:         clcd_putch('*', (0x80 + (1)));
-[e ( _clcd_putch (2 , -> -> 42 `ui `uc -> + -> 128 `i -> 1 `i `uc ]
-"75
-[; ;scrolldisplay.c: 75:         clcd_print((unsigned char*) scrolling[logg], (0x80 + (3)));
-[e ( _clcd_print (2 , -> -> *U + &U _scrolling * -> _logg `ux -> -> # *U &U _scrolling `ui `ux `*uc `*Cuc -> + -> 128 `i -> 3 `i `uc ]
-"76
-[; ;scrolldisplay.c: 76:         clcd_print((unsigned char*) scrolling[logg + 1], (0xC0 + (3)));
-[e ( _clcd_print (2 , -> -> *U + &U _scrolling * -> -> + -> _logg `i -> 1 `i `ui `ux -> -> # *U &U _scrolling `ui `ux `*uc `*Cuc -> + -> 192 `i -> 3 `i `uc ]
-"77
-[; ;scrolldisplay.c: 77:         }
-}
-[e :U 1107 ]
-"78
-[; ;scrolldisplay.c: 78:     if(key==12 || key==11)
-[e $ ! || == -> _key `i -> 12 `i == -> _key `i -> 11 `i 1108  ]
-"79
-[; ;scrolldisplay.c: 79:     {
-{
-"80
-[; ;scrolldisplay.c: 80:         out++;
-[e ++ _out -> -> 1 `i `ui ]
-"81
-[; ;scrolldisplay.c: 81:         prevkey=key;
-[e = F10719 _key ]
-"82
-[; ;scrolldisplay.c: 82:         if(out > 4000 && key==12)
-[e $ ! && > _out -> -> 4000 `i `ui == -> _key `i -> 12 `i 1109  ]
-"83
-[; ;scrolldisplay.c: 83:         {
-{
-"84
-[; ;scrolldisplay.c: 84:             out=0;
-[e = _out -> -> 0 `i `ui ]
-"85
-[; ;scrolldisplay.c: 85:             clcd_write(0x01, 0);
-[e ( _clcd_write (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-"86
-[; ;scrolldisplay.c: 86:             controlflag=1;
-[e = _controlflag -> -> 1 `i `ui ]
-"87
-[; ;scrolldisplay.c: 87:             press=0;
-[e = _press -> 0 `i ]
-"88
-[; ;scrolldisplay.c: 88:             return;
-[e $UE 1106  ]
-"89
-[; ;scrolldisplay.c: 89:         }
-}
-[e $U 1110  ]
-"90
-[; ;scrolldisplay.c: 90:         else if(out>4000 && key==11)
-[e :U 1109 ]
-[e $ ! && > _out -> -> 4000 `i `ui == -> _key `i -> 11 `i 1111  ]
-"91
-[; ;scrolldisplay.c: 91:         {
-{
-"92
-[; ;scrolldisplay.c: 92:             if(logg==0)
-[e $ ! == -> _logg `i -> 0 `i 1112  ]
-"93
-[; ;scrolldisplay.c: 93:             {
-{
-"94
-[; ;scrolldisplay.c: 94:                 clcd_write(0x01, 0);
-[e ( _clcd_write (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-"95
-[; ;scrolldisplay.c: 95:                 controlflag=4;
-[e = _controlflag -> -> 4 `i `ui ]
-"96
-[; ;scrolldisplay.c: 96:             }
-}
-[e :U 1112 ]
-"97
-[; ;scrolldisplay.c: 97:         }
-}
-[e :U 1111 ]
-[e :U 1110 ]
-"98
-[; ;scrolldisplay.c: 98:     }
-}
-[e $U 1113  ]
-"99
-[; ;scrolldisplay.c: 99:     else if(out!=0 && out<=4000)
-[e :U 1108 ]
-[e $ ! && != _out -> -> 0 `i `ui <= _out -> -> 4000 `i `ui 1114  ]
-"100
-[; ;scrolldisplay.c: 100:         {
-{
-"101
-[; ;scrolldisplay.c: 101:             out=0;
-[e = _out -> -> 0 `i `ui ]
-"102
-[; ;scrolldisplay.c: 102:             print(prevkey);
-[e ( _print (1 F10719 ]
-"103
-[; ;scrolldisplay.c: 103:             prevkey=0xFF;
-[e = F10719 -> -> 255 `i `uc ]
-"104
-[; ;scrolldisplay.c: 104:         }
-}
-[e :U 1114 ]
-[e :U 1113 ]
-"106
-[; ;scrolldisplay.c: 106: }
-[e :UE 1106 ]
-}
-[a 2C 68 111 119 110 108 111 97 100 32 108 111 103 32 0 ]
-[a 5C 67 104 97 110 103 101 32 80 97 115 115 32 32 0 ]
-[a 3C 67 108 101 97 114 32 108 111 103 32 32 32 32 0 ]
-[a 1C 86 105 101 119 32 108 111 103 32 32 32 32 32 0 ]
-[a 4C 83 101 116 32 116 105 109 101 32 32 32 32 32 0 ]

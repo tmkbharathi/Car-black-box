@@ -64,10 +64,10 @@ void logscreen(unsigned char key)
                     for(unsigned int wait=50000; wait--;);
                     clcd_print( TC "  Code Passed   ", LINE1(0));
                     clcd_print( TC " Car Black Box  ", LINE2(0));
-                    for(wait=1000000; wait--;);
+                    for(wait=500000; wait--;);
                     CLEAR_DISP_SCREEN;
                     controlflag=3;
-                    enterflag=0;
+                    blink=0, tryflag=3, enterflag=0, compareflag=0,blinkflag=0;
                     return;
                 }
                 else
@@ -88,8 +88,6 @@ void logscreen(unsigned char key)
        {
               enterflag=1;
               CLEAR_DISP_SCREEN;
-              //clcd_print( TC "Try Again left" , LINE1(0));
-              //clcd_print( TC "              ", LINE2(0));
               timeleft();
               blink=0, tryflag=3, enterflag=0, compareflag=0,blinkflag=0;
        } 

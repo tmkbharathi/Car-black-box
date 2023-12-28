@@ -1,8 +1,8 @@
 #ifndef Ds1307_H
 #define Ds1307_H
 
-#define SLAVE_READ		0xD1
-#define SLAVE_WRITE		0xD0
+#define SLAVE_READD		0xD1
+#define SLAVE_WRITED		0xD0
 
 
 #define SEC_ADDR		0x00

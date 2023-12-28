@@ -1,5 +1,5 @@
-build/default/production/scrolldisplay.p1:  \
-scrolldisplay.c  \
+build/default/production/external.p1:  \
+external.c  \
 main.h  \
 conf.h  \
 clcd.h  \

@@ -18072,6 +18072,18 @@ void write_ds1307(unsigned char address1, unsigned char data);
 unsigned char read_ds1307(unsigned char address1);
 # 21 "./main.h" 2
 
+# 1 "./ext_eeprom.h" 1
+
+
+
+
+
+
+
+void write_external_eeprom(unsigned char address1, unsigned char data);
+unsigned char read_external_eeprom(unsigned char address1);
+# 22 "./main.h" 2
+
 void init_config(void);
 void init_animation(void);
 int mystrcmp(char*s1, char *s2);
@@ -18095,73 +18107,178 @@ unsigned short read_adc(unsigned char channel);
 
 
 void logscreen(unsigned char uckey);
-void scrolllog(unsigned char key, unsigned char key1);
+void scrolllog(unsigned char key);
 void timeleft(void);
 void init_timer0(void);
 
 void display_times(void);
-static void get_time(void);
+void get_time(void);
 void init_ds1307(void);
+
+void getforstoreevent(void);
+void log_event();
 # 1 "scrolldisplay.c" 2
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 1 3
+# 25 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 3
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 411 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct __locale_struct * locale_t;
+# 26 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\string.h" 2 3
+
+void *memcpy (void *restrict, const void *restrict, size_t);
+void *memmove (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int memcmp (const void *, const void *, size_t);
+void *memchr (const void *, int, size_t);
+
+char *strcpy (char *restrict, const char *restrict);
+char *strncpy (char *restrict, const char *restrict, size_t);
+
+char *strcat (char *restrict, const char *restrict);
+char *strncat (char *restrict, const char *restrict, size_t);
+
+int strcmp (const char *, const char *);
+int strncmp (const char *, const char *, size_t);
+
+int strcoll (const char *, const char *);
+size_t strxfrm (char *restrict, const char *restrict, size_t);
+
+char *strchr (const char *, int);
+char *strrchr (const char *, int);
+
+size_t strcspn (const char *, const char *);
+size_t strspn (const char *, const char *);
+char *strpbrk (const char *, const char *);
+char *strstr (const char *, const char *);
+char *strtok (char *restrict, const char *restrict);
+
+size_t strlen (const char *);
+
+char *strerror (int);
+
+
+
+
+char *strtok_r (char *restrict, const char *restrict, char **restrict);
+int strerror_r (int, char *, size_t);
+char *stpcpy(char *restrict, const char *restrict);
+char *stpncpy(char *restrict, const char *restrict, size_t);
+size_t strnlen (const char *, size_t);
+char *strdup (const char *);
+char *strndup (const char *, size_t);
+char *strsignal(int);
+char *strerror_l (int, locale_t);
+int strcoll_l (const char *, const char *, locale_t);
+size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+
+
+
+void *memccpy (void *restrict, const void *restrict, int, size_t);
+# 2 "scrolldisplay.c" 2
 
 char *scrolling[5]={"View log     ", "Download log ", "Clear log    ", "Set time     ", "Change Pass  "};
 char logg=0;
-char star=1;
-int k=0, p=0;
-char mpos=0;
-
+char log[17];
 int press=0;
+extern unsigned char time[9];
+char logpos=(-1);
+unsigned eventcount=0;
 extern unsigned int controlflag;
+unsigned int out=0;
+extern char*signature;
+extern char signindex;
 
+void get_speed()
+{
+    unsigned short adc = (unsigned short)(read_adc(4)/10.33);
+    log[14] = ((adc/10)%10)+'0';
+    log[15] = (adc%10)+'0';
+}
+void getforstoreevent()
+{
+    for(int i=0; i<16; i++)
+        log[i]=' ';
+    log[16] = '\0';
+    get_time();
+    for(int i=0; i<8; i++)
+        log[i+2]=time[i];
+    get_speed();
 
-void scrolllog(unsigned char key, unsigned char keys) {
-    static unsigned int out = 0;
-    static unsigned int longPressTimer = 0;
-    static char longPressActive = 0;
-
-    if (keys == 12) {
-        if (out++ == 4000) {
-            out = 0;
-            controlflag = 1;
-            clcd_write(0x01, 0);
-            return;
-        }
-        longPressTimer++;
-        if (longPressTimer >= 2000) {
-            longPressActive = 1;
-            longPressTimer = 0;
-        }
-    } else {
-        longPressActive = 0;
-        longPressTimer = 0;
+    log_event();
+}
+void log_event()
+{
+    unsigned char address;
+    logpos++;
+    if(logpos==10)
+        logpos=0;
+    address=logpos*16;
+    for(int i=0; i<16 ;i++)
+    {
+        write_external_eeprom(address,log[i]);
+        address++;
     }
 
-    if (press == 0) {
-        clcd_putch('*', (0x80 + (1)));
-        clcd_print((unsigned char*) scrolling[logg], (0x80 + (3)));
-        clcd_print((unsigned char*) scrolling[logg + 1], (0xC0 + (3)));
-    }
 
-    if ((key == 12) && (logg < 3)) {
+}
+
+void print(unsigned char key)
+{
+    if((key==12)&&(logg < 4))
+    {
         clcd_write(0x01, 0);
         logg++;
-        press = 1;
+        press=1;
         clcd_putch('*', (0xC0 + (1)));
-        clcd_print((unsigned char*) scrolling[logg - 1], (0x80 + (3)));
+        clcd_print((unsigned char*) scrolling[logg-1], (0x80 + (3)));
         clcd_print((unsigned char*) scrolling[logg], (0xC0 + (3)));
-    } else if ((key == 11) && (logg >= 1)) {
+    }
+    else if((key== 11)&&(logg>=1))
+    {
         clcd_write(0x01, 0);
         logg--;
         press = 1;
         clcd_putch('*', (0x80 + (1)));
         clcd_print((unsigned char*) scrolling[logg], (0x80 + (3)));
-        clcd_print((unsigned char*) scrolling[logg + 1], (0xC0 + (3)));
-    } else if (longPressActive && (key == 11) && (logg == 1)) {
-        clcd_write(0x01, 0);
-        logg = 0;
-        press = 1;
+        clcd_print((unsigned char*) scrolling[logg+1], (0xC0 + (3)));
+    }
+}
+void scrolllog(unsigned char key) {
+    static unsigned char prevkey=0xFF;
+    if(press==0)
+        {
         clcd_putch('*', (0x80 + (1)));
         clcd_print((unsigned char*) scrolling[logg], (0x80 + (3)));
         clcd_print((unsigned char*) scrolling[logg + 1], (0xC0 + (3)));
+        }
+    if(key==12 || key==11)
+    {
+        out++;
+        prevkey=key;
+        if(out > 4000 && key==12)
+        {
+            out=0;
+            clcd_write(0x01, 0);
+            controlflag=1;
+            press=0;
+            return;
+        }
+        else if(out>4000 && key==11)
+        {
+            if(logg==0)
+            {
+                clcd_write(0x01, 0);
+                controlflag=4;
+            }
+        }
     }
+    else if(out!=0 && out<=4000)
+        {
+            out=0;
+            print(prevkey);
+            prevkey=0xFF;
+        }
+
 }

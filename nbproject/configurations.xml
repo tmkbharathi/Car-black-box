@@ -9,6 +9,7 @@
       <itemPath>clcd.h</itemPath>
       <itemPath>ds1307.h</itemPath>
       <itemPath>i2c.h</itemPath>
+      <itemPath>ext_eeprom.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -28,6 +29,7 @@
       <itemPath>scrolldisplay.c</itemPath>
       <itemPath>ds1307.c</itemPath>
       <itemPath>i2c.c</itemPath>
+      <itemPath>external.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

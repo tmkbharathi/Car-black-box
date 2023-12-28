@@ -1,85 +1,127 @@
 #include "main.h"
+#include<string.h>
 char *scrolling[5]={"View log     ", "Download log ", "Clear log    ", "Set time     ", "Change Pass  "};
 char logg=0;
-char star=1;
-int k=0, p=0;
-char mpos=0;
-//char log[11];
+char log[17];
 int press=0;
+extern unsigned char time[9];
+char logpos=(-1);
+unsigned eventcount=0;
 extern unsigned int controlflag;
-#define LONG_PRESS_THRESHOLD 2000 // Define the threshold for a long press (adjust as needed)
+unsigned int out=0;
+extern char*signature;
+extern char signindex;
 
-void scrolllog(unsigned char key, unsigned char keys) {
-    static unsigned int out = 0;
-    static unsigned int longPressTimer = 0;
-    static char longPressActive = 0;
+void get_speed()
+{
+    unsigned short adc = (unsigned short)(read_adc(4)/10.33);
+    log[14] = ((adc/10)%10)+'0';
+    log[15] = (adc%10)+'0';
+}
+void getforstoreevent()
+{
+    for(int i=0; i<16; i++)
+        log[i]=' ';
+    log[16] = '\0';
+    get_time();
+    for(int i=0; i<8; i++)
+        log[i+2]=time[i];   
+    get_speed();
 
-    if (keys == 12) {
-        if (out++ == 4000) {
-            out = 0;
-            controlflag = 1;
-            CLEAR_DISP_SCREEN;
-            return;
-        }
-        longPressTimer++;
-        if (longPressTimer >= LONG_PRESS_THRESHOLD) {
-            longPressActive = 1;
-            longPressTimer = 0; // Reset the timer after detecting long press
-        }
-    } else {
-        longPressActive = 0; // Reset long press flag if the button is released
-        longPressTimer = 0; // Reset the timer
+    log_event();
+}
+void log_event()
+{
+    unsigned char address;
+    logpos++;
+    if(logpos==10)
+        logpos=0;
+    address=logpos*16;
+    for(int i=0; i<16 ;i++)
+    {
+        write_external_eeprom(address,log[i]);
+        address++;
     }
+    /*if(eventcount<9)
+        eventcount++;*/
+}
 
-    if (press == 0) {
-        clcd_putch('*', LINE1(1));
-        clcd_print(TC scrolling[logg], LINE1(3));
-        clcd_print(TC scrolling[logg + 1], LINE2(3));
-    }
-
-    if ((key == 12) && (logg < 3)) {
+void print(unsigned char key)
+{    
+    if((key==12)&&(logg < 4)) 
+    {
         CLEAR_DISP_SCREEN;
         logg++; 
-        press = 1;
+        press=1;
         clcd_putch('*', LINE2(1));
-        clcd_print(TC scrolling[logg - 1], LINE1(3));
+        clcd_print(TC scrolling[logg-1], LINE1(3));
         clcd_print(TC scrolling[logg], LINE2(3));
-    } else if ((key == 11) && (logg >= 1)) {
+    } 
+    else if((key== 11)&&(logg>=1)) 
+    {
         CLEAR_DISP_SCREEN;
         logg--;
         press = 1;
         clcd_putch('*', LINE1(1));
         clcd_print(TC scrolling[logg], LINE1(3));
-        clcd_print(TC scrolling[logg + 1], LINE2(3));
-    } else if (longPressActive && (key == 11) && (logg == 1)) {
-        CLEAR_DISP_SCREEN;
-        logg = 0;
-        press = 1;
+        clcd_print(TC scrolling[logg+1], LINE2(3));
+    }
+}
+void scrolllog(unsigned char key) {
+    static unsigned char prevkey=0xFF;
+    if(press==0) 
+        {
         clcd_putch('*', LINE1(1));
         clcd_print(TC scrolling[logg], LINE1(3));
         clcd_print(TC scrolling[logg + 1], LINE2(3));
+        }
+    if(key==12 || key==11)             
+    {
+        out++;
+        prevkey=key;
+        if(out > 4000 && key==12)
+        {
+            out=0;
+            CLEAR_DISP_SCREEN;
+            controlflag=1;
+            press=0;
+            return;
+        }
+        else if(out>4000 && key==11)
+        {
+            if(logg==0)
+            {
+                CLEAR_DISP_SCREEN;
+                controlflag=4;
+            }
+        }
     }
+    else if(out!=0 && out<=4000)
+        {
+            out=0;
+            print(prevkey);
+            prevkey=0xFF;
+        }
+
 }
- /*void view_log(unsigned char key,unsigned char reset_flag)
+    
+/*
+ void view_log(unsigned char key)
 {
     char rlog[11];
     unsigned char add;
-    static unsigned char rpos;
-    if(event_count ==-1)
+    static unsigned char rpos=0;
+    if(eventcount ==-1)
     {
         clcd_print(" No logs",LINE2(0));
     }
     else
     {
-        if (reset_flag==VIEW_LOG_RESET)
-        {
-            rpos=0;
-        }
-        if(key==SW5 && rpos< (event_count-1))
+        if(key==12 && rpos< (eventcount-1))
         {
             rpos++;
         }
-        else if(key==SW4 && rpos > 0)
+        else if(key==11 && rpos > 0)
         {
             rpos--;
         }
@@ -108,32 +150,5 @@ void scrolllog(unsigned char key, unsigned char keys) {
         clcd_putch(rlog[8],LINE2(14));
         clcd_putch(rlog[9],LINE2(15));   
     }
-}     *//*
-void log_event()
-{
-    unsigned char add;
-    pos++;
-    if(pos==10)
-    {
-        pos=0;
-    }
-    add=pos*10+5;
-    for(int i=0;log[i]!='\0';i++)
-    {
-        eeprom_write(add,log[i]);
-        add++;
-    }
-    if(event_count<9)
-        event_count++;
-}
-
-void log_car_event(char event[], unsigned char speed)
-{
-    get_time();
-    strncpy(log, time, 6);
-    strncpy(&log[6], event, 2);
-    log[8] = (speed/10)+'0';
-    log[9] = (speed%10)+'0';
-    log[10] = '\0';
-    log_event();
-}*/
+}     
+*/

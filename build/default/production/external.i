@@ -1,4 +1,4 @@
-# 1 "isr.c"
+# 1 "external.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "isr.c" 2
+# 1 "external.c" 2
+
 # 1 "./main.h" 1
 # 10 "./main.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 1 3
@@ -18117,21 +18118,35 @@ void init_ds1307(void);
 
 void getforstoreevent(void);
 void log_event();
-# 1 "isr.c" 2
+# 2 "external.c" 2
 
-extern short int sec;
-void __attribute__((picinterrupt(("")))) isr(void)
+
+
+
+
+
+
+void write_external_eeprom(unsigned char address, unsigned char data)
 {
-    static unsigned int count = 0;
-    if (TMR0IF == 1)
-    {
-        TMR0 = TMR0 + 8;
-        if (++count == 20000)
-        {
-            count=0;
-            sec--;
-        }
+ i2c_start();
+ i2c_write(0xA0);
+ i2c_write(address);
+ i2c_write(data);
+ i2c_stop();
+ for(unsigned int i = 3000;i--;);
+}
 
-        TMR0IF = 0;
-    }
+unsigned char read_external_eeprom(unsigned char address)
+{
+ unsigned char data;
+
+ i2c_start();
+ i2c_write(0xA0);
+ i2c_write(address);
+ i2c_rep_start();
+ i2c_write(0xA1);
+ data = i2c_read();
+ i2c_stop();
+
+ return data;
 }

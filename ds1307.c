@@ -46,7 +46,7 @@ void init_ds1307(void)
 void write_ds1307(unsigned char address, unsigned char data)
 {
 	i2c_start();
-	i2c_write(SLAVE_WRITE);
+	i2c_write(SLAVE_WRITED);
 	i2c_write(address);
 	i2c_write(data);
 	i2c_stop();
@@ -57,10 +57,10 @@ unsigned char read_ds1307(unsigned char address)
 	unsigned char data;
 
 	i2c_start();
-	i2c_write(SLAVE_WRITE);
+	i2c_write(SLAVE_WRITED);
 	i2c_write(address);
 	i2c_rep_start();
-	i2c_write(SLAVE_READ);
+	i2c_write(SLAVE_READD);
 	data = i2c_read();
 	i2c_stop();
 

@@ -5,20 +5,23 @@ Version 4.0 HI-TECH Software Intermediate Code
 "39
 [; ;./clcd.h: 39: void clcd_putch(const unsigned char data, unsigned char addr);
 [v _clcd_putch `(v ~T0 @X0 0 ef2`Cuc`uc ]
-"34 ./main.h
-[; ;./main.h: 34: void display_time(void);
+"40
+[; ;./clcd.h: 40: void clcd_write(unsigned char bit_values, unsigned char control_bit);
+[v _clcd_write `(v ~T0 @X0 0 ef2`uc`uc ]
+"35 ./main.h
+[; ;./main.h: 35: void display_time(void);
 [v _display_time `(v ~T0 @X0 0 ef ]
-"35
-[; ;./main.h: 35: void gear_monitor(unsigned char uckey);
-[v _gear_monitor `(v ~T0 @X0 0 ef1`uc ]
 "36
-[; ;./main.h: 36: void display_speed(unsigned short usads);
+[; ;./main.h: 36: void gear_monitor(unsigned char uckey);
+[v _gear_monitor `(v ~T0 @X0 0 ef1`uc ]
+"37
+[; ;./main.h: 37: void display_speed(unsigned short usads);
 [v _display_speed `(v ~T0 @X0 0 ef1`us ]
+"51
+[; ;./main.h: 51: void get_time(void);
+[v _get_time `(v ~T0 @X0 0 ef ]
 "50
-[; ;./main.h: 50: static void get_time(void);
-[v _get_time `(v ~T0 @X0 0 sf ]
-"49
-[; ;./main.h: 49: void display_times(void);
+[; ;./main.h: 50: void display_times(void);
 [v _display_times `(v ~T0 @X0 0 ef ]
 "19 ./ds1307.h
 [; ;./ds1307.h: 19: unsigned char read_ds1307(unsigned char address1);
@@ -1360,258 +1363,282 @@ Version 4.0 HI-TECH Software Intermediate Code
 ..
 ]
 "6
-[; ;car_black_box.c: 6: void display_dashboard(unsigned char uckey, unsigned short usads)
-[v _display_dashboard `(v ~T0 @X0 1 ef2`uc`us ]
+[; ;car_black_box.c: 6: unsigned int controlflag;
+[v _controlflag `ui ~T0 @X0 1 e ]
 "7
-[; ;car_black_box.c: 7: {
+[; ;car_black_box.c: 7: char signindex=0;
+[v _signindex `uc ~T0 @X0 1 e ]
+[i _signindex
+-> -> 0 `i `uc
+]
+"8
+[; ;car_black_box.c: 8: void display_dashboard(unsigned char uckey, unsigned short usads)
+[v _display_dashboard `(v ~T0 @X0 1 ef2`uc`us ]
+"9
+[; ;car_black_box.c: 9: {
 {
 [e :U _display_dashboard ]
-"6
-[; ;car_black_box.c: 6: void display_dashboard(unsigned char uckey, unsigned short usads)
+"8
+[; ;car_black_box.c: 8: void display_dashboard(unsigned char uckey, unsigned short usads)
 [v _uckey `uc ~T0 @X0 1 r1 ]
 [v _usads `us ~T0 @X0 1 r2 ]
-"7
-[; ;car_black_box.c: 7: {
+"9
+[; ;car_black_box.c: 9: {
 [f ]
-"8
-[; ;car_black_box.c: 8:     clcd_print( (unsigned char*) "   Time    E  S" , (0x80 + (0)));
-[e ( _clcd_print (2 , -> -> :s 9C `*uc `*Cuc -> + -> 128 `i -> 0 `i `uc ]
 "10
-[; ;car_black_box.c: 10:     clcd_putch(0x70,(0x80 + (15)));
-[e ( _clcd_putch (2 , -> -> 112 `i `uc -> + -> 128 `i -> 15 `i `uc ]
+[; ;car_black_box.c: 10:     clcd_print( (unsigned char*) "   Time    E  S" , (0x80 + (0)));
+[e ( _clcd_print (2 , -> -> :s 9C `*uc `*Cuc -> + -> 128 `i -> 0 `i `uc ]
 "11
-[; ;car_black_box.c: 11:     display_time();
-[e ( _display_time ..  ]
+[; ;car_black_box.c: 11:     clcd_putch(0x70,(0x80 + (15)));
+[e ( _clcd_putch (2 , -> -> 112 `i `uc -> + -> 128 `i -> 15 `i `uc ]
 "12
-[; ;car_black_box.c: 12:     gear_monitor(uckey);
-[e ( _gear_monitor (1 _uckey ]
+[; ;car_black_box.c: 12:     if(uckey == 10)
+[e $ ! == -> _uckey `i -> 10 `i 1089  ]
 "13
-[; ;car_black_box.c: 13:     display_speed(usads);
-[e ( _display_speed (1 _usads ]
+[; ;car_black_box.c: 13:         {
+{
 "14
-[; ;car_black_box.c: 14: }
+[; ;car_black_box.c: 14:             controlflag=0;
+[e = _controlflag -> -> 0 `i `ui ]
+"15
+[; ;car_black_box.c: 15:             clcd_write(0x01, 0);
+[e ( _clcd_write (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
+"16
+[; ;car_black_box.c: 16:             return;
+[e $UE 1088  ]
+"17
+[; ;car_black_box.c: 17:         }
+}
+[e :U 1089 ]
+"18
+[; ;car_black_box.c: 18:     display_time();
+[e ( _display_time ..  ]
+"19
+[; ;car_black_box.c: 19:     gear_monitor(uckey);
+[e ( _gear_monitor (1 _uckey ]
+"20
+[; ;car_black_box.c: 20:     display_speed(usads);
+[e ( _display_speed (1 _usads ]
+"21
+[; ;car_black_box.c: 21: }
 [e :UE 1088 ]
 }
-"15
-[; ;car_black_box.c: 15: void display_time(){
+"22
+[; ;car_black_box.c: 22: void display_time(){
 [v _display_time `(v ~T0 @X0 1 ef ]
 {
 [e :U _display_time ]
 [f ]
-"17
-[; ;car_black_box.c: 17:      get_time();
+"23
+[; ;car_black_box.c: 23:      get_time();
 [e ( _get_time ..  ]
-"18
-[; ;car_black_box.c: 18:   display_times();
+"24
+[; ;car_black_box.c: 24:   display_times();
 [e ( _display_times ..  ]
-"19
-[; ;car_black_box.c: 19: }
-[e :UE 1089 ]
+"25
+[; ;car_black_box.c: 25: }
+[e :UE 1090 ]
 }
-"20
-[; ;car_black_box.c: 20: void display_times(void)
+"26
+[; ;car_black_box.c: 26: void display_times(void)
 [v _display_times `(v ~T0 @X0 1 ef ]
-"21
-[; ;car_black_box.c: 21: {
+"27
+[; ;car_black_box.c: 27: {
 {
 [e :U _display_times ]
 [f ]
-"22
-[; ;car_black_box.c: 22:  clcd_print(time, (0xC0 + (2)));
+"28
+[; ;car_black_box.c: 28:  clcd_print(time, (0xC0 + (2)));
 [e ( _clcd_print (2 , -> &U _time `*Cuc -> + -> 192 `i -> 2 `i `uc ]
-"23
-[; ;car_black_box.c: 23: }
-[e :UE 1090 ]
+"29
+[; ;car_black_box.c: 29: }
+[e :UE 1091 ]
 }
-"25
-[; ;car_black_box.c: 25: static void get_time(void)
-[v _get_time `(v ~T0 @X0 1 sf ]
-"26
-[; ;car_black_box.c: 26: {
+"31
+[; ;car_black_box.c: 31: void get_time(void)
+[v _get_time `(v ~T0 @X0 1 ef ]
+"32
+[; ;car_black_box.c: 32: {
 {
 [e :U _get_time ]
 [f ]
-"27
-[; ;car_black_box.c: 27:  clock_reg[0] = read_ds1307(0x02);
-[e = *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux ( _read_ds1307 (1 -> -> 2 `i `uc ]
-"28
-[; ;car_black_box.c: 28:  clock_reg[1] = read_ds1307(0x01);
-[e = *U + &U _clock_reg * -> -> -> 1 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux ( _read_ds1307 (1 -> -> 1 `i `uc ]
-"29
-[; ;car_black_box.c: 29:  clock_reg[2] = read_ds1307(0x00);
-[e = *U + &U _clock_reg * -> -> -> 2 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux ( _read_ds1307 (1 -> -> 0 `i `uc ]
-"31
-[; ;car_black_box.c: 31:  if (clock_reg[0] & 0x40)
-[e $ ! != & -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 64 `i -> 0 `i 1092  ]
-"32
-[; ;car_black_box.c: 32:  {
-{
 "33
-[; ;car_black_box.c: 33:   time[0] = '0' + ((clock_reg[0] >> 4) & 0x01);
-[e = *U + &U _time * -> -> -> 0 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 1 `i `ui `uc ]
+[; ;car_black_box.c: 33:  clock_reg[0] = read_ds1307(0x02);
+[e = *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux ( _read_ds1307 (1 -> -> 2 `i `uc ]
 "34
-[; ;car_black_box.c: 34:   time[1] = '0' + (clock_reg[0] & 0x0F);
-[e = *U + &U _time * -> -> -> 1 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
+[; ;car_black_box.c: 34:  clock_reg[1] = read_ds1307(0x01);
+[e = *U + &U _clock_reg * -> -> -> 1 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux ( _read_ds1307 (1 -> -> 1 `i `uc ]
 "35
-[; ;car_black_box.c: 35:  }
-}
-[e $U 1093  ]
-"36
-[; ;car_black_box.c: 36:  else
-[e :U 1092 ]
+[; ;car_black_box.c: 35:  clock_reg[2] = read_ds1307(0x00);
+[e = *U + &U _clock_reg * -> -> -> 2 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux ( _read_ds1307 (1 -> -> 0 `i `uc ]
 "37
-[; ;car_black_box.c: 37:  {
-{
+[; ;car_black_box.c: 37:  if (clock_reg[0] & 0x40)
+[e $ ! != & -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 64 `i -> 0 `i 1093  ]
 "38
-[; ;car_black_box.c: 38:   time[0] = '0' + ((clock_reg[0] >> 4) & 0x03);
-[e = *U + &U _time * -> -> -> 0 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 3 `i `ui `uc ]
+[; ;car_black_box.c: 38:  {
+{
 "39
-[; ;car_black_box.c: 39:   time[1] = '0' + (clock_reg[0] & 0x0F);
-[e = *U + &U _time * -> -> -> 1 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
+[; ;car_black_box.c: 39:   time[0] = '0' + ((clock_reg[0] >> 4) & 0x01);
+[e = *U + &U _time * -> -> -> 0 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 1 `i `ui `uc ]
 "40
-[; ;car_black_box.c: 40:  }
-}
-[e :U 1093 ]
+[; ;car_black_box.c: 40:   time[1] = '0' + (clock_reg[0] & 0x0F);
+[e = *U + &U _time * -> -> -> 1 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
 "41
-[; ;car_black_box.c: 41:  time[2] = ':';
-[e = *U + &U _time * -> -> -> 2 `i `ui `ux -> -> # *U &U _time `ui `ux -> -> 58 `ui `uc ]
-"42
-[; ;car_black_box.c: 42:  time[3] = '0' + ((clock_reg[1] >> 4) & 0x0F);
-[e = *U + &U _time * -> -> -> 3 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 1 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 15 `i `ui `uc ]
-"43
-[; ;car_black_box.c: 43:  time[4] = '0' + (clock_reg[1] & 0x0F);
-[e = *U + &U _time * -> -> -> 4 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 1 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
-"44
-[; ;car_black_box.c: 44:  time[5] = ':';
-[e = *U + &U _time * -> -> -> 5 `i `ui `ux -> -> # *U &U _time `ui `ux -> -> 58 `ui `uc ]
-"45
-[; ;car_black_box.c: 45:  time[6] = '0' + ((clock_reg[2] >> 4) & 0x0F);
-[e = *U + &U _time * -> -> -> 6 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 2 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 15 `i `ui `uc ]
-"46
-[; ;car_black_box.c: 46:  time[7] = '0' + (clock_reg[2] & 0x0F);
-[e = *U + &U _time * -> -> -> 7 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 2 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
-"47
-[; ;car_black_box.c: 47:  time[8] = '\0';
-[e = *U + &U _time * -> -> -> 8 `i `ui `ux -> -> # *U &U _time `ui `ux -> -> 0 `ui `uc ]
-"48
-[; ;car_black_box.c: 48: }
-[e :UE 1091 ]
+[; ;car_black_box.c: 41:  }
 }
+[e $U 1094  ]
+"42
+[; ;car_black_box.c: 42:  else
+[e :U 1093 ]
+"43
+[; ;car_black_box.c: 43:  {
+{
+"44
+[; ;car_black_box.c: 44:   time[0] = '0' + ((clock_reg[0] >> 4) & 0x03);
+[e = *U + &U _time * -> -> -> 0 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 3 `i `ui `uc ]
+"45
+[; ;car_black_box.c: 45:   time[1] = '0' + (clock_reg[0] & 0x0F);
+[e = *U + &U _time * -> -> -> 1 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 0 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
+"46
+[; ;car_black_box.c: 46:  }
+}
+[e :U 1094 ]
+"47
+[; ;car_black_box.c: 47:  time[2] = ':';
+[e = *U + &U _time * -> -> -> 2 `i `ui `ux -> -> # *U &U _time `ui `ux -> -> 58 `ui `uc ]
+"48
+[; ;car_black_box.c: 48:  time[3] = '0' + ((clock_reg[1] >> 4) & 0x0F);
+[e = *U + &U _time * -> -> -> 3 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 1 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 15 `i `ui `uc ]
 "49
-[; ;car_black_box.c: 49: void gear_monitor(unsigned char uckey){
+[; ;car_black_box.c: 49:  time[4] = '0' + (clock_reg[1] & 0x0F);
+[e = *U + &U _time * -> -> -> 4 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 1 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
+"50
+[; ;car_black_box.c: 50:  time[5] = ':';
+[e = *U + &U _time * -> -> -> 5 `i `ui `ux -> -> # *U &U _time `ui `ux -> -> 58 `ui `uc ]
+"51
+[; ;car_black_box.c: 51:  time[6] = '0' + ((clock_reg[2] >> 4) & 0x0F);
+[e = *U + &U _time * -> -> -> 6 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & >> -> *U + &U _clock_reg * -> -> -> 2 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 4 `i -> 15 `i `ui `uc ]
+"52
+[; ;car_black_box.c: 52:  time[7] = '0' + (clock_reg[2] & 0x0F);
+[e = *U + &U _time * -> -> -> 7 `i `ui `ux -> -> # *U &U _time `ui `ux -> + -> 48 `ui -> & -> *U + &U _clock_reg * -> -> -> 2 `i `ui `ux -> -> # *U &U _clock_reg `ui `ux `i -> 15 `i `ui `uc ]
+"53
+[; ;car_black_box.c: 53:  time[8] = '\0';
+[e = *U + &U _time * -> -> -> 8 `i `ui `ux -> -> # *U &U _time `ui `ux -> -> 0 `ui `uc ]
+"54
+[; ;car_black_box.c: 54: }
+[e :UE 1092 ]
+}
+"55
+[; ;car_black_box.c: 55: void gear_monitor(unsigned char uckey){
 [v _gear_monitor `(v ~T0 @X0 1 ef1`uc ]
 {
 [e :U _gear_monitor ]
 [v _uckey `uc ~T0 @X0 1 r1 ]
 [f ]
-"50
-[; ;car_black_box.c: 50:     static char signindex=0, crashflag=0;
-[v F10534 `uc ~T0 @X0 1 s signindex ]
-[i F10534
--> -> 0 `i `uc
-]
-[v F10535 `uc ~T0 @X0 1 s crashflag ]
-[i F10535
--> -> 0 `i `uc
-]
-"51
-[; ;car_black_box.c: 51:     if(uckey == 1)
-[e $ ! == -> _uckey `i -> 1 `i 1095  ]
-"52
-[; ;car_black_box.c: 52:     {
-{
-"53
-[; ;car_black_box.c: 53:         crashflag=1;
-[e = F10535 -> -> 1 `i `uc ]
-"54
-[; ;car_black_box.c: 54:         signindex=7;
-[e = F10534 -> -> 7 `i `uc ]
-"55
-[; ;car_black_box.c: 55:     }
-}
-[e $U 1096  ]
 "56
-[; ;car_black_box.c: 56:     else if(uckey == 2)
-[e :U 1095 ]
-[e $ ! == -> _uckey `i -> 2 `i 1097  ]
+[; ;car_black_box.c: 56:     static char crashflag=0;
+[v F10542 `uc ~T0 @X0 1 s crashflag ]
+[i F10542
+-> -> 0 `i `uc
+]
 "57
-[; ;car_black_box.c: 57:     {
-{
+[; ;car_black_box.c: 57:     if(uckey == 1)
+[e $ ! == -> _uckey `i -> 1 `i 1096  ]
 "58
-[; ;car_black_box.c: 58:         if(signindex < 6)
-[e $ ! < -> F10534 `i -> 6 `i 1098  ]
-"59
-[; ;car_black_box.c: 59:             signindex++;
-[e ++ F10534 -> -> 1 `i `uc ]
-[e $U 1099  ]
-"60
-[; ;car_black_box.c: 60:         else if(signindex ==7)
-[e :U 1098 ]
-[e $ ! == -> F10534 `i -> 7 `i 1100  ]
-"61
-[; ;car_black_box.c: 61:         {
+[; ;car_black_box.c: 58:     {
 {
+"59
+[; ;car_black_box.c: 59:         crashflag=1;
+[e = F10542 -> -> 1 `i `uc ]
+"60
+[; ;car_black_box.c: 60:         signindex=7;
+[e = _signindex -> -> 7 `i `uc ]
+"61
+[; ;car_black_box.c: 61:     }
+}
+[e $U 1097  ]
 "62
-[; ;car_black_box.c: 62:             signindex=1;
-[e = F10534 -> -> 1 `i `uc ]
+[; ;car_black_box.c: 62:     else if(uckey == 2)
+[e :U 1096 ]
+[e $ ! == -> _uckey `i -> 2 `i 1098  ]
 "63
-[; ;car_black_box.c: 63:             crashflag=0;
-[e = F10535 -> -> 0 `i `uc ]
+[; ;car_black_box.c: 63:     {
+{
 "64
-[; ;car_black_box.c: 64:         }
-}
-[e :U 1100 ]
-[e :U 1099 ]
+[; ;car_black_box.c: 64:         if(signindex < 6)
+[e $ ! < -> _signindex `i -> 6 `i 1099  ]
 "65
-[; ;car_black_box.c: 65:     }
-}
-[e $U 1101  ]
+[; ;car_black_box.c: 65:             signindex++;
+[e ++ _signindex -> -> 1 `i `uc ]
+[e $U 1100  ]
 "66
-[; ;car_black_box.c: 66:     else if(uckey == 3)
-[e :U 1097 ]
-[e $ ! == -> _uckey `i -> 3 `i 1102  ]
+[; ;car_black_box.c: 66:         else if(signindex ==7)
+[e :U 1099 ]
+[e $ ! == -> _signindex `i -> 7 `i 1101  ]
 "67
-[; ;car_black_box.c: 67:     {
+[; ;car_black_box.c: 67:         {
 {
 "68
-[; ;car_black_box.c: 68:           if(crashflag ==0 && signindex > 1)
-[e $ ! && == -> F10535 `i -> 0 `i > -> F10534 `i -> 1 `i 1103  ]
+[; ;car_black_box.c: 68:             signindex=1;
+[e = _signindex -> -> 1 `i `uc ]
 "69
-[; ;car_black_box.c: 69:               signindex--;
-[e -- F10534 -> -> 1 `i `uc ]
-[e :U 1103 ]
+[; ;car_black_box.c: 69:             crashflag=0;
+[e = F10542 -> -> 0 `i `uc ]
 "70
-[; ;car_black_box.c: 70:     }
+[; ;car_black_box.c: 70:         }
 }
-[e :U 1102 ]
 [e :U 1101 ]
-[e :U 1096 ]
+[e :U 1100 ]
 "71
-[; ;car_black_box.c: 71:     clcd_putch(signature[signindex][0], (0xC0 + (11)));
-[e ( _clcd_putch (2 , -> *U + *U + &U _signature * -> F10534 `ux -> -> # *U &U _signature `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U *U + &U _signature * -> F10534 `ux -> -> # *U &U _signature `ui `ux `ui `ux `uc -> + -> 192 `i -> 11 `i `uc ]
-"72
-[; ;car_black_box.c: 72:     clcd_putch(signature[signindex][1], (0xC0 + (12)));
-[e ( _clcd_putch (2 , -> *U + *U + &U _signature * -> F10534 `ux -> -> # *U &U _signature `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U *U + &U _signature * -> F10534 `ux -> -> # *U &U _signature `ui `ux `ui `ux `uc -> + -> 192 `i -> 12 `i `uc ]
-"73
-[; ;car_black_box.c: 73: }
-[e :UE 1094 ]
+[; ;car_black_box.c: 71:     }
 }
+[e $U 1102  ]
+"72
+[; ;car_black_box.c: 72:     else if(uckey == 3)
+[e :U 1098 ]
+[e $ ! == -> _uckey `i -> 3 `i 1103  ]
+"73
+[; ;car_black_box.c: 73:     {
+{
 "74
-[; ;car_black_box.c: 74: void display_speed(unsigned short usadc){
+[; ;car_black_box.c: 74:           if(crashflag ==0 && signindex > 1)
+[e $ ! && == -> F10542 `i -> 0 `i > -> _signindex `i -> 1 `i 1104  ]
+"75
+[; ;car_black_box.c: 75:               signindex--;
+[e -- _signindex -> -> 1 `i `uc ]
+[e :U 1104 ]
+"76
+[; ;car_black_box.c: 76:     }
+}
+[e :U 1103 ]
+[e :U 1102 ]
+[e :U 1097 ]
+"77
+[; ;car_black_box.c: 77:     clcd_putch(signature[signindex][0], (0xC0 + (11)));
+[e ( _clcd_putch (2 , -> *U + *U + &U _signature * -> _signindex `ux -> -> # *U &U _signature `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U *U + &U _signature * -> _signindex `ux -> -> # *U &U _signature `ui `ux `ui `ux `uc -> + -> 192 `i -> 11 `i `uc ]
+"78
+[; ;car_black_box.c: 78:     clcd_putch(signature[signindex][1], (0xC0 + (12)));
+[e ( _clcd_putch (2 , -> *U + *U + &U _signature * -> _signindex `ux -> -> # *U &U _signature `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U *U + &U _signature * -> _signindex `ux -> -> # *U &U _signature `ui `ux `ui `ux `uc -> + -> 192 `i -> 12 `i `uc ]
+"79
+[; ;car_black_box.c: 79: }
+[e :UE 1095 ]
+}
+"80
+[; ;car_black_box.c: 80: void display_speed(unsigned short usadc){
 [v _display_speed `(v ~T0 @X0 1 ef1`us ]
 {
 [e :U _display_speed ]
 [v _usadc `us ~T0 @X0 1 r1 ]
 [f ]
-"75
-[; ;car_black_box.c: 75:         clcd_putch((unsigned char)(usadc/10)%10+48, (0xC0 + (14)));
+"81
+[; ;car_black_box.c: 81:         clcd_putch((unsigned char)(usadc/10)%10+48, (0xC0 + (14)));
 [e ( _clcd_putch (2 , -> + % -> -> / -> _usadc `ui -> -> 10 `i `ui `uc `i -> 10 `i -> 48 `i `uc -> + -> 192 `i -> 14 `i `uc ]
-"76
-[; ;car_black_box.c: 76:         clcd_putch((unsigned char)usadc%10+48, (0xC0 + (15)));
+"82
+[; ;car_black_box.c: 82:         clcd_putch((unsigned char)usadc%10+48, (0xC0 + (15)));
 [e ( _clcd_putch (2 , -> + % -> -> _usadc `uc `i -> 10 `i -> 48 `i `uc -> + -> 192 `i -> 15 `i `uc ]
-"78
-[; ;car_black_box.c: 78: }
-[e :UE 1104 ]
+"84
+[; ;car_black_box.c: 84: }
+[e :UE 1105 ]
 }
 [a 9C 32 32 32 84 105 109 101 32 32 32 32 69 32 32 83 0 ]
 [a 7C 71 82 0 ]

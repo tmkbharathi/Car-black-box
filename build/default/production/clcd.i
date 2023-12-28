@@ -18072,6 +18072,18 @@ void write_ds1307(unsigned char address1, unsigned char data);
 unsigned char read_ds1307(unsigned char address1);
 # 21 "./main.h" 2
 
+# 1 "./ext_eeprom.h" 1
+
+
+
+
+
+
+
+void write_external_eeprom(unsigned char address1, unsigned char data);
+unsigned char read_external_eeprom(unsigned char address1);
+# 22 "./main.h" 2
+
 void init_config(void);
 void init_animation(void);
 int mystrcmp(char*s1, char *s2);
@@ -18095,13 +18107,16 @@ unsigned short read_adc(unsigned char channel);
 
 
 void logscreen(unsigned char uckey);
-void scrolllog(unsigned char key, unsigned char key1);
+void scrolllog(unsigned char key);
 void timeleft(void);
 void init_timer0(void);
 
 void display_times(void);
-static void get_time(void);
+void get_time(void);
 void init_ds1307(void);
+
+void getforstoreevent(void);
+void log_event();
 # 1 "clcd.c" 2
 
 

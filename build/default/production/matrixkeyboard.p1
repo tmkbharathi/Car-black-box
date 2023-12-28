@@ -8,8 +8,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "36229
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 36229: extern volatile __bit RBPU __attribute__((address(0x7F8F)));
 [v _RBPU `Vb ~T0 @X0 0 e@32655 ]
-"30 ./main.h
-[; ;./main.h: 30: unsigned char scan_key(void);
+"31 ./main.h
+[; ;./main.h: 31: unsigned char scan_key(void);
 [v _scan_key `(uc ~T0 @X0 0 ef ]
 "25720 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 25720:     struct {
@@ -1379,11 +1379,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "12
 [; ;matrixkeyboard.c: 12:     static unsigned char uconce=1, uckey;
-[v F10526 `uc ~T0 @X0 1 s uconce ]
-[i F10526
+[v F10532 `uc ~T0 @X0 1 s uconce ]
+[i F10532
 -> -> 1 `i `uc
 ]
-[v F10527 `uc ~T0 @X0 1 s uckey ]
+[v F10533 `uc ~T0 @X0 1 s uckey ]
 "13
 [; ;matrixkeyboard.c: 13:     if(ucdetection ==0 )
 [e $ ! == -> _ucdetection `i -> 0 `i 1090  ]
@@ -1401,19 +1401,19 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "17
 [; ;matrixkeyboard.c: 17:         uckey = scan_key();
-[e = F10527 ( _scan_key ..  ]
+[e = F10533 ( _scan_key ..  ]
 "18
 [; ;matrixkeyboard.c: 18:         if((uckey != 0xFF) && uconce)
-[e $ ! && != -> F10527 `i -> 255 `i != -> F10526 `i -> 0 `i 1093  ]
+[e $ ! && != -> F10533 `i -> 255 `i != -> F10532 `i -> 0 `i 1093  ]
 "19
 [; ;matrixkeyboard.c: 19:         {
 {
 "20
 [; ;matrixkeyboard.c: 20:             uconce=0;
-[e = F10526 -> -> 0 `i `uc ]
+[e = F10532 -> -> 0 `i `uc ]
 "21
 [; ;matrixkeyboard.c: 21:             return uckey;
-[e ) F10527 ]
+[e ) F10533 ]
 [e $UE 1089  ]
 "22
 [; ;matrixkeyboard.c: 22:         }
@@ -1422,10 +1422,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;matrixkeyboard.c: 23:         else if(uckey == 0xFF)
 [e :U 1093 ]
-[e $ ! == -> F10527 `i -> 255 `i 1095  ]
+[e $ ! == -> F10533 `i -> 255 `i 1095  ]
 "24
 [; ;matrixkeyboard.c: 24:             uconce = 1;
-[e = F10526 -> -> 1 `i `uc ]
+[e = F10532 -> -> 1 `i `uc ]
 [e :U 1095 ]
 [e :U 1094 ]
 "25

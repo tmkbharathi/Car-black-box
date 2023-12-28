@@ -19,6 +19,7 @@
 #include "clcd.h"
 #include "i2c.h"
 #include "ds1307.h"
+#include "ext_eeprom.h"
 void init_config(void);
 void init_animation(void);
 int mystrcmp(char*s1, char *s2);
@@ -42,11 +43,14 @@ unsigned short read_adc(unsigned char channel);
 
 /*logscreen*/
 void logscreen(unsigned char uckey);
-void scrolllog(unsigned char key, unsigned char key1);
+void scrolllog(unsigned char key);
 void timeleft(void);
 void init_timer0(void);
 
 void display_times(void);
-static void get_time(void);
+void get_time(void);
 void init_ds1307(void);
+
+void getforstoreevent(void);
+void log_event();
 #endif	/* MAIN_H */

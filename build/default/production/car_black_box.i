@@ -18072,6 +18072,18 @@ void write_ds1307(unsigned char address1, unsigned char data);
 unsigned char read_ds1307(unsigned char address1);
 # 21 "./main.h" 2
 
+# 1 "./ext_eeprom.h" 1
+
+
+
+
+
+
+
+void write_external_eeprom(unsigned char address1, unsigned char data);
+unsigned char read_external_eeprom(unsigned char address1);
+# 22 "./main.h" 2
+
 void init_config(void);
 void init_animation(void);
 int mystrcmp(char*s1, char *s2);
@@ -18095,30 +18107,39 @@ unsigned short read_adc(unsigned char channel);
 
 
 void logscreen(unsigned char uckey);
-void scrolllog(unsigned char key, unsigned char key1);
+void scrolllog(unsigned char key);
 void timeleft(void);
 void init_timer0(void);
 
 void display_times(void);
-static void get_time(void);
+void get_time(void);
 void init_ds1307(void);
+
+void getforstoreevent(void);
+void log_event();
 # 1 "car_black_box.c" 2
 
 
 char* signature[8]={"ON","GN","G1","G2","G3","G4","GR", "C "};
 unsigned char time[9]={0};
 unsigned char clock_reg[3]={0};
+unsigned int controlflag;
+char signindex=0;
 void display_dashboard(unsigned char uckey, unsigned short usads)
 {
     clcd_print( (unsigned char*) "   Time    E  S" , (0x80 + (0)));
-
     clcd_putch(0x70,(0x80 + (15)));
+    if(uckey == 10)
+        {
+            controlflag=0;
+            clcd_write(0x01, 0);
+            return;
+        }
     display_time();
     gear_monitor(uckey);
     display_speed(usads);
 }
 void display_time(){
-
      get_time();
   display_times();
 }
@@ -18127,7 +18148,7 @@ void display_times(void)
  clcd_print(time, (0xC0 + (2)));
 }
 
-static void get_time(void)
+void get_time(void)
 {
  clock_reg[0] = read_ds1307(0x02);
  clock_reg[1] = read_ds1307(0x01);
@@ -18152,7 +18173,7 @@ static void get_time(void)
  time[8] = '\0';
 }
 void gear_monitor(unsigned char uckey){
-    static char signindex=0, crashflag=0;
+    static char crashflag=0;
     if(uckey == 1)
     {
         crashflag=1;

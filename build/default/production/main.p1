@@ -1,44 +1,44 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"28 ./main.h
-[; ;./main.h: 28: void init_matrixkeypad(void);
+"29 ./main.h
+[; ;./main.h: 29: void init_matrixkeypad(void);
 [v _init_matrixkeypad `(v ~T0 @X0 0 ef ]
 "37 ./clcd.h
 [; ;./clcd.h: 37: void init_clcd(void);
 [v _init_clcd `(v ~T0 @X0 0 ef ]
-"40 ./main.h
-[; ;./main.h: 40: void init_adc(void);
+"41 ./main.h
+[; ;./main.h: 41: void init_adc(void);
 [v _init_adc `(v ~T0 @X0 0 ef ]
-"47
-[; ;./main.h: 47: void init_timer0(void);
+"48
+[; ;./main.h: 48: void init_timer0(void);
 [v _init_timer0 `(v ~T0 @X0 0 ef ]
 "5 ./i2c.h
 [; ;./i2c.h: 5: void init_i2c(void);
 [v _init_i2c `(v ~T0 @X0 0 ef ]
-"51 ./main.h
-[; ;./main.h: 51: void init_ds1307(void);
+"52 ./main.h
+[; ;./main.h: 52: void init_ds1307(void);
 [v _init_ds1307 `(v ~T0 @X0 0 ef ]
 [p mainexit ]
-"41
-[; ;./main.h: 41: unsigned short read_adc(unsigned char channel);
+"54
+[; ;./main.h: 54: void getforstoreevent(void);
+[v _getforstoreevent `(v ~T0 @X0 0 ef ]
+"42
+[; ;./main.h: 42: unsigned short read_adc(unsigned char channel);
 [v _read_adc `(us ~T0 @X0 0 ef1`uc ]
-"29
-[; ;./main.h: 29: unsigned char read_switches(unsigned char ucdetection);
+"30
+[; ;./main.h: 30: unsigned char read_switches(unsigned char ucdetection);
 [v _read_switches `(uc ~T0 @X0 0 ef1`uc ]
-"40 ./clcd.h
-[; ;./clcd.h: 40: void clcd_write(unsigned char bit_values, unsigned char control_bit);
-[v _clcd_write `(v ~T0 @X0 0 ef2`uc`uc ]
-"44 ./main.h
-[; ;./main.h: 44: void logscreen(unsigned char uckey);
-[v _logscreen `(v ~T0 @X0 0 ef1`uc ]
-"20 main.c
-[; ;main.c: 20: extern char mpos;
-[v _mpos `uc ~T0 @X0 0 e ]
-"33 ./main.h
-[; ;./main.h: 33: void display_dashboard(unsigned char uckey, unsigned short usAdc);
-[v _display_dashboard `(v ~T0 @X0 0 ef2`uc`us ]
 "45
-[; ;./main.h: 45: void scrolllog(unsigned char key, unsigned char key1);
-[v _scrolllog `(v ~T0 @X0 0 ef2`uc`uc ]
+[; ;./main.h: 45: void logscreen(unsigned char uckey);
+[v _logscreen `(v ~T0 @X0 0 ef1`uc ]
+"34
+[; ;./main.h: 34: void display_dashboard(unsigned char uckey, unsigned short usAdc);
+[v _display_dashboard `(v ~T0 @X0 0 ef2`uc`us ]
+"46
+[; ;./main.h: 46: void scrolllog(unsigned char key);
+[v _scrolllog `(v ~T0 @X0 0 ef1`uc ]
+"38 ./clcd.h
+[; ;./clcd.h: 38: void clcd_print(const unsigned char *data, unsigned char addr);
+[v _clcd_print `(v ~T0 @X0 0 ef2`*Cuc`uc ]
 "54 C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.15/packs/Microchip/PIC18Fxxxx_DFP/1.4.151/xc8\pic\include\proc\pic18f4580.h: 54: __asm("RXF6SIDH equ 0D60h");
 [; <" RXF6SIDH equ 0D60h ;# ">
@@ -1356,146 +1356,138 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11
 [; ;main.c: 11:     init_clcd();
 [e ( _init_clcd ..  ]
-"13
-[; ;main.c: 13:     init_adc();
+"12
+[; ;main.c: 12:     init_adc();
 [e ( _init_adc ..  ]
-"14
-[; ;main.c: 14:     init_timer0();
+"13
+[; ;main.c: 13:     init_timer0();
 [e ( _init_timer0 ..  ]
-"15
-[; ;main.c: 15:     init_i2c();
+"14
+[; ;main.c: 14:     init_i2c();
 [e ( _init_i2c ..  ]
-"16
-[; ;main.c: 16:  init_ds1307();
+"15
+[; ;main.c: 15:  init_ds1307();
 [e ( _init_ds1307 ..  ]
-"17
-[; ;main.c: 17: }
+"16
+[; ;main.c: 16: }
 [e :UE 1088 ]
 }
-"18
-[; ;main.c: 18: unsigned int controlflag=1;
+"17
+[; ;main.c: 17: unsigned int controlflag=1;
 [v _controlflag `ui ~T0 @X0 1 e ]
 [i _controlflag
 -> -> 1 `i `ui
 ]
-"19
-[; ;main.c: 19: unsigned int logout=0;
+"18
+[; ;main.c: 18: unsigned int logout=0;
 [v _logout `ui ~T0 @X0 1 e ]
 [i _logout
 -> -> 0 `i `ui
 ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"21
-[; ;main.c: 21: void main(void) {
+"19
+[; ;main.c: 19: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"22
-[; ;main.c: 22:     init_config();
+"20
+[; ;main.c: 20:     init_config();
 [e ( _init_config ..  ]
-"23
-[; ;main.c: 23:     unsigned char ucKey,uc1Key;
+"21
+[; ;main.c: 21:     unsigned char ucKey;
 [v _ucKey `uc ~T0 @X0 1 a ]
-[v _uc1Key `uc ~T0 @X0 1 a ]
-"24
-[; ;main.c: 24:     unsigned short usAdc;
+"22
+[; ;main.c: 22:     unsigned short usAdc;
 [v _usAdc `us ~T0 @X0 1 a ]
-"25
-[; ;main.c: 25:     while(1){
+"23
+[; ;main.c: 23:     getforstoreevent();
+[e ( _getforstoreevent ..  ]
+"24
+[; ;main.c: 24:     while(1){
 [e :U 1091 ]
 {
-"26
-[; ;main.c: 26:         usAdc = (unsigned short)(read_adc(4)/10.33);
+"25
+[; ;main.c: 25:         usAdc = (unsigned short)(read_adc(4)/10.33);
 [e = _usAdc -> / -> -> ( _read_adc (1 -> -> 4 `i `uc `ui `d .10.33 `us ]
+"26
+[; ;main.c: 26:         if(controlflag == 0 || controlflag == 1)
+[e $ ! || == _controlflag -> -> 0 `i `ui == _controlflag -> -> 1 `i `ui 1093  ]
 "27
-[; ;main.c: 27:         ucKey = read_switches(1);
+[; ;main.c: 27:             ucKey = read_switches(1);
 [e = _ucKey ( _read_switches (1 -> -> 1 `i `uc ]
+[e $U 1094  ]
 "28
-[; ;main.c: 28:         uc1Key = read_switches(0);
-[e = _uc1Key ( _read_switches (1 -> -> 0 `i `uc ]
-"29
-[; ;main.c: 29:         if(ucKey == 10)
-[e $ ! == -> _ucKey `i -> 10 `i 1093  ]
-"30
-[; ;main.c: 30:         {
-{
-"31
-[; ;main.c: 31:             controlflag=0;
-[e = _controlflag -> -> 0 `i `ui ]
-"32
-[; ;main.c: 32:             clcd_write(0x01, 0);
-[e ( _clcd_write (2 , -> -> 1 `i `uc -> -> 0 `i `uc ]
-"33
-[; ;main.c: 33:         }
-}
+[; ;main.c: 28:         else
 [e :U 1093 ]
-"34
-[; ;main.c: 34:         switch(controlflag)
-[e $U 1095  ]
-"35
-[; ;main.c: 35:         {
-{
-"36
-[; ;main.c: 36:             case 0:
-[e :U 1096 ]
-"37
-[; ;main.c: 37:                 logscreen(ucKey);
-[e ( _logscreen (1 _ucKey ]
-"38
-[; ;main.c: 38:                 mpos=0;
-[e = _mpos -> -> 0 `i `uc ]
-"39
-[; ;main.c: 39:                 break;
-[e $U 1094  ]
-"40
-[; ;main.c: 40:             case 1:
-[e :U 1097 ]
-"41
-[; ;main.c: 41:                 display_dashboard(ucKey, usAdc);
-[e ( _display_dashboard (2 , _ucKey _usAdc ]
-"42
-[; ;main.c: 42:                 mpos=0;
-[e = _mpos -> -> 0 `i `uc ]
-"43
-[; ;main.c: 43:                 break;
-[e $U 1094  ]
-"44
-[; ;main.c: 44:             case 3:
-[e :U 1098 ]
-"45
-[; ;main.c: 45:                 scrolllog(ucKey, uc1Key);
-[e ( _scrolllog (2 , _ucKey _uc1Key ]
-"46
-[; ;main.c: 46:                 break;
-[e $U 1094  ]
-"47
-[; ;main.c: 47:             case 4:
-[e :U 1099 ]
-"48
-[; ;main.c: 48:                 break;
-[e $U 1094  ]
-"49
-[; ;main.c: 49:         }
-}
-[e $U 1094  ]
-[e :U 1095 ]
-[e [\ _controlflag , $ -> -> 0 `i `ui 1096
- , $ -> -> 1 `i `ui 1097
- , $ -> -> 3 `i `ui 1098
- , $ -> -> 4 `i `ui 1099
- 1094 ]
+"29
+[; ;main.c: 29:             ucKey = read_switches(0);
+[e = _ucKey ( _read_switches (1 -> -> 0 `i `uc ]
 [e :U 1094 ]
-"50
-[; ;main.c: 50:     }
+"31
+[; ;main.c: 31:         switch(controlflag)
+[e $U 1096  ]
+"32
+[; ;main.c: 32:         {
+{
+"33
+[; ;main.c: 33:             case 0:
+[e :U 1097 ]
+"34
+[; ;main.c: 34:                 logscreen(ucKey);
+[e ( _logscreen (1 _ucKey ]
+"35
+[; ;main.c: 35:                 break;
+[e $U 1095  ]
+"36
+[; ;main.c: 36:             case 1:
+[e :U 1098 ]
+"37
+[; ;main.c: 37:                 display_dashboard(ucKey, usAdc);
+[e ( _display_dashboard (2 , _ucKey _usAdc ]
+"38
+[; ;main.c: 38:                 break;
+[e $U 1095  ]
+"39
+[; ;main.c: 39:             case 3:
+[e :U 1099 ]
+"40
+[; ;main.c: 40:                 scrolllog(ucKey);
+[e ( _scrolllog (1 _ucKey ]
+"41
+[; ;main.c: 41:                 break;
+[e $U 1095  ]
+"42
+[; ;main.c: 42:             case 4:
+[e :U 1100 ]
+"43
+[; ;main.c: 43:                 clcd_print("View log",(0xC0 + (0)));
+[e ( _clcd_print (2 , :s 1C -> + -> 192 `i -> 0 `i `uc ]
+"44
+[; ;main.c: 44:                 break;
+[e $U 1095  ]
+"45
+[; ;main.c: 45:         }
+}
+[e $U 1095  ]
+[e :U 1096 ]
+[e [\ _controlflag , $ -> -> 0 `i `ui 1097
+ , $ -> -> 1 `i `ui 1098
+ , $ -> -> 3 `i `ui 1099
+ , $ -> -> 4 `i `ui 1100
+ 1095 ]
+[e :U 1095 ]
+"46
+[; ;main.c: 46:     }
 }
 [e :U 1090 ]
 [e $U 1091  ]
 [e :U 1092 ]
-"53
-[; ;main.c: 53:     return;
+"49
+[; ;main.c: 49:     return;
 [e $UE 1089  ]
-"54
-[; ;main.c: 54: }
+"50
+[; ;main.c: 50: }
 [e :UE 1089 ]
 }
+[a 1C 86 105 101 119 32 108 111 103 0 ]
