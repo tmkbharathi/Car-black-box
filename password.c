@@ -5,7 +5,7 @@ unsigned long int wait=0;
 unsigned char i=0;
 unsigned int blink=0;
 unsigned int blinkflag=0, tryflag=3, enterflag=0, compareflag=0;
-char pass[5]="1100";
+extern char pass[5];
 extern unsigned int controlflag;
 unsigned long int notpressed=10000;
 void logscreen(unsigned char key)
@@ -122,5 +122,84 @@ int mystrcmp(char*s1, char *s2)
         i++;
     }
     return 0;
+    
+}
+void change_pass(unsigned  char ucKey)
+{
+    static char count=0,flag=0;
+    static char passcheck[5];
+    static char passcheck1[5];
+    passcheck1[4]='\0';
+    passcheck[4]='\0';
+    clcd_print(TC "changing password", LINE1(0));
+    for(unsigned long int wait=10000; wait--;);
+    if(flag==0)
+    {
+            clcd_print(TC "\n current Pass", LINE1(0));
+            if(count<4)
+            {
+                if(ucKey!=0xFF)
+                {
+                    passcheck[count]=ucKey+48-11;
+                    count++;
+                }
+            }
+            else
+            {
+                CLEAR_DISP_SCREEN;
+                count=0;
+                if(!mystrcmp(pass, passcheck))
+                {
+                    clcd_print(TC "Password Correct", LINE1(0));
+                    for(unsigned long int wait=10000; wait--;);
+                    CLEAR_DISP_SCREEN;
+                    flag=1;
+                }
+            }
+    }
+    if(flag==1)
+    {
+        clcd_print(TC "\n New Password", LINE1(0));
+        if(count<4)
+            {
+                if(ucKey!=0xFF)
+                {
+                    passcheck1[count]=ucKey+48-11;
+                    count++;
+                }
+            }
+            else
+            {
+                CLEAR_DISP_SCREEN;
+                count=0;
+                flag=2;
+            }
+    }
+    if(flag==2)
+    {
+            clcd_print(TC "RE-Enter  Pass", LINE1(0));
+            if(count<4)
+            {
+                if(ucKey!=0xFF)
+                {
+                    passcheck1[count]=ucKey+48-11;
+                    count++;
+                }
+            }
+            else
+            {
+                CLEAR_DISP_SCREEN;
+                count=0;
+                if(!mystrcmp(passcheck1, passcheck))
+                {
+                    clcd_print(TC"  Pass Changed  ", LINE1(0));
+                    clcd_print(TC"  Successfully  ", LINE2(0));
+                    for(unsigned long int wait=10000; wait--;);
+                    CLEAR_DISP_SCREEN;
+                    controlflag=1;
+                }
+            }
+    }
+    
     
 }

@@ -1,4 +1,4 @@
-# 1 "matrixkeyboard.c"
+# 1 "uart.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "matrixkeyboard.c" 2
+# 1 "uart.c" 2
 # 1 "./main.h" 1
 # 10 "./main.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.41\\pic\\include\\c99\\stdlib.h" 1 3
@@ -18040,66 +18040,60 @@ unsigned char getch();
 unsigned char getche();
 void putch(unsigned char data);
 void puts(char*data);
-# 1 "matrixkeyboard.c" 2
+# 1 "uart.c" 2
 
 
-void init_matrixkeypad()
+void init_uart()
 {
-    PORTB =0x00;
-    TRISB = TRISB & 0x1E;
-    RBPU=0;
+
+    TRISC6=0;
+    TRISC7=1;
+
+    TX9=0;
+    TXEN=1;
+    SYNC=0;
+    BRGH=1;
+
+    SPEN=1;
+    RX9=0;
+    CREN=1;
+
+    BRG16=0;
+    SPBRG=129;
+    SENDB=1;
+
+
+    TXIE=1;
+    RCIE=1;
+    TXIF=0;
+    RCIF=0;
 }
 
-unsigned char read_switches(unsigned char ucdetection)
+unsigned char getch()
 {
-    static unsigned char uconce=1, uckey;
-    if(ucdetection ==0 )
-        return scan_key();
-    else if(ucdetection == 1)
+    while(!RCIF);
+    RCIF=0;
+    return RCREG;
+}
+unsigned char getche()
+{
+    char ch;
+    while(!RCIF);
+    RCIF=0;
+    putch(ch=RCREG);
+    return ch;
+}
+void putch(unsigned char data)
+{
+    TXREG=data;
+    while(!TXIF)
+        TXIF=0;
+}
+void puts(char*data)
+{
+    while(*data)
     {
-        uckey = scan_key();
-        if((uckey != 0xFF) && uconce)
-        {
-            uconce=0;
-            return uckey;
-        }
-        else if(uckey == 0xFF)
-            uconce = 1;
+        putch(*data);
+        data++;
     }
-    return 0xFF;
-}
-
-unsigned char scan_key()
-{
-    PORTBbits.RB5 = 0, PORTBbits.RB6 = 1, PORTBbits.RB7 = 1;
-    if( PORTBbits.RB1 == 0)
-        return 1;
-
-
-
-
-    else if( PORTBbits.RB4 == 0)
-        return 10;
-
-    PORTBbits.RB5 = 1, PORTBbits.RB6 = 0, PORTBbits.RB7 = 1;
-    if( PORTBbits.RB1 == 0)
-        return 2;
-
-
-
-
-    else if( PORTBbits.RB4 == 0)
-        return 11;
-
-    PORTBbits.RB5 = 1, PORTBbits.RB6 = 1, PORTBbits.RB7 = 0, PORTBbits.RB7 = 0;
-    if( PORTBbits.RB1 == 0)
-        return 3;
-
-
-
-
-    else if( PORTBbits.RB4 == 0)
-        return 12;
-
-        return 0xFF;
 }

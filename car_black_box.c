@@ -16,12 +16,13 @@ void display_dashboard(unsigned char uckey, unsigned short usads)
             return;
         }
     display_time();
-    gear_monitor(uckey);
     display_speed(usads);
 }
 void display_time(){
      get_time();
 	 display_times();
+     clcd_putch(signature[signindex][0], LINE2(11));
+     clcd_putch(signature[signindex][1], LINE2(12));
 }
 void display_times(void)
 {
@@ -53,29 +54,39 @@ void get_time(void)
 	time[8] = '\0';
 }
 void gear_monitor(unsigned char uckey){
-    static char crashflag=0;
-    if(uckey == 1)
+    static unsigned char crashflag=0, prekey=0xFF;
+    static long int delay=0;
+    if(uckey==1 || uckey==2 || uckey==3)
     {
-        crashflag=1;                         //crashed
-        signindex=7;                     
-    }        
-    else if(uckey == 2)                      //increment
-    {
-        if(signindex < 6)
-            signindex++;
-        else if(signindex ==7)
-        {
-            signindex=1;
-            crashflag=0;
-        }
-    } 
-    else if(uckey == 3)                       //decrement
-    {
-          if(crashflag ==0 && signindex > 1)
-              signindex--; 
+        delay++;
+        prekey=uckey;
+        if(delay>4000)
+            delay=0;
     }
-    clcd_putch(signature[signindex][0], LINE2(11));
-    clcd_putch(signature[signindex][1], LINE2(12));
+    else if(delay!=0)
+    {
+        if(prekey == 1)
+        {
+            crashflag=1;                         //crashed
+            signindex=7;                     
+        }        
+        else if(prekey == 2)                      //increment
+        {
+            if(signindex < 6)
+                signindex++;
+            else if(signindex ==7)
+            {
+                signindex=1;
+                crashflag=0;
+            }
+        } 
+        else if(prekey == 3)                       //decrement
+        {
+              if(crashflag ==0 && signindex > 1)
+                  signindex--; 
+        }
+        prekey=0xFF;
+    }
 }
 void display_speed(unsigned short usadc){
         clcd_putch((unsigned char)(usadc/10)%10+48, LINE2(14));

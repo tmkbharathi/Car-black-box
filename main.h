@@ -20,6 +20,7 @@
 #include "i2c.h"
 #include "ds1307.h"
 #include "ext_eeprom.h"
+
 void init_config(void);
 void init_animation(void);
 int mystrcmp(char*s1, char *s2);
@@ -52,5 +53,15 @@ void get_time(void);
 void init_ds1307(void);
 
 void getforstoreevent(void);
-void log_event();
+void log_event(void);
+void view_log(unsigned char ucKey);
+void change_pass(unsigned  char ucKey);
+void set_time(unsigned char ucKey);
+void download_log(unsigned char ucKey);
+
+void init_uart();
+unsigned char getch();
+unsigned char getche();
+void putch(unsigned char data);
+void puts(char*data);
 #endif	/* MAIN_H */

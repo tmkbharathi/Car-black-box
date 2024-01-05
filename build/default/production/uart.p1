@@ -1,65 +1,61 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"30 ./main.h
-[; ;./main.h: 30: void init_matrixkeypad(void);
-[v _init_matrixkeypad `(v ~T0 @X0 0 ef ]
-"37 ./clcd.h
-[; ;./clcd.h: 37: void init_clcd(void);
-[v _init_clcd `(v ~T0 @X0 0 ef ]
-"42 ./main.h
-[; ;./main.h: 42: void init_adc(void);
-[v _init_adc `(v ~T0 @X0 0 ef ]
-"49
-[; ;./main.h: 49: void init_timer0(void);
-[v _init_timer0 `(v ~T0 @X0 0 ef ]
-"5 ./i2c.h
-[; ;./i2c.h: 5: void init_i2c(void);
-[v _init_i2c `(v ~T0 @X0 0 ef ]
-"53 ./main.h
-[; ;./main.h: 53: void init_ds1307(void);
-[v _init_ds1307 `(v ~T0 @X0 0 ef ]
-[p mainexit ]
-"8 ./ext_eeprom.h
-[; ;./ext_eeprom.h: 8: void write_external_eeprom(unsigned char address1, unsigned char data);
-[v _write_external_eeprom `(v ~T0 @X0 0 ef2`uc`uc ]
-"9
-[; ;./ext_eeprom.h: 9: unsigned char read_external_eeprom(unsigned char address1);
-[v _read_external_eeprom `(uc ~T0 @X0 0 ef1`uc ]
-"55 ./main.h
-[; ;./main.h: 55: void getforstoreevent(void);
-[v _getforstoreevent `(v ~T0 @X0 0 ef ]
-"43
-[; ;./main.h: 43: unsigned short read_adc(unsigned char channel);
-[v _read_adc `(us ~T0 @X0 0 ef1`uc ]
-"31
-[; ;./main.h: 31: unsigned char read_switches(unsigned char ucdetection);
-[v _read_switches `(uc ~T0 @X0 0 ef1`uc ]
-"37
-[; ;./main.h: 37: void gear_monitor(unsigned char uckey);
-[v _gear_monitor `(v ~T0 @X0 0 ef1`uc ]
-"46
-[; ;./main.h: 46: void logscreen(unsigned char uckey);
-[v _logscreen `(v ~T0 @X0 0 ef1`uc ]
-"35
-[; ;./main.h: 35: void display_dashboard(unsigned char uckey, unsigned short usAdc);
-[v _display_dashboard `(v ~T0 @X0 0 ef2`uc`us ]
-"47
-[; ;./main.h: 47: void scrolllog(unsigned char key);
-[v _scrolllog `(v ~T0 @X0 0 ef1`uc ]
-"57
-[; ;./main.h: 57: void view_log(unsigned char ucKey);
-[v _view_log `(v ~T0 @X0 0 ef1`uc ]
-"58
-[; ;./main.h: 58: void change_pass(unsigned char ucKey);
-[v _change_pass `(v ~T0 @X0 0 ef1`uc ]
-"60
-[; ;./main.h: 60: void download_log(unsigned char ucKey);
-[v _download_log `(v ~T0 @X0 0 ef1`uc ]
-"59
-[; ;./main.h: 59: void set_time(unsigned char ucKey);
-[v _set_time `(v ~T0 @X0 0 ef1`uc ]
-"38 ./clcd.h
-[; ;./clcd.h: 38: void clcd_print(const unsigned char *data, unsigned char addr);
-[v _clcd_print `(v ~T0 @X0 0 ef2`*Cuc`uc ]
+"39216 C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 39216: extern volatile __bit TRISC6 __attribute__((address(0x7CA6)));
+[v _TRISC6 `Vb ~T0 @X0 0 e@31910 ]
+"39219
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 39219: extern volatile __bit TRISC7 __attribute__((address(0x7CA7)));
+[v _TRISC7 `Vb ~T0 @X0 0 e@31911 ]
+"39303
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 39303: extern volatile __bit TX9 __attribute__((address(0x7D66)));
+[v _TX9 `Vb ~T0 @X0 0 e@32102 ]
+"40326
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 40326: extern volatile __bit TXEN __attribute__((address(0x7D65)));
+[v _TXEN `Vb ~T0 @X0 0 e@32101 ]
+"38958
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 38958: extern volatile __bit SYNC __attribute__((address(0x7D64)));
+[v _SYNC `Vb ~T0 @X0 0 e@32100 ]
+"34755
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 34755: extern volatile __bit BRGH __attribute__((address(0x7D62)));
+[v _BRGH `Vb ~T0 @X0 0 e@32098 ]
+"38880
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 38880: extern volatile __bit SPEN __attribute__((address(0x7D5F)));
+[v _SPEN `Vb ~T0 @X0 0 e@32095 ]
+"36372
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 36372: extern volatile __bit RX9 __attribute__((address(0x7D5E)));
+[v _RX9 `Vb ~T0 @X0 0 e@32094 ]
+"34914
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 34914: extern volatile __bit CREN __attribute__((address(0x7D5C)));
+[v _CREN `Vb ~T0 @X0 0 e@32092 ]
+"34752
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 34752: extern volatile __bit BRG16 __attribute__((address(0x7DC3)));
+[v _BRG16 `Vb ~T0 @X0 0 e@32195 ]
+"29269
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 29269: extern volatile unsigned char SPBRG __attribute__((address(0xFAF)));
+[v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
+"38859
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 38859: extern volatile __bit SENDB __attribute__((address(0x7D63)));
+[v _SENDB `Vb ~T0 @X0 0 e@32099 ]
+"40332
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 40332: extern volatile __bit TXIE __attribute__((address(0x7CEC)));
+[v _TXIE `Vb ~T0 @X0 0 e@31980 ]
+"36276
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 36276: extern volatile __bit RCIE __attribute__((address(0x7CED)));
+[v _RCIE `Vb ~T0 @X0 0 e@31981 ]
+"40335
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 40335: extern volatile __bit TXIF __attribute__((address(0x7CF4)));
+[v _TXIF `Vb ~T0 @X0 0 e@31988 ]
+"36279
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 36279: extern volatile __bit RCIF __attribute__((address(0x7CF5)));
+[v _RCIF `Vb ~T0 @X0 0 e@31989 ]
+"29257
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 29257: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
+"65 ./main.h
+[; ;./main.h: 65: void putch(unsigned char data);
+[v _putch `(v ~T0 @X0 0 ef1`uc ]
+"29245 C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h
+[; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 29245: extern volatile unsigned char TXREG __attribute__((address(0xFAD)));
+[v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
 "54 C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h
 [; ;C:/Users/Manikanda Bharathi/.mchp_packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4580.h: 54: __asm("RXF6SIDH equ 0D60h");
 [; <" RXF6SIDH equ 0D60h ;# ">
@@ -1365,231 +1361,191 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p x EBTR3  =  OFF       ]
 "67
 [p x EBTRB  =  OFF       ]
-"9 main.c
-[; ;main.c: 9: void init_config(){
-[v _init_config `(v ~T0 @X0 1 ef ]
+"3 uart.c
+[; ;uart.c: 3: void init_uart()
+[v _init_uart `(v ~T0 @X0 1 ef ]
+"4
+[; ;uart.c: 4: {
 {
-[e :U _init_config ]
+[e :U _init_uart ]
 [f ]
+"6
+[; ;uart.c: 6:     TRISC6=0;
+[e = _TRISC6 -> -> 0 `i `b ]
+"7
+[; ;uart.c: 7:     TRISC7=1;
+[e = _TRISC7 -> -> 1 `i `b ]
+"9
+[; ;uart.c: 9:     TX9=0;
+[e = _TX9 -> -> 0 `i `b ]
 "10
-[; ;main.c: 10:     init_matrixkeypad();
-[e ( _init_matrixkeypad ..  ]
+[; ;uart.c: 10:     TXEN=1;
+[e = _TXEN -> -> 1 `i `b ]
 "11
-[; ;main.c: 11:     init_clcd();
-[e ( _init_clcd ..  ]
+[; ;uart.c: 11:     SYNC=0;
+[e = _SYNC -> -> 0 `i `b ]
 "12
-[; ;main.c: 12:     init_adc();
-[e ( _init_adc ..  ]
-"13
-[; ;main.c: 13:     init_timer0();
-[e ( _init_timer0 ..  ]
+[; ;uart.c: 12:     BRGH=1;
+[e = _BRGH -> -> 1 `i `b ]
 "14
-[; ;main.c: 14:     init_i2c();
-[e ( _init_i2c ..  ]
+[; ;uart.c: 14:     SPEN=1;
+[e = _SPEN -> -> 1 `i `b ]
 "15
-[; ;main.c: 15:  init_ds1307();
-[e ( _init_ds1307 ..  ]
-"17
-[; ;main.c: 17: }
+[; ;uart.c: 15:     RX9=0;
+[e = _RX9 -> -> 0 `i `b ]
+"16
+[; ;uart.c: 16:     CREN=1;
+[e = _CREN -> -> 1 `i `b ]
+"18
+[; ;uart.c: 18:     BRG16=0;
+[e = _BRG16 -> -> 0 `i `b ]
+"19
+[; ;uart.c: 19:     SPBRG=129;
+[e = _SPBRG -> -> 129 `i `uc ]
+"20
+[; ;uart.c: 20:     SENDB=1;
+[e = _SENDB -> -> 1 `i `b ]
+"23
+[; ;uart.c: 23:     TXIE=1;
+[e = _TXIE -> -> 1 `i `b ]
+"24
+[; ;uart.c: 24:     RCIE=1;
+[e = _RCIE -> -> 1 `i `b ]
+"25
+[; ;uart.c: 25:     TXIF=0;
+[e = _TXIF -> -> 0 `i `b ]
+"26
+[; ;uart.c: 26:     RCIF=0;
+[e = _RCIF -> -> 0 `i `b ]
+"27
+[; ;uart.c: 27: }
 [e :UE 1088 ]
 }
-"18
-[; ;main.c: 18: unsigned int controlflag=1;
-[v _controlflag `ui ~T0 @X0 1 e ]
-[i _controlflag
--> -> 1 `i `ui
-]
-"19
-[; ;main.c: 19: unsigned int logout=0;
-[v _logout `ui ~T0 @X0 1 e ]
-[i _logout
--> -> 0 `i `ui
-]
-"20
-[; ;main.c: 20: char pass[5];
-[v _pass `uc ~T0 @X0 -> 5 `i e ]
-"21
-[; ;main.c: 21: unsigned char firstrunflag;
-[v _firstrunflag `uc ~T0 @X0 1 e ]
-[v $root$_main `(v ~T0 @X0 0 e ]
-"22
-[; ;main.c: 22: void main(void) {
-[v _main `(v ~T0 @X0 1 ef ]
-{
-[e :U _main ]
-[f ]
-"23
-[; ;main.c: 23:     init_config();
-[e ( _init_config ..  ]
-"25
-[; ;main.c: 25:     write_external_eeprom(0x00,'0');
-[e ( _write_external_eeprom (2 , -> -> 0 `i `uc -> -> 48 `ui `uc ]
-"26
-[; ;main.c: 26:     write_external_eeprom(0x01,'0');
-[e ( _write_external_eeprom (2 , -> -> 1 `i `uc -> -> 48 `ui `uc ]
-"27
-[; ;main.c: 27:     write_external_eeprom(0x02,'0');
-[e ( _write_external_eeprom (2 , -> -> 2 `i `uc -> -> 48 `ui `uc ]
-"28
-[; ;main.c: 28:     write_external_eeprom(0x03,'0');
-[e ( _write_external_eeprom (2 , -> -> 3 `i `uc -> -> 48 `ui `uc ]
 "29
-[; ;main.c: 29:     pass[4]='\0';
-[e = *U + &U _pass * -> -> -> 4 `i `ui `ux -> -> # *U &U _pass `ui `ux -> -> 0 `ui `uc ]
-"32
-[; ;main.c: 32:     pass[0]=read_external_eeprom(0x00);
-[e = *U + &U _pass * -> -> -> 0 `i `ui `ux -> -> # *U &U _pass `ui `ux -> ( _read_external_eeprom (1 -> -> 0 `i `uc `uc ]
-"33
-[; ;main.c: 33:     pass[1]=read_external_eeprom(0x01);
-[e = *U + &U _pass * -> -> -> 1 `i `ui `ux -> -> # *U &U _pass `ui `ux -> ( _read_external_eeprom (1 -> -> 1 `i `uc `uc ]
-"34
-[; ;main.c: 34:     pass[2]=read_external_eeprom(0x02);
-[e = *U + &U _pass * -> -> -> 2 `i `ui `ux -> -> # *U &U _pass `ui `ux -> ( _read_external_eeprom (1 -> -> 2 `i `uc `uc ]
-"35
-[; ;main.c: 35:     pass[3]=read_external_eeprom(0x03);
-[e = *U + &U _pass * -> -> -> 3 `i `ui `ux -> -> # *U &U _pass `ui `ux -> ( _read_external_eeprom (1 -> -> 3 `i `uc `uc ]
-"36
-[; ;main.c: 36:     unsigned char ucKey;
-[v _ucKey `uc ~T0 @X0 1 a ]
-"37
-[; ;main.c: 37:     unsigned short usAdc;
-[v _usAdc `us ~T0 @X0 1 a ]
-"38
-[; ;main.c: 38:     getforstoreevent();
-[e ( _getforstoreevent ..  ]
-"39
-[; ;main.c: 39:     while(1){
+[; ;uart.c: 29: unsigned char getch()
+[v _getch `(uc ~T0 @X0 1 ef ]
+"30
+[; ;uart.c: 30: {
+{
+[e :U _getch ]
+[f ]
+"31
+[; ;uart.c: 31:     while(!RCIF);
+[e $U 1090  ]
 [e :U 1091 ]
-{
-"40
-[; ;main.c: 40:         usAdc = (unsigned short)(read_adc(4)/10.33);
-[e = _usAdc -> / -> -> ( _read_adc (1 -> -> 4 `i `uc `ui `d .10.33 `us ]
-"41
-[; ;main.c: 41:         if(controlflag==0 || controlflag==2)
-[e $ ! || == _controlflag -> -> 0 `i `ui == _controlflag -> -> 2 `i `ui 1093  ]
-"42
-[; ;main.c: 42:             ucKey = read_switches(1);
-[e = _ucKey ( _read_switches (1 -> -> 1 `i `uc ]
-[e $U 1094  ]
-"43
-[; ;main.c: 43:         else
-[e :U 1093 ]
-"44
-[; ;main.c: 44:         {
-{
-"45
-[; ;main.c: 45:             ucKey = read_switches(0);
-[e = _ucKey ( _read_switches (1 -> -> 0 `i `uc ]
-"46
-[; ;main.c: 46:             gear_monitor(ucKey);
-[e ( _gear_monitor (1 _ucKey ]
-"47
-[; ;main.c: 47:         }
-}
-[e :U 1094 ]
-"49
-[; ;main.c: 49:         switch(controlflag)
-[e $U 1096  ]
-"50
-[; ;main.c: 50:         {
-{
-"51
-[; ;main.c: 51:             case 0:
-[e :U 1097 ]
-"52
-[; ;main.c: 52:                 logscreen(ucKey);
-[e ( _logscreen (1 _ucKey ]
-"53
-[; ;main.c: 53:                 break;
-[e $U 1095  ]
-"54
-[; ;main.c: 54:             case 1:
-[e :U 1098 ]
-"55
-[; ;main.c: 55:                 display_dashboard(ucKey, usAdc);
-[e ( _display_dashboard (2 , _ucKey _usAdc ]
-"56
-[; ;main.c: 56:                 break;
-[e $U 1095  ]
-"57
-[; ;main.c: 57:             case 3:
-[e :U 1099 ]
-"58
-[; ;main.c: 58:                 scrolllog(ucKey);
-[e ( _scrolllog (1 _ucKey ]
-"59
-[; ;main.c: 59:                 break;
-[e $U 1095  ]
-"60
-[; ;main.c: 60:             case 4:
-[e :U 1100 ]
-"61
-[; ;main.c: 61:                 view_log(ucKey);
-[e ( _view_log (1 _ucKey ]
-"62
-[; ;main.c: 62:                 break;
-[e $U 1095  ]
-"63
-[; ;main.c: 63:             case 2:
-[e :U 1101 ]
-"64
-[; ;main.c: 64:                 change_pass(ucKey);
-[e ( _change_pass (1 _ucKey ]
-"65
-[; ;main.c: 65:                 break;
-[e $U 1095  ]
-"66
-[; ;main.c: 66:             case 5:
-[e :U 1102 ]
-"67
-[; ;main.c: 67:                 download_log(ucKey);
-[e ( _download_log (1 _ucKey ]
-"68
-[; ;main.c: 68:                 break;
-[e $U 1095  ]
-"69
-[; ;main.c: 69:             case 6:
-[e :U 1103 ]
-"70
-[; ;main.c: 70:                 set_time(ucKey);
-[e ( _set_time (1 _ucKey ]
-"71
-[; ;main.c: 71:                 break;
-[e $U 1095  ]
-"72
-[; ;main.c: 72:             default:
-[e :U 1104 ]
-"73
-[; ;main.c: 73:                 clcd_print( (unsigned char*) "Control flag miss", (0x80 + (0)));
-[e ( _clcd_print (2 , -> -> :s 1C `*uc `*Cuc -> + -> 128 `i -> 0 `i `uc ]
-"74
-[; ;main.c: 74:                 break;
-[e $U 1095  ]
-"75
-[; ;main.c: 75:         }
-}
-[e $U 1095  ]
-[e :U 1096 ]
-[e [\ _controlflag , $ -> -> 0 `i `ui 1097
- , $ -> -> 1 `i `ui 1098
- , $ -> -> 3 `i `ui 1099
- , $ -> -> 4 `i `ui 1100
- , $ -> -> 2 `i `ui 1101
- , $ -> -> 5 `i `ui 1102
- , $ -> -> 6 `i `ui 1103
- 1104 ]
-[e :U 1095 ]
-"76
-[; ;main.c: 76:     }
-}
 [e :U 1090 ]
-[e $U 1091  ]
+[e $ ! _RCIF 1091  ]
 [e :U 1092 ]
-"79
-[; ;main.c: 79:     return;
+"32
+[; ;uart.c: 32:     RCIF=0;
+[e = _RCIF -> -> 0 `i `b ]
+"33
+[; ;uart.c: 33:     return RCREG;
+[e ) _RCREG ]
 [e $UE 1089  ]
-"80
-[; ;main.c: 80: }
+"34
+[; ;uart.c: 34: }
 [e :UE 1089 ]
 }
-[a 1C 67 111 110 116 114 111 108 32 102 108 97 103 32 109 105 115 115 0 ]
+"35
+[; ;uart.c: 35: unsigned char getche()
+[v _getche `(uc ~T0 @X0 1 ef ]
+"36
+[; ;uart.c: 36: {
+{
+[e :U _getche ]
+[f ]
+"37
+[; ;uart.c: 37:     char ch;
+[v _ch `uc ~T0 @X0 1 a ]
+"38
+[; ;uart.c: 38:     while(!RCIF);
+[e $U 1094  ]
+[e :U 1095 ]
+[e :U 1094 ]
+[e $ ! _RCIF 1095  ]
+[e :U 1096 ]
+"39
+[; ;uart.c: 39:     RCIF=0;
+[e = _RCIF -> -> 0 `i `b ]
+"40
+[; ;uart.c: 40:     putch(ch=RCREG);
+[e ( _putch (1 -> = _ch -> _RCREG `uc `uc ]
+"41
+[; ;uart.c: 41:     return ch;
+[e ) -> _ch `uc ]
+[e $UE 1093  ]
+"42
+[; ;uart.c: 42: }
+[e :UE 1093 ]
+}
+"43
+[; ;uart.c: 43: void putch(unsigned char data)
+[v _putch `(v ~T0 @X0 1 ef1`uc ]
+"44
+[; ;uart.c: 44: {
+{
+[e :U _putch ]
+"43
+[; ;uart.c: 43: void putch(unsigned char data)
+[v _data `uc ~T0 @X0 1 r1 ]
+"44
+[; ;uart.c: 44: {
+[f ]
+"45
+[; ;uart.c: 45:     TXREG=data;
+[e = _TXREG _data ]
+"46
+[; ;uart.c: 46:     while(!TXIF)
+[e $U 1098  ]
+[e :U 1099 ]
+"47
+[; ;uart.c: 47:         TXIF=0;
+[e = _TXIF -> -> 0 `i `b ]
+[e :U 1098 ]
+"46
+[; ;uart.c: 46:     while(!TXIF)
+[e $ ! _TXIF 1099  ]
+[e :U 1100 ]
+"48
+[; ;uart.c: 48: }
+[e :UE 1097 ]
+}
+"49
+[; ;uart.c: 49: void puts(char*data)
+[v _puts `(v ~T0 @X0 1 ef1`*uc ]
+"50
+[; ;uart.c: 50: {
+{
+[e :U _puts ]
+"49
+[; ;uart.c: 49: void puts(char*data)
+[v _data `*uc ~T0 @X0 1 r1 ]
+"50
+[; ;uart.c: 50: {
+[f ]
+"51
+[; ;uart.c: 51:     while(*data)
+[e $U 1102  ]
+[e :U 1103 ]
+"52
+[; ;uart.c: 52:     {
+{
+"53
+[; ;uart.c: 53:         putch(*data);
+[e ( _putch (1 -> *U _data `uc ]
+"54
+[; ;uart.c: 54:         data++;
+[e ++ _data * -> -> 1 `i `x -> -> # *U _data `i `x ]
+"55
+[; ;uart.c: 55:     }
+}
+[e :U 1102 ]
+"51
+[; ;uart.c: 51:     while(*data)
+[e $ != -> *U _data `i -> 0 `i 1103  ]
+[e :U 1104 ]
+"56
+[; ;uart.c: 56: }
+[e :UE 1101 ]
+}
